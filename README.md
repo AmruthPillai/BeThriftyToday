@@ -1,4 +1,4 @@
-<img src="https://github.com/AmruthPillai/BeThriftyToday/blob/master/assets/icons/app_icon.png?raw=true" width="256px" />
+<img src="https://github.com/AmruthPillai/BeThriftyToday/blob/master/assets/icons/app_icon.png?raw=true" alt="Be Thrifty Today" width="256px" />
 
 # Be Thrifty Today
 

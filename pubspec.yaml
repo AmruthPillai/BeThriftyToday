@@ -13,6 +13,28 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_launcher_icons: ^0.7.4
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path: assets/icons/app_icon.png
 
 flutter:
   uses-material-design: true
+  assets:
+    - assets/logos/
+    - assets/images/
+  fonts:
+    - family: FiraSans
+      fonts:
+        - asset: assets/fonts/FiraSans-Regular-400.ttf
+          weight: 400
+        - asset: assets/fonts/FiraSans-Medium-500.ttf
+          weight: 500
+        - asset: assets/fonts/FiraSans-SemiBold-600.ttf
+          weight: 600
+        - asset: assets/fonts/FiraSans-Bold-700.ttf
+          weight: 700
+        - asset: assets/fonts/FiraSans-ExtraBold-800.ttf
+          weight: 800

@@ -1,4 +1,4 @@
-package com.example.bethriftytoday
+package today.bethrifty.app
 
 import androidx.annotation.NonNull;
 import io.flutter.embedding.android.FlutterActivity

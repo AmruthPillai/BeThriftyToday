@@ -16,8 +16,9 @@ class _SplashScreenState extends State<SplashScreen>
     with AfterLayoutMixin<SplashScreen> {
   @override
   void afterFirstLayout(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(statusBarBrightness: Brightness.dark));
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      statusBarBrightness: Brightness.dark,
+    ));
 
     Future.delayed(Duration(seconds: 2), () {
       Navigator.pushReplacementNamed(context, LoginScreen.routeName);

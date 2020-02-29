@@ -1,16 +1,16 @@
-# bethriftytoday
+<img src="https://github.com/AmruthPillai/BeThriftyToday/blob/master/assets/icons/app_icon.png?raw=true" width="256px" />
 
-A new Flutter project.
+# Be Thrifty Today
 
-## Getting Started
+A simple money management app for those who want to be in control of their financial life.
 
-This project is a starting point for a Flutter application.
+## Description
 
-A few resources to get you started if this is your first Flutter project:
+Be Thrifty Today is a money management application for those who want complete control over their expenses and incomes. It was built out of pure necessity and attention to detail.
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+There are few others apps that do this, maybe even better, but the focus of Be Thrifty Today are as follows:
+Manage transactions across platforms (Mobile & Web)
+Simple management of incomes and expenses
+Attention to design, and enhanced usability
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+This app is ad-free, and always will be.

@@ -13,22 +13,19 @@ class TopSection extends StatelessWidget {
           Container(
             margin: const EdgeInsets.only(top: 20),
             child: ThriftyLogo(
-              size: 80,
+              size: 100,
               isLight: true,
             ),
           ),
           Spacer(),
           Container(
-            height: 280,
-            margin: const EdgeInsets.only(
-              bottom: 40,
-              left: 20,
-              right: 20,
-            ),
+            width: MediaQuery.of(context).size.width * 0.9,
+            height: 260,
+            margin: const EdgeInsets.only(bottom: 30),
             child: Stack(
               children: <Widget>[
-                Positioned(
-                  bottom: 0,
+                Align(
+                  alignment: Alignment.bottomLeft,
                   child: Opacity(
                     opacity: 0.25,
                     child: Image.asset(
@@ -46,9 +43,8 @@ class TopSection extends StatelessWidget {
                     height: 240,
                   ),
                 ),
-                Positioned(
-                  bottom: 0,
-                  right: 0,
+                Align(
+                  alignment: Alignment.bottomRight,
                   child: Opacity(
                     opacity: 0.25,
                     child: Image.asset(

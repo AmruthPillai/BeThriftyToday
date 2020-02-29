@@ -17,6 +17,7 @@ class _SplashScreenState extends State<SplashScreen>
   @override
   void afterFirstLayout(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      statusBarColor: thriftyBlue,
       statusBarBrightness: Brightness.dark,
     ));
 

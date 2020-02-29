@@ -1,3 +1,5 @@
+import 'package:bethriftytoday/config/colors.dart';
+import 'package:bethriftytoday/screens/login/bottom_section.dart';
 import 'package:bethriftytoday/screens/login/top_section.dart';
 import 'package:bethriftytoday/shared/wave_clipper.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +11,7 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      statusBarColor: thriftyBlue,
       statusBarBrightness: Brightness.dark,
     ));
 
@@ -17,7 +20,7 @@ class LoginScreen extends StatelessWidget {
         child: Column(
           children: <Widget>[
             Flexible(
-              flex: 2,
+              flex: 3,
               child: Stack(
                 children: <Widget>[
                   ClipPath(
@@ -28,10 +31,8 @@ class LoginScreen extends StatelessWidget {
               ),
             ),
             Flexible(
-              flex: 1,
-              child: Column(
-                children: <Widget>[],
-              ),
+              flex: 2,
+              child: BottomSection(),
             ),
           ],
         ),

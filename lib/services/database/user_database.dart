@@ -22,7 +22,7 @@ class UserDatabaseService {
   Future<bool> get checkIfUserExists => userCollection
       .document(user.uid)
       .get()
-      .then((user) => user.data.containsKey('currency'));
+      .then((user) => user.data['currency'] != null);
 
   Future setUserData() async {
     return await userCollection.document(this.user.uid).setData({
@@ -31,12 +31,19 @@ class UserDatabaseService {
     }, merge: true);
   }
 
-  Future updateUserData({String name, Currency currency}) async {
+  Future updateUserName(String name) async {
     var userDoc = await getUserDocument;
     return await userCollection.document(this.user.uid).updateData({
       ...userDoc.toJson(),
-      'name': name ?? userDoc.name,
-      'currency': currency?.toJson(),
+      'name': name,
+    });
+  }
+
+  Future updateUserCurrency(Currency currency) async {
+    var userDoc = await getUserDocument;
+    return await userCollection.document(this.user.uid).updateData({
+      ...userDoc.toJson(),
+      'currency': currency.toJson(),
     });
   }
 }

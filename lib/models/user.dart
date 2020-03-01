@@ -28,7 +28,6 @@ class User {
           name: user.displayName ?? '',
           email: user.email ?? '',
           photoURL: user.photoUrl ?? '',
-          currency: null,
         )
       : null;
 

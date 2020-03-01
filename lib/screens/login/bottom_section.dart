@@ -1,3 +1,4 @@
+import 'package:bethriftytoday/config/utils.dart';
 import 'package:bethriftytoday/screens/home/home.dart';
 import 'package:bethriftytoday/screens/onboarding/profile_setup.dart';
 import 'package:bethriftytoday/services/auth.dart';
@@ -29,12 +30,21 @@ class _BottomSectionState extends State<BottomSection> {
             ),
           ),
         ),
+        SizedBox(height: 20),
+        Text(
+          'For those who want to be in control.',
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.w800,
+          ),
+        ),
         Spacer(),
         Container(
           width: MediaQuery.of(context).size.width * 0.8,
           child: FlatButton(
             onPressed: () => signIn(false),
-            color: Colors.white,
+            color: isDarkMode(context) ? Colors.black54 : Colors.white,
             padding: const EdgeInsets.symmetric(vertical: 14),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -49,7 +59,7 @@ class _BottomSectionState extends State<BottomSection> {
                   'Login with Google',
                   style: TextStyle(
                     fontSize: 16,
-                    color: Color(0xFF1976D2),
+                    color: Theme.of(context).primaryColor,
                   ),
                 ),
               ],

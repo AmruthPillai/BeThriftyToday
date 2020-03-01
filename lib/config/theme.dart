@@ -35,6 +35,34 @@ ThemeData theme = ThemeData(
 );
 
 ThemeData darkTheme = ThemeData(
-          primaryColor: Colors.white,
-          brightness: Brightness.dark,
-        );
+  fontFamily: 'FiraSans',
+  primaryColor: Colors.white,
+  brightness: Brightness.dark,
+  primaryColorBrightness: Brightness.dark,
+  inputDecorationTheme: InputDecorationTheme(
+    labelStyle: TextStyle(
+      fontWeight: FontWeight.w600,
+    ),
+    hintStyle: TextStyle(
+      fontWeight: FontWeight.w600,
+    ),
+    border: OutlineInputBorder(
+      borderSide: BorderSide(
+        width: 2,
+        color: thriftyBlue,
+      ),
+    ),
+    enabledBorder: OutlineInputBorder(
+      borderSide: BorderSide(
+        width: 2,
+        color: thriftyBlue,
+      ),
+    ),
+    disabledBorder: OutlineInputBorder(
+      borderSide: BorderSide(
+        width: 2,
+        color: Colors.grey,
+      ),
+    ),
+  ),
+);

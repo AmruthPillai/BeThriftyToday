@@ -12,21 +12,29 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     var user = Provider.of<User>(context);
 
-    return StreamProvider<User>.value(
-      value: UserDatabaseService(user).userDocument,
-      child: Scaffold(
-        drawer: Drawer(
-          elevation: 0,
-          child: ThriftyDrawer(),
-        ),
-        body: SafeArea(
-          child: Column(
-            children: <Widget>[
-              ThriftyAppBar(),
-            ],
+    if (user != null) {
+      return StreamProvider<User>.value(
+        value: UserDatabaseService(user).userDocument,
+        child: Scaffold(
+          drawer: Drawer(
+            elevation: 0,
+            child: ThriftyDrawer(),
+          ),
+          body: SafeArea(
+            child: Column(
+              children: <Widget>[
+                ThriftyAppBar(),
+              ],
+            ),
           ),
         ),
-      ),
-    );
+      );
+    } else {
+      return Scaffold(
+        body: Center(
+          child: CircularProgressIndicator(),
+        ),
+      );
+    }
   }
 }

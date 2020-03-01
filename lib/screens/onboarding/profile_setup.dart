@@ -90,9 +90,8 @@ class _ProfileSetupScreenState extends State<ProfileSetupScreen>
               ThriftyButton(
                 title: 'NEXT',
                 onPressed: () async {
-                  await UserDatabaseService(user).updateUserData(
-                    name: _nameController.text,
-                  );
+                  await UserDatabaseService(user)
+                      .updateUserName(_nameController.text);
                   Navigator.pushNamed(context, CurrencySetupScreen.routeName);
                 },
               ),

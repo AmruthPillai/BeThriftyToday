@@ -1,8 +1,8 @@
 import 'package:after_layout/after_layout.dart';
 import 'package:bethriftytoday/config/colors.dart';
 import 'package:bethriftytoday/config/utils.dart';
+import 'package:bethriftytoday/screens/home/home.dart';
 import 'package:bethriftytoday/screens/login/login.dart';
-import 'package:bethriftytoday/screens/onboarding/profile_setup.dart';
 import 'package:bethriftytoday/services/auth.dart';
 import 'package:bethriftytoday/shared/thrifty_logo.dart';
 import 'package:flutter/material.dart';
@@ -28,7 +28,7 @@ class _SplashScreenState extends State<SplashScreen>
     var user = await _auth.getUser;
 
     if (user != null) {
-      Navigator.pushReplacementNamed(context, ProfileSetupScreen.routeName);
+      Navigator.pushReplacementNamed(context, HomeScreen.routeName);
     } else {
       Navigator.pushReplacementNamed(context, LoginScreen.routeName);
     }

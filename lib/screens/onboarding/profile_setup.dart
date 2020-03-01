@@ -1,6 +1,8 @@
 import 'package:after_layout/after_layout.dart';
 import 'package:bethriftytoday/config/utils.dart';
-import 'package:bethriftytoday/services/auth.dart';
+import 'package:bethriftytoday/models/user.dart';
+import 'package:bethriftytoday/screens/onboarding/currency_setup.dart';
+import 'package:bethriftytoday/services/database/user_database.dart';
 import 'package:bethriftytoday/shared/onboarding_header.dart';
 import 'package:bethriftytoday/shared/thrifty_button.dart';
 import 'package:flutter/material.dart';
@@ -22,13 +24,17 @@ class _ProfileSetupScreenState extends State<ProfileSetupScreen>
   void afterFirstLayout(BuildContext context) async {
     updateStatusBarColor();
 
-    var authService = Provider.of<AuthService>(context, listen: false);
-    _nameController.text = (await authService.getUser).name;
-    _emailController.text = (await authService.getUser).email;
+    Future.delayed(Duration(milliseconds: 500), () {
+      var user = Provider.of<User>(context, listen: false);
+      _nameController.text = user.name;
+      _emailController.text = user.email;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
+    var user = Provider.of<User>(context);
+
     return Scaffold(
       body: SingleChildScrollView(
         child: SizedBox(
@@ -83,7 +89,12 @@ class _ProfileSetupScreenState extends State<ProfileSetupScreen>
               Spacer(),
               ThriftyButton(
                 title: 'NEXT',
-                onPressed: () {},
+                onPressed: () async {
+                  await UserDatabaseService(user).updateUserData(
+                    name: _nameController.text,
+                  );
+                  Navigator.pushNamed(context, CurrencySetupScreen.routeName);
+                },
               ),
               SizedBox(height: 30),
             ],

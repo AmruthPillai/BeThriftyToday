@@ -12,16 +12,11 @@ class ThriftyLogo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Hero(
-      tag: 'thrifty_logo',
-      child: Container(
-        width: size,
-        height: size,
-        child: Image.asset(
-          isLight
-              ? 'assets/logos/logo_white.png'
-              : 'assets/logos/logo_blue.png',
-        ),
+    return Container(
+      width: size,
+      height: size,
+      child: Image.asset(
+        isLight ? 'assets/logos/logo_white.png' : 'assets/logos/logo_blue.png',
       ),
     );
   }

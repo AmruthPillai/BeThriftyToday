@@ -4,7 +4,9 @@ import 'package:bethriftytoday/shared/wave_clipper.dart';
 import 'package:flutter/material.dart';
 
 class OnboardingHeader extends StatelessWidget {
-  const OnboardingHeader({Key key}) : super(key: key);
+  const OnboardingHeader({
+    Key key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,9 +18,9 @@ class OnboardingHeader extends StatelessWidget {
         child: Column(
           children: <Widget>[
             Container(
-              margin: const EdgeInsets.only(top: 30),
+              margin: const EdgeInsets.only(top: 40),
               child: ThriftyLogo(
-                size: 100,
+                size: 80,
                 isLight: true,
               ),
             ),

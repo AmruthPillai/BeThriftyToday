@@ -1,10 +1,14 @@
 import 'package:bethriftytoday/models/user.dart';
-import 'package:bethriftytoday/services/database.dart';
+import 'package:bethriftytoday/services/database/user_database.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthService {
   static FirebaseAuth _auth = FirebaseAuth.instance;
+  static Firestore _db = Firestore.instance;
+  final CollectionReference userCollection = _db.collection('users');
+
   final GoogleSignIn _googleSignIn = GoogleSignIn(scopes: [
     'https://www.googleapis.com/auth/plus.me',
     'https://www.googleapis.com/auth/userinfo.email',
@@ -54,11 +58,7 @@ class AuthService {
   Future<User> mapUserFromFirebaseUser(AuthResult authResult) async {
     FirebaseUser firebaseUser = authResult.user;
     User user = User.fromFirebaseUser(firebaseUser);
-
-    // Save User Details to Database
-    if (!await DatabaseService(user).checkIfUserExists) {
-      DatabaseService(user).setUserData();
-    }
+    UserDatabaseService(user).setUserData();
 
     return user;
   }

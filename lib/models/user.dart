@@ -1,3 +1,4 @@
+import 'package:bethriftytoday/models/currency.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:json_annotation/json_annotation.dart';
 
@@ -9,12 +10,14 @@ class User {
   final String name;
   final String email;
   final String photoURL;
+  final Currency currency;
 
   User({
     this.uid,
     this.name,
     this.email,
     this.photoURL,
+    this.currency,
   });
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
@@ -25,6 +28,7 @@ class User {
           name: user.displayName ?? '',
           email: user.email ?? '',
           photoURL: user.photoUrl ?? '',
+          currency: null,
         )
       : null;
 

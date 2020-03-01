@@ -1,5 +1,7 @@
+import 'package:bethriftytoday/screens/home/home.dart';
 import 'package:bethriftytoday/screens/onboarding/profile_setup.dart';
 import 'package:bethriftytoday/services/auth.dart';
+import 'package:bethriftytoday/services/database/user_database.dart';
 import 'package:flutter/material.dart';
 
 class BottomSection extends StatefulWidget {
@@ -75,12 +77,17 @@ class _BottomSectionState extends State<BottomSection> {
 
   Future<void> signIn(bool isAnonymous) async {
     try {
-      (isAnonymous)
+      var user = isAnonymous
           ? await _authService.signInAnonymously()
           : await _authService.signInWithGoogle();
-      Navigator.pushReplacementNamed(context, ProfileSetupScreen.routeName);
+
+      if (await UserDatabaseService(user).checkIfUserExists) {
+        Navigator.pushReplacementNamed(context, HomeScreen.routeName);
+      } else {
+        Navigator.pushReplacementNamed(context, ProfileSetupScreen.routeName);
+      }
     } catch (e) {
-      Scaffold.of(context).showSnackBar(SnackBar(content: e));
+      print(e.toString());
       return null;
     }
   }

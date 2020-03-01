@@ -44,6 +44,7 @@ class _ThriftyAppBarState extends State<ThriftyAppBar> {
       return CircleAvatar(
         radius: 25,
         backgroundImage: NetworkImage(user.photoURL),
+        backgroundColor: Theme.of(context).primaryColor,
       );
     } else {
       return CircleAvatar(

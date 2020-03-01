@@ -2,6 +2,8 @@ import 'package:bethriftytoday/models/user.dart';
 import 'package:bethriftytoday/services/database/user_database.dart';
 import 'package:bethriftytoday/shared/thrifty_appbar.dart';
 import 'package:bethriftytoday/shared/thrifty_drawer.dart';
+import 'package:bethriftytoday/shared/thrifty_overview.dart';
+import 'package:bethriftytoday/shared/transaction_list/daily.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -20,10 +22,26 @@ class HomeScreen extends StatelessWidget {
             elevation: 0,
             child: ThriftyDrawer(),
           ),
+          floatingActionButtonLocation:
+              FloatingActionButtonLocation.centerFloat,
+          floatingActionButton: FloatingActionButton(
+            onPressed: () {},
+            elevation: 0,
+            splashColor: Theme.of(context).accentColor.withOpacity(0.5),
+            backgroundColor: Theme.of(context).primaryColor,
+            foregroundColor: Theme.of(context).accentColor,
+            child: Icon(
+              Icons.add,
+              size: 32,
+            ),
+          ),
           body: SafeArea(
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 ThriftyAppBar(),
+                ThriftyOverview(),
+                DailyTransactionList(),
               ],
             ),
           ),

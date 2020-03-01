@@ -58,8 +58,11 @@ class AuthService {
   Future<User> mapUserFromFirebaseUser(AuthResult authResult) async {
     FirebaseUser firebaseUser = authResult.user;
     User user = User.fromFirebaseUser(firebaseUser);
-    UserDatabaseService(user).setUserData();
-
+    try {
+      if (!(await UserDatabaseService(user).checkIfUserExists)) {
+        UserDatabaseService(user).setUserData();
+      }
+    } catch (_) {}
     return user;
   }
 

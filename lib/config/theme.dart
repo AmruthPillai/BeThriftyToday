@@ -3,9 +3,10 @@ import 'package:flutter/material.dart';
 
 ThemeData theme = ThemeData(
   fontFamily: 'FiraSans',
-  brightness: Brightness.light,
   primaryColor: thriftyBlue,
-  primaryColorBrightness: Brightness.dark,
+  accentColor: Colors.white,
+  brightness: Brightness.light,
+  primaryColorBrightness: Brightness.light,
   inputDecorationTheme: InputDecorationTheme(
     labelStyle: TextStyle(
       fontWeight: FontWeight.w600,
@@ -37,6 +38,7 @@ ThemeData theme = ThemeData(
 ThemeData darkTheme = ThemeData(
   fontFamily: 'FiraSans',
   primaryColor: Colors.white,
+  accentColor: thriftyBlue,
   brightness: Brightness.dark,
   primaryColorBrightness: Brightness.dark,
   inputDecorationTheme: InputDecorationTheme(

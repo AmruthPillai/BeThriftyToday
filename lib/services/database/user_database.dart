@@ -19,10 +19,14 @@ class UserDatabaseService {
       .snapshots()
       .map((user) => User.fromJson(user.data));
 
-  Future<bool> get checkIfUserExists => userCollection
-      .document(user.uid)
-      .get()
-      .then((user) => user.data['currency'] != null);
+  Future<bool> get checkIfUserExists async {
+    try {
+      var snapshot = await userCollection.document(user.uid).get();
+      return (snapshot == null) ? false : snapshot.data['currency'] != null;
+    } catch (e) {
+      return false;
+    }
+  }
 
   Future setUserData() async {
     return await userCollection.document(this.user.uid).setData({

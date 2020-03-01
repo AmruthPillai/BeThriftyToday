@@ -1,4 +1,5 @@
 import 'package:bethriftytoday/config/colors.dart';
+import 'package:bethriftytoday/config/utils.dart';
 import 'package:bethriftytoday/models/user.dart';
 import 'package:bethriftytoday/screens/login/login.dart';
 import 'package:bethriftytoday/screens/splash.dart';
@@ -10,28 +11,54 @@ import 'package:provider/provider.dart';
 class ThriftyDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    AuthService authService = AuthService();
     var user = Provider.of<User>(context);
 
     return SafeArea(
       child: Column(
         children: <Widget>[
           DrawerHeader(user),
+          SizedBox(height: 10),
           ListTile(
-            onTap: () {
-              Navigator.pop(context);
-              authService.signOut();
-              Navigator.pushNamedAndRemoveUntil(
-                context,
-                LoginScreen.routeName,
-                ModalRoute.withName(SplashScreen.routeName),
-              );
-            },
+            onTap: () {},
+            leading: Icon(Icons.import_export),
+            title: Text('Export as CSV'),
+          ),
+          Divider(),
+          ListTile(
+            onTap: () {},
+            leading: Icon(Icons.rate_review),
+            title: Text('Rate the App'),
+          ),
+          ListTile(
+            onTap: () => logout(context),
             leading: Icon(Icons.exit_to_app),
             title: Text('Logout'),
           ),
+          Spacer(),
+          FutureBuilder(
+            initialData: '',
+            future: getVersionCode(),
+            builder: (context, snapshot) {
+              return Text(
+                snapshot.data,
+                style: Theme.of(context).textTheme.caption,
+              );
+            },
+          ),
+          SizedBox(height: 10),
         ],
       ),
+    );
+  }
+
+  logout(BuildContext context) {
+    AuthService authService = AuthService();
+    Navigator.pop(context);
+    authService.signOut();
+    Navigator.pushNamedAndRemoveUntil(
+      context,
+      LoginScreen.routeName,
+      ModalRoute.withName(SplashScreen.routeName),
     );
   }
 }

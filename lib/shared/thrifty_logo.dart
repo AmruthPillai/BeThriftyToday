@@ -1,3 +1,4 @@
+import 'package:bethriftytoday/config/utils.dart';
 import 'package:flutter/material.dart';
 
 class ThriftyLogo extends StatelessWidget {
@@ -16,7 +17,9 @@ class ThriftyLogo extends StatelessWidget {
       width: size,
       height: size,
       child: Image.asset(
-        isLight ? 'assets/logos/logo_white.png' : 'assets/logos/logo_blue.png',
+        (isLight || isDarkMode(context))
+            ? 'assets/logos/logo_white.png'
+            : 'assets/logos/logo_blue.png',
       ),
     );
   }

@@ -31,6 +31,7 @@ class _MyAppState extends State<MyApp> {
         ],
         title: 'Be Thrifty Today',
         theme: theme,
+        darkTheme: darkTheme,
         initialRoute: SplashScreen.routeName,
         routes: routes,
       ),

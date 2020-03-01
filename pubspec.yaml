@@ -4,7 +4,7 @@ description: A simple money management app for those who want to be in control o
 version: 1.0.0+1
 
 environment:
-  sdk: '>=2.1.0 <3.0.0'
+  sdk: '>=2.3.0 <3.0.0'
 
 dependencies:
   flutter:
@@ -14,12 +14,16 @@ dependencies:
   firebase_analytics: 5.0.11
   firebase_auth: 0.15.3+1
   firebase_core: 0.4.3+3
+  google_sign_in: ^4.1.4
+  json_annotation: ^3.0.1
   provider: 4.0.4
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  build_runner: ^1.7.4
   flutter_launcher_icons: ^0.7.4
+  json_serializable: ^3.2.5
 
 flutter_icons:
   android: true

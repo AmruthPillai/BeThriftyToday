@@ -11,7 +11,7 @@ class TopSection extends StatelessWidget {
       child: Column(
         children: <Widget>[
           Container(
-            margin: const EdgeInsets.only(top: 20),
+            margin: const EdgeInsets.only(top: 25),
             child: ThriftyLogo(
               size: 100,
               isLight: true,

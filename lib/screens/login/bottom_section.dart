@@ -1,7 +1,16 @@
+import 'package:bethriftytoday/screens/onboarding/profile_setup.dart';
+import 'package:bethriftytoday/services/auth.dart';
 import 'package:flutter/material.dart';
 
-class BottomSection extends StatelessWidget {
+class BottomSection extends StatefulWidget {
   const BottomSection({Key key}) : super(key: key);
+
+  @override
+  _BottomSectionState createState() => _BottomSectionState();
+}
+
+class _BottomSectionState extends State<BottomSection> {
+  AuthService _authService = AuthService();
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +31,7 @@ class BottomSection extends StatelessWidget {
         Container(
           width: MediaQuery.of(context).size.width * 0.8,
           child: FlatButton(
-            onPressed: () {},
+            onPressed: () => signIn(false),
             color: Colors.white,
             padding: const EdgeInsets.symmetric(vertical: 14),
             child: Row(
@@ -49,7 +58,7 @@ class BottomSection extends StatelessWidget {
         Container(
           width: MediaQuery.of(context).size.width * 0.8,
           child: FlatButton(
-            onPressed: () {},
+            onPressed: () => signIn(true),
             padding: const EdgeInsets.symmetric(vertical: 14),
             child: Text(
               'Sign in as a Guest',
@@ -62,5 +71,17 @@ class BottomSection extends StatelessWidget {
         Spacer(),
       ],
     );
+  }
+
+  Future<void> signIn(bool isAnonymous) async {
+    try {
+      (isAnonymous)
+          ? await _authService.signInAnonymously()
+          : await _authService.signInWithGoogle();
+      Navigator.pushReplacementNamed(context, ProfileSetupScreen.routeName);
+    } catch (e) {
+      Scaffold.of(context).showSnackBar(SnackBar(content: e));
+      return null;
+    }
   }
 }

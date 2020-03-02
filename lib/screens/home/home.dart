@@ -19,7 +19,6 @@ class HomeScreen extends StatelessWidget {
         value: UserDatabaseService(user).userDocument,
         child: Scaffold(
           drawer: Drawer(
-            elevation: 0,
             child: ThriftyDrawer(),
           ),
           floatingActionButtonLocation:
@@ -36,6 +35,7 @@ class HomeScreen extends StatelessWidget {
             ),
           ),
           body: SafeArea(
+            bottom: false,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[

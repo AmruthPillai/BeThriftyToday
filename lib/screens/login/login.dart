@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:bethriftytoday/config/utils.dart';
 import 'package:bethriftytoday/screens/login/bottom_section.dart';
 import 'package:bethriftytoday/screens/login/top_section.dart';
@@ -13,6 +15,8 @@ class LoginScreen extends StatelessWidget {
 
     return Scaffold(
       body: SafeArea(
+        top: !Platform.isIOS,
+        bottom: false,
         child: Column(
           children: <Widget>[
             Flexible(

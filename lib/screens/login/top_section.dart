@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:bethriftytoday/config/colors.dart';
 import 'package:bethriftytoday/shared/thrifty_logo.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +12,7 @@ class TopSection extends StatelessWidget {
       color: thriftyBlue,
       child: Column(
         children: <Widget>[
+          (Platform.isIOS) ? SizedBox(height: 25) : Container(),
           Container(
             margin: const EdgeInsets.only(top: 25),
             child: ThriftyLogo(

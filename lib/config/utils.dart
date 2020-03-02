@@ -6,6 +6,7 @@ import 'package:package_info/package_info.dart';
 updateStatusBarColor() {
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
     statusBarColor: thriftyBlue,
+    systemNavigationBarColor: thriftyBlue,
     statusBarBrightness: Brightness.dark,
   ));
 }

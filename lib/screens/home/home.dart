@@ -1,5 +1,6 @@
 import 'package:bethriftytoday/models/user.dart';
-import 'package:bethriftytoday/services/database/user_database.dart';
+import 'package:bethriftytoday/services/database/transaction_db.dart';
+import 'package:bethriftytoday/services/database/user_db.dart';
 import 'package:bethriftytoday/shared/thrifty_appbar.dart';
 import 'package:bethriftytoday/shared/thrifty_drawer.dart';
 import 'package:bethriftytoday/shared/thrifty_overview.dart';
@@ -15,8 +16,15 @@ class HomeScreen extends StatelessWidget {
     var user = Provider.of<User>(context);
 
     if (user != null) {
-      return StreamProvider<User>.value(
-        value: UserDatabaseService(user).userDocument,
+      return MultiProvider(
+        providers: [
+          StreamProvider<User>.value(
+            value: UserDatabaseService(user).userDocument,
+          ),
+          StreamProvider<double>.value(
+            value: TransactionDatabaseService(user).balance,
+          ),
+        ],
         child: Scaffold(
           drawer: Drawer(
             child: ThriftyDrawer(),

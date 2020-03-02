@@ -1,4 +1,5 @@
 import 'package:bethriftytoday/config/colors.dart';
+import 'package:bethriftytoday/config/utils.dart';
 import 'package:bethriftytoday/models/user.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -11,6 +12,7 @@ class ThriftyOverview extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var user = Provider.of<User>(context);
+    var balance = Provider.of<double>(context);
 
     if (user != null) {
       return Container(
@@ -40,7 +42,7 @@ class ThriftyOverview extends StatelessWidget {
                   ),
                   SizedBox(height: 4),
                   Text(
-                    '${user.currency.symbol} 29,382',
+                    formatAmount(user, balance),
                     style: TextStyle(
                       fontSize: 30,
                       color: Colors.white,

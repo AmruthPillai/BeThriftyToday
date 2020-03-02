@@ -2,7 +2,7 @@ import 'package:bethriftytoday/config/colors.dart';
 import 'package:bethriftytoday/models/currency.dart';
 import 'package:bethriftytoday/models/user.dart';
 import 'package:bethriftytoday/screens/home/home.dart';
-import 'package:bethriftytoday/services/database/user_database.dart';
+import 'package:bethriftytoday/services/database/user_db.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

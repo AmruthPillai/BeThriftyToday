@@ -1,8 +1,10 @@
 import 'package:bethriftytoday/config/routes.dart';
 import 'package:bethriftytoday/config/theme.dart';
+import 'package:bethriftytoday/models/currency.dart';
 import 'package:bethriftytoday/models/user.dart';
 import 'package:bethriftytoday/screens/splash.dart';
 import 'package:bethriftytoday/services/auth.dart';
+import 'package:bethriftytoday/services/database/currency_db.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_analytics/observer.dart';
 import 'package:flutter/material.dart';
@@ -23,6 +25,9 @@ class _MyAppState extends State<MyApp> {
     return MultiProvider(
       providers: [
         StreamProvider<User>.value(value: AuthService().user),
+        StreamProvider<List<Currency>>.value(
+          value: CurrencyDatabaseService().currencies,
+        ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

@@ -1,157 +1,108 @@
-import 'package:intl/intl.dart';
 import 'package:bethriftytoday/models/transaction.dart';
-import 'package:bethriftytoday/config/colors.dart';
 import 'package:bethriftytoday/models/user.dart';
+import 'package:bethriftytoday/services/database/transaction_db.dart';
+import 'package:bethriftytoday/shared/transaction_list/transaction_list_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class DailyTransactionList extends StatefulWidget {
-  @override
-  _DailyTransactionListState createState() => _DailyTransactionListState();
-}
-
-class _DailyTransactionListState extends State<DailyTransactionList> {
-  List<Transaction> transactions = [
-    Transaction(
-      category: 'Food & Drinks',
-      description: 'Breakfast at Tiffany\'s',
-      timestamp: DateTime.now(),
-      amount: 23,
-    ),
-    Transaction(
-      category: 'Food & Drinks',
-      description: 'Breakfast at Tiffany\'s',
-      timestamp: DateTime.now(),
-      amount: -55,
-    ),
-  ];
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 20),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          DateLabel(DateTime.now()),
-          ...transactions.map((x) => TransactionListTile(transaction: x))
-        ],
-      ),
-    );
-  }
-}
-
-class TransactionListTile extends StatelessWidget {
-  final Transaction transaction;
-
-  const TransactionListTile({
-    Key key,
-    this.transaction,
-  }) : super(key: key);
-
+class DailyTransactionList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var user = Provider.of<User>(context);
 
-    return Container(
-      padding: const EdgeInsets.symmetric(vertical: 14),
-      decoration: BoxDecoration(
-        border: Border(
-          bottom: BorderSide(
-            color: Theme.of(context).primaryColor.withOpacity(0.1),
-          ),
-        ),
-      ),
-      child: Row(
-        children: <Widget>[
-          buildCategoryIcon(),
-          SizedBox(width: 12),
-          buildMeta(),
-          Spacer(),
-          buildAmount(user),
-        ],
-      ),
-    );
-  }
+    return StreamBuilder<List<Transaction>>(
+      stream: TransactionDatabaseService(user).transactions,
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          var grouped = TransactionDatabaseService(user)
+              .groupTransactionsByDate(snapshot.data);
 
-  CircleAvatar buildCategoryIcon() {
-    return CircleAvatar(
-      radius: 22,
-      backgroundColor: thriftyBlue,
-      child: Text(
-        transaction.category[0],
-        style: TextStyle(
-          fontSize: 18,
-          color: Colors.white,
-          fontWeight: FontWeight.w600,
-        ),
-      ),
-    );
-  }
+          return Container(
+            margin: const EdgeInsets.symmetric(horizontal: 20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                ...grouped.keys.map((date) {
+                  return TransactionList(
+                    date: date,
+                    grouped: grouped,
+                  );
+                }),
+              ],
+            ),
+          );
+        }
 
-  Column buildMeta() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        Text(
-          transaction.category,
-          style: TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.w500,
-          ),
-        ),
-        (transaction.description != null)
-            ? Column(
-                children: <Widget>[
-                  SizedBox(height: 2),
-                  Text(
-                    transaction.description,
-                    style: TextStyle(
-                      fontSize: 12,
-                      color: Colors.grey,
-                      fontWeight: FontWeight.w400,
-                    ),
-                  ),
-                ],
-              )
-            : Container(),
-      ],
-    );
-  }
+        if (snapshot.hasError) {
+          return Padding(
+            padding: const EdgeInsets.only(top: 40),
+            child: Center(
+              child: Text('There seems to be an error!'),
+            ),
+          );
+        }
 
-  String formatAmount(User user) {
-    return '${transaction.amount > 0 ? '+' : '-'} ${user?.currency?.symbol} ${transaction.amount.abs().toStringAsPrecision(2)}';
-  }
-
-  Text buildAmount(User user) {
-    return Text(
-      formatAmount(user),
-      style: TextStyle(
-        fontSize: 18,
-        color: (transaction.amount > 0) ? Colors.green[400] : Colors.red[700],
-        fontWeight: FontWeight.w700,
-      ),
+        return Container();
+      },
     );
   }
 }
 
-class DateLabel extends StatelessWidget {
-  final DateTime timestamp;
+class TransactionList extends StatefulWidget {
+  final String date;
+  final Map<String, List<Transaction>> grouped;
 
-  const DateLabel(this.timestamp);
+  const TransactionList({
+    Key key,
+    @required this.date,
+    @required this.grouped,
+  }) : super(key: key);
+
+  @override
+  _TransactionListState createState() => _TransactionListState();
+}
+
+class _TransactionListState extends State<TransactionList> {
+  bool visible = true;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.only(top: 35),
-      child: Text(
-        DateFormat('dd MMMM y').format(timestamp).toUpperCase(),
-        style: TextStyle(
-          fontSize: 12,
-          color: Colors.grey,
-          fontWeight: FontWeight.w600,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        InkWell(
+          onTap: () {
+            setState(() => visible = !visible);
+          },
+          child: Container(
+            margin: const EdgeInsets.only(top: 30),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                DateLabel(widget.date),
+                Row(
+                  children: <Widget>[
+                    visible
+                        ? Container()
+                        : Text(
+                            '${widget.grouped[widget.date].length} transactions hidden',
+                            style: TextStyle(fontSize: 12, color: Colors.grey),
+                          ),
+                    SizedBox(width: 5),
+                    Icon(
+                      visible ? Icons.arrow_upward : Icons.arrow_downward,
+                      size: 12,
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
         ),
-      ),
+        ...visible
+            ? widget.grouped[widget.date].map((txn) => TransactionListTile(txn))
+            : [],
+      ],
     );
   }
 }

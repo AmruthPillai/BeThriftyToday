@@ -1,4 +1,5 @@
 import 'package:bethriftytoday/config/colors.dart';
+import 'package:bethriftytoday/models/user.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:package_info/package_info.dart';
@@ -9,6 +10,10 @@ updateStatusBarColor() {
     systemNavigationBarColor: thriftyBlue,
     statusBarBrightness: Brightness.dark,
   ));
+}
+
+String formatAmount(User user, double amount) {
+  return '${amount > 0 ? '' : '- '}${user?.currency?.symbol} ${amount.abs().ceil()}';
 }
 
 Future<String> getVersionCode() async {

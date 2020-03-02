@@ -1,0 +1,14 @@
+import 'package:bethriftytoday/models/category.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
+class CategoryDatabaseService {
+  static Firestore _db = Firestore.instance;
+  final CollectionReference _categoryCollection = _db.collection('categories');
+
+  Stream<List<Category>> get categories =>
+      _categoryCollection.snapshots().map((x) {
+        return x.documents.map((y) {
+          return Category.fromJson(y.data);
+        }).toList();
+      });
+}

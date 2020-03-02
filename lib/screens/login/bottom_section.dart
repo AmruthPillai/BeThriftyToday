@@ -2,7 +2,7 @@ import 'package:bethriftytoday/config/utils.dart';
 import 'package:bethriftytoday/screens/home/home.dart';
 import 'package:bethriftytoday/screens/onboarding/profile_setup.dart';
 import 'package:bethriftytoday/services/auth.dart';
-import 'package:bethriftytoday/services/database/user_database.dart';
+import 'package:bethriftytoday/services/database/user_db.dart';
 import 'package:flutter/material.dart';
 
 class BottomSection extends StatefulWidget {

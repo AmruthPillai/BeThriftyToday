@@ -11,13 +11,14 @@ dependencies:
     sdk: flutter
   after_layout: 1.0.7+2
   cloud_firestore: 0.13.2+3
+  collection: 1.14.11
   firebase_analytics: 5.0.11
   firebase_auth: 0.15.3+1
   firebase_core: 0.4.3+3
-  intl: 0.16.1
   google_sign_in: 4.1.4
-  package_info: 0.4.0+14
+  intl: 0.16.1
   json_annotation: 3.0.1
+  package_info: 0.4.0+14
   provider: 4.0.4
 
 dev_dependencies:
@@ -37,6 +38,7 @@ flutter:
   assets:
     - assets/logos/
     - assets/images/
+    - assets/emojis/
   fonts:
     - family: FiraSans
       fonts:

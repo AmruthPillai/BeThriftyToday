@@ -1,10 +1,10 @@
 import 'package:after_layout/after_layout.dart';
 import 'package:bethriftytoday/config/utils.dart';
 import 'package:bethriftytoday/models/currency.dart';
-import 'package:bethriftytoday/services/database/currency_database.dart';
 import 'package:bethriftytoday/shared/currency_circle.dart';
 import 'package:bethriftytoday/shared/onboarding_header.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class CurrencySetupScreen extends StatefulWidget {
   static const String routeName = '/currency-setup';
@@ -96,27 +96,22 @@ class CurrencyGridView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder(
-      stream: CurrencyDatabaseService().currencies,
-      builder: (context, AsyncSnapshot<List<Currency>> snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return CircularProgressIndicator();
-        }
+    var currencies = Provider.of<List<Currency>>(context);
 
-        if (snapshot.hasData) {
-          return GridView.count(
-            crossAxisCount: 3,
-            childAspectRatio: 2,
-            mainAxisSpacing: 40,
-            shrinkWrap: true,
-            children: snapshot.data
-                .map((currency) => CurrencyCircle(currency))
-                .toList(),
-          );
-        }
+    if (currencies != null) {
+      return GridView.count(
+        crossAxisCount: 3,
+        childAspectRatio: 2,
+        mainAxisSpacing: 40,
+        shrinkWrap: true,
+        children: currencies
+            .map((Currency currency) => CurrencyCircle(currency))
+            .toList(),
+      );
+    }
 
-        return Container();
-      },
+    return Center(
+      child: CircularProgressIndicator(),
     );
   }
 }

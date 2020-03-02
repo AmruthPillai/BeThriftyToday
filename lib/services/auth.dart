@@ -1,5 +1,5 @@
 import 'package:bethriftytoday/models/user.dart';
-import 'package:bethriftytoday/services/database/user_database.dart';
+import 'package:bethriftytoday/services/database/user_db.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';

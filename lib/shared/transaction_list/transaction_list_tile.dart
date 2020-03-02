@@ -44,7 +44,7 @@ class TransactionListTile extends StatelessWidget {
         horizontal: 10,
         vertical: 6,
       ),
-      child: Image.asset('assets/emojis/${transaction.category.icon}'),
+      child: Image.asset('assets/categories/${transaction.category.icon}'),
     );
   }
 

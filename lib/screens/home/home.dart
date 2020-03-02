@@ -1,6 +1,9 @@
+import 'package:bethriftytoday/models/category.dart';
 import 'package:bethriftytoday/models/user.dart';
+import 'package:bethriftytoday/services/database/category_db.dart';
 import 'package:bethriftytoday/services/database/transaction_db.dart';
 import 'package:bethriftytoday/services/database/user_db.dart';
+import 'package:bethriftytoday/shared/add_transaction/floating_button.dart';
 import 'package:bethriftytoday/shared/thrifty_appbar.dart';
 import 'package:bethriftytoday/shared/thrifty_drawer.dart';
 import 'package:bethriftytoday/shared/thrifty_overview.dart';
@@ -8,11 +11,17 @@ import 'package:bethriftytoday/shared/transaction_list/daily.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   static const String routeName = '/home';
 
   @override
+  _HomeScreenState createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  @override
   Widget build(BuildContext context) {
+    final _scaffoldKey = GlobalKey<ScaffoldState>();
     var user = Provider.of<User>(context);
 
     if (user != null) {
@@ -21,27 +30,21 @@ class HomeScreen extends StatelessWidget {
           StreamProvider<User>.value(
             value: UserDatabaseService(user).userDocument,
           ),
+          StreamProvider<List<Category>>.value(
+            value: CategoryDatabaseService().categories,
+          ),
           StreamProvider<double>.value(
             value: TransactionDatabaseService(user).balance,
           ),
         ],
         child: Scaffold(
+          key: _scaffoldKey,
           drawer: Drawer(
             child: ThriftyDrawer(),
           ),
           floatingActionButtonLocation:
               FloatingActionButtonLocation.centerFloat,
-          floatingActionButton: FloatingActionButton(
-            onPressed: () {},
-            elevation: 0,
-            splashColor: Theme.of(context).accentColor.withOpacity(0.5),
-            backgroundColor: Theme.of(context).primaryColor,
-            foregroundColor: Theme.of(context).accentColor,
-            child: Icon(
-              Icons.add,
-              size: 32,
-            ),
-          ),
+          floatingActionButton: AddTransactionFloatingButton(),
           body: SafeArea(
             bottom: false,
             child: Column(

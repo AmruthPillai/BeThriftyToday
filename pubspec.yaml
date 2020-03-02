@@ -39,6 +39,7 @@ flutter:
     - assets/logos/
     - assets/images/
     - assets/emojis/
+    - assets/categories/
   fonts:
     - family: FiraSans
       fonts:

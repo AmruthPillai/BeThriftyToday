@@ -7,13 +7,12 @@ import 'package:package_info/package_info.dart';
 updateStatusBarColor() {
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
     statusBarColor: thriftyBlue,
-    systemNavigationBarColor: thriftyBlue,
     statusBarBrightness: Brightness.dark,
   ));
 }
 
 String formatAmount(User user, double amount) {
-  return '${amount > 0 ? '' : '- '}${user?.currency?.symbol} ${amount.abs().ceil()}';
+  return '${amount > 0 ? '' : '- '}${user?.currency?.symbol} ${amount?.abs()?.ceil()}';
 }
 
 Future<String> getVersionCode() async {

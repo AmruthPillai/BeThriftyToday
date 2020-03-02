@@ -16,6 +16,9 @@ class AddTransactionFloatingButton extends StatelessWidget {
           isDismissible: true,
           useRootNavigator: true,
           isScrollControlled: true,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(top: Radius.circular(10)),
+          ),
           builder: (context) => AddTransactionBottomSheet(),
         );
       },

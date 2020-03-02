@@ -21,7 +21,6 @@ class _ThriftyButtonState extends State<ThriftyButton> {
     return Container(
       width: double.infinity,
       height: 50,
-      margin: const EdgeInsets.symmetric(horizontal: 30),
       child: FlatButton(
         onPressed: this.widget.onPressed,
         padding: const EdgeInsets.symmetric(horizontal: 30),

@@ -29,16 +29,19 @@ class _MyAppState extends State<MyApp> {
           value: CurrencyDatabaseService().currencies,
         ),
       ],
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        navigatorObservers: [
-          FirebaseAnalyticsObserver(analytics: analytics),
-        ],
-        title: 'Be Thrifty Today',
-        theme: theme,
-        darkTheme: darkTheme,
-        initialRoute: SplashScreen.routeName,
-        routes: routes,
+      child: GestureDetector(
+        onTap: () => FocusScope.of(context).unfocus(),
+        child: MaterialApp(
+          debugShowCheckedModeBanner: false,
+          navigatorObservers: [
+            FirebaseAnalyticsObserver(analytics: analytics),
+          ],
+          title: 'Be Thrifty Today',
+          theme: theme,
+          darkTheme: darkTheme,
+          initialRoute: SplashScreen.routeName,
+          routes: routes,
+        ),
       ),
     );
   }

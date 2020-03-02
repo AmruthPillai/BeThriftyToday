@@ -43,11 +43,11 @@ ThemeData darkTheme = ThemeData(
   primaryColorBrightness: Brightness.dark,
   inputDecorationTheme: InputDecorationTheme(
     labelStyle: TextStyle(
-      color: Colors.white,
+      color: Colors.white.withOpacity(0.75),
       fontWeight: FontWeight.w600,
     ),
     hintStyle: TextStyle(
-      color: Colors.white,
+      color: Colors.white.withOpacity(0.75),
       fontWeight: FontWeight.w600,
     ),
     border: OutlineInputBorder(

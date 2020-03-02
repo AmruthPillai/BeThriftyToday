@@ -39,7 +39,8 @@ flutter:
     - assets/logos/
     - assets/icons/
     - assets/images/
-    - assets/categories/
+    - assets/categories/expense/
+    - assets/categories/income/
   fonts:
     - family: FiraSans
       fonts:

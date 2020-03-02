@@ -13,26 +13,32 @@ class TransactionListTile extends StatelessWidget {
   Widget build(BuildContext context) {
     var user = Provider.of<User>(context);
 
-    return Container(
-      padding: const EdgeInsets.symmetric(vertical: 14),
-      decoration: BoxDecoration(
-        border: Border(
-          bottom: BorderSide(
-            color: isDarkMode(context)
-                ? Colors.white.withOpacity(0.05)
-                : Colors.black.withOpacity(0.05),
+    if (user != null) {
+      return Container(
+        padding: const EdgeInsets.symmetric(vertical: 14),
+        decoration: BoxDecoration(
+          border: Border(
+            bottom: BorderSide(
+              color: isDarkMode(context)
+                  ? Colors.white.withOpacity(0.05)
+                  : Colors.black.withOpacity(0.05),
+            ),
           ),
         ),
-      ),
-      child: Row(
-        children: <Widget>[
-          buildCategoryIcon(),
-          SizedBox(width: 10),
-          buildMeta(),
-          Spacer(),
-          buildAmount(user),
-        ],
-      ),
+        child: Row(
+          children: <Widget>[
+            buildCategoryIcon(),
+            SizedBox(width: 10),
+            buildMeta(),
+            Spacer(),
+            buildAmount(user),
+          ],
+        ),
+      );
+    }
+
+    return Center(
+      child: CircularProgressIndicator(),
     );
   }
 

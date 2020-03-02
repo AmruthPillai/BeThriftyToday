@@ -30,6 +30,10 @@ class TransactionDatabaseService {
     await doc.updateData({'id': doc.documentID});
   }
 
+  deleteTransaction(Transaction transaction) async {
+    await _transactionCollection.document(transaction.id).delete();
+  }
+
   Map<String, List<Transaction>> groupTransactionsByDate(
     List<Transaction> transactions,
   ) {

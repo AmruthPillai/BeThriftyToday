@@ -18,7 +18,6 @@ class DailyTransactionList extends StatelessWidget {
               .groupTransactionsByDate(snapshot.data);
 
           return Container(
-            margin: const EdgeInsets.symmetric(horizontal: 20),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
@@ -75,7 +74,12 @@ class _TransactionListState extends State<TransactionList> {
             setState(() => visible = !visible);
           },
           child: Container(
-            margin: const EdgeInsets.only(top: 30),
+            margin: const EdgeInsets.only(
+              top: 30,
+              bottom: 10,
+              left: 20,
+              right: 20,
+            ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[

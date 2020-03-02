@@ -1,6 +1,7 @@
 import 'package:bethriftytoday/config/utils.dart';
 import 'package:bethriftytoday/models/transaction.dart';
 import 'package:bethriftytoday/models/user.dart';
+import 'package:bethriftytoday/services/database/transaction_db.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -14,25 +15,48 @@ class TransactionListTile extends StatelessWidget {
     var user = Provider.of<User>(context);
 
     if (user != null) {
-      return Container(
-        padding: const EdgeInsets.symmetric(vertical: 14),
-        decoration: BoxDecoration(
-          border: Border(
-            bottom: BorderSide(
-              color: isDarkMode(context)
-                  ? Colors.white.withOpacity(0.05)
-                  : Colors.black.withOpacity(0.05),
+      return Dismissible(
+        key: Key(transaction.id),
+        direction: DismissDirection.endToStart,
+        onDismissed: (_) {
+          TransactionDatabaseService(user).deleteTransaction(transaction);
+        },
+        background: Container(
+          color: Colors.red,
+          child: Align(
+            alignment: Alignment.centerRight,
+            child: Padding(
+              padding: const EdgeInsets.only(right: 20),
+              child: Icon(
+                Icons.delete,
+                color: Colors.white,
+              ),
             ),
           ),
         ),
-        child: Row(
-          children: <Widget>[
-            buildCategoryIcon(),
-            SizedBox(width: 10),
-            buildMeta(),
-            Spacer(),
-            buildAmount(user),
-          ],
+        child: Container(
+          padding: const EdgeInsets.symmetric(vertical: 14),
+          decoration: BoxDecoration(
+            border: Border(
+              bottom: BorderSide(
+                color: isDarkMode(context)
+                    ? Colors.white.withOpacity(0.05)
+                    : Colors.black.withOpacity(0.05),
+              ),
+            ),
+          ),
+          child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Row(
+              children: <Widget>[
+                buildCategoryIcon(),
+                SizedBox(width: 10),
+                buildMeta(),
+                Spacer(),
+                buildAmount(user),
+              ],
+            ),
+          ),
         ),
       );
     }

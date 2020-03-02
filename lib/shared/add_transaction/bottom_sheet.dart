@@ -1,8 +1,13 @@
-import 'package:bethriftytoday/config/colors.dart';
 import 'package:bethriftytoday/models/category.dart';
+import 'package:bethriftytoday/models/transaction.dart';
+import 'package:bethriftytoday/models/user.dart';
 import 'package:bethriftytoday/services/database/category_db.dart';
+import 'package:bethriftytoday/services/database/transaction_db.dart';
+import 'package:bethriftytoday/shared/add_transaction/category_selector.dart';
+import 'package:bethriftytoday/shared/add_transaction/txn_type_selector.dart';
 import 'package:bethriftytoday/shared/thrifty_button.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class AddTransactionBottomSheet extends StatefulWidget {
   const AddTransactionBottomSheet({
@@ -15,8 +20,11 @@ class AddTransactionBottomSheet extends StatefulWidget {
 }
 
 class _AddTransactionBottomSheetState extends State<AddTransactionBottomSheet> {
-  bool isExpense = true;
+  double amount;
+  String description;
   Category selectedCategory;
+
+  bool isExpense = true;
   final _formKey = GlobalKey<FormState>();
 
   setIsExpense(bool value) => setState(() => isExpense = value);
@@ -47,6 +55,7 @@ class _AddTransactionBottomSheetState extends State<AddTransactionBottomSheet> {
                   buildCategorySelector(),
                   SizedBox(height: 30),
                   TextFormField(
+                    onSaved: (v) => setState(() => description = v),
                     decoration: InputDecoration(
                       labelText: 'Description (optional)',
                     ),
@@ -54,6 +63,7 @@ class _AddTransactionBottomSheetState extends State<AddTransactionBottomSheet> {
                   SizedBox(height: 30),
                   TextFormField(
                     keyboardType: TextInputType.number,
+                    onSaved: (v) => setState(() => amount = double.parse(v)),
                     validator: (value) {
                       if (value.isEmpty) {
                         return 'Please enter an amount.';
@@ -73,7 +83,9 @@ class _AddTransactionBottomSheetState extends State<AddTransactionBottomSheet> {
                   SizedBox(height: 30),
                   ThriftyButton(
                     title: 'Add'.toUpperCase(),
-                    onPressed: (selectedCategory != null) ? () {} : null,
+                    onPressed: (this.selectedCategory != null)
+                        ? this.addTransaction
+                        : null,
                   ),
                 ],
               ),
@@ -82,6 +94,21 @@ class _AddTransactionBottomSheetState extends State<AddTransactionBottomSheet> {
         ),
       ),
     );
+  }
+
+  addTransaction() async {
+    FocusScope.of(context).unfocus();
+    var user = Provider.of<User>(context, listen: false);
+    _formKey.currentState.save();
+
+    Transaction transaction = Transaction(
+      amount: amount * (isExpense ? -1 : 1),
+      description: description,
+      timestamp: DateTime.now(),
+      category: selectedCategory,
+    );
+    TransactionDatabaseService(user).addTransaction(transaction);
+    Navigator.pop(context);
   }
 
   StreamBuilder<List<Category>> buildCategorySelector() {
@@ -120,120 +147,17 @@ class _AddTransactionBottomSheetState extends State<AddTransactionBottomSheet> {
       height: 40,
       child: Row(
         children: <Widget>[
-          CategoryTypeOption(
+          TransactionTypeSelector(
             title: 'Expense',
             isSelected: isExpense,
             onPressed: () => setIsExpense(true),
           ),
-          CategoryTypeOption(
+          TransactionTypeSelector(
             title: 'Income',
             isSelected: !isExpense,
             onPressed: () => setIsExpense(false),
           ),
         ],
-      ),
-    );
-  }
-}
-
-class CategorySelector extends StatelessWidget {
-  final Category category;
-  final bool isSelected;
-  final Function onPressed;
-
-  const CategorySelector({
-    Key key,
-    @required this.category,
-    this.isSelected = false,
-    this.onPressed,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      onTap: this.onPressed,
-      child: Container(
-        width: 80,
-        child: Stack(
-          children: <Widget>[
-            Align(
-              alignment: Alignment.center,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: <Widget>[
-                  Container(
-                    width: 30,
-                    height: 30,
-                    child: Image.asset(
-                      'assets/categories/${category.icon}',
-                    ),
-                  ),
-                  Text(
-                    category.name,
-                    textAlign: TextAlign.center,
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            isSelected
-                ? Align(
-                    alignment: Alignment.topRight,
-                    child: Icon(
-                      Icons.check_box,
-                      color: thriftyBlue,
-                    ),
-                  )
-                : Container(),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class CategoryTypeOption extends StatelessWidget {
-  final String title;
-  final bool isSelected;
-  final Function onPressed;
-
-  const CategoryTypeOption({
-    Key key,
-    @required this.title,
-    this.isSelected = false,
-    this.onPressed,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Expanded(
-      child: InkWell(
-        onTap: this.onPressed,
-        child: AnimatedContainer(
-          duration: Duration(milliseconds: 200),
-          width: double.infinity,
-          height: double.infinity,
-          decoration: BoxDecoration(
-            color: isSelected ? thriftyBlue : Colors.transparent,
-            border: Border.all(
-              width: 2,
-              color: thriftyBlue,
-            ),
-          ),
-          child: Center(
-            child: Text(
-              this.title.toUpperCase(),
-              style: TextStyle(
-                fontSize: 16,
-                color: isSelected ? Colors.white : thriftyBlue,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-        ),
       ),
     );
   }

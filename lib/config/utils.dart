@@ -12,7 +12,7 @@ updateStatusBarColor() {
 }
 
 String formatAmount(User user, double amount) {
-  return '${amount > 0 ? '' : '- '}${user?.currency?.symbol} ${amount?.abs()?.ceil()}';
+  return '${amount >= 0 ? '' : '- '}${user?.currency?.symbol} ${amount?.abs()?.ceil()}';
 }
 
 Future<String> getVersionCode() async {

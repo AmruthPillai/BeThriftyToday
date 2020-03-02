@@ -10,7 +10,7 @@ class TransactionDatabaseService {
   CollectionReference _transactionCollection;
 
   TransactionDatabaseService(this.user) {
-    this._transactionCollection = _db
+    _transactionCollection = _db
         .collection('users')
         .document(this.user?.uid)
         .collection('transactions');
@@ -24,6 +24,11 @@ class TransactionDatabaseService {
           return Transaction.fromJson(y.data);
         }).toList();
       });
+
+  addTransaction(Transaction transaction) async {
+    var doc = await _transactionCollection.add(transaction.toJson());
+    await doc.updateData({'id': doc.documentID});
+  }
 
   Map<String, List<Transaction>> groupTransactionsByDate(
     List<Transaction> transactions,

@@ -41,14 +41,16 @@ class ThriftyOverview extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: 4),
-                  Text(
-                    formatAmount(user, balance),
-                    style: TextStyle(
-                      fontSize: 30,
-                      color: Colors.white,
-                      fontWeight: FontWeight.w800,
-                    ),
-                  ),
+                  (balance != null)
+                      ? Text(
+                          formatAmount(user, balance),
+                          style: TextStyle(
+                            fontSize: 30,
+                            color: Colors.white,
+                            fontWeight: FontWeight.w800,
+                          ),
+                        )
+                      : Container(),
                   SizedBox(height: 8),
                   Text(
                     'Tap to set a monthly budget\nand manage your expenses efficiently.',

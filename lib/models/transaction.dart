@@ -1,10 +1,6 @@
 import 'package:bethriftytoday/models/category.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:json_annotation/json_annotation.dart';
 
-part 'transaction.g.dart';
-
-@JsonSerializable(createFactory: false)
 class Transaction {
   final String id;
   final Category category;
@@ -32,5 +28,11 @@ class Transaction {
         amount: (json['amount'] as num)?.toDouble(),
       );
 
-  Map<String, dynamic> toJson() => _$TransactionToJson(this);
+  Map<String, dynamic> toJson() => <String, dynamic>{
+        'id': this.id,
+        'category': this.category.toJson(),
+        'description': this.description,
+        'timestamp': this.timestamp,
+        'amount': this.amount,
+      };
 }

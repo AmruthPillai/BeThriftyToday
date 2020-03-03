@@ -88,7 +88,7 @@ class ThriftyOverview extends StatelessWidget {
               SizedBox(width: 60),
               (user.budget != null)
                   ? buildBudgetMeter(expenses, user)
-                  : Icon(Icons.track_changes, size: 60),
+                  : Icon(Icons.track_changes, size: 60, color: Colors.white),
             ],
           ),
         ),

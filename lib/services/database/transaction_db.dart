@@ -43,7 +43,13 @@ class TransactionDatabaseService {
 
   addTransaction(Transaction transaction) async {
     var doc = await _transactionCollection.add(transaction.toJson());
-    await doc.updateData({'id': doc.documentID});
+    return doc.updateData({'id': doc.documentID});
+  }
+
+  updateTransaction(Transaction transaction) {
+    return _transactionCollection
+        .document(transaction.id)
+        .updateData(transaction.toJson());
   }
 
   deleteTransaction(Transaction transaction) async {

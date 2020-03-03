@@ -11,8 +11,11 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 class AddTransactionBottomSheet extends StatefulWidget {
+  final Transaction transaction;
+
   const AddTransactionBottomSheet({
     Key key,
+    this.transaction,
   }) : super(key: key);
 
   @override
@@ -21,6 +24,7 @@ class AddTransactionBottomSheet extends StatefulWidget {
 }
 
 class _AddTransactionBottomSheetState extends State<AddTransactionBottomSheet> {
+  String id;
   double amount;
   String description;
   DateTime timestamp;
@@ -31,6 +35,9 @@ class _AddTransactionBottomSheetState extends State<AddTransactionBottomSheet> {
 
   bool isExpense = true;
   final _formKey = GlobalKey<FormState>();
+
+  TextEditingController _descriptionController = TextEditingController();
+  TextEditingController _amountController = TextEditingController();
   TextEditingController _dateController = TextEditingController();
 
   setIsExpense(bool value) => setState(() => isExpense = value);
@@ -44,6 +51,17 @@ class _AddTransactionBottomSheetState extends State<AddTransactionBottomSheet> {
     var time = TimeOfDay.now();
 
     setDateTime(date, time);
+
+    if (widget.transaction != null) {
+      id = widget.transaction.id;
+      amount = widget.transaction.amount;
+      _amountController.text = amount.abs().toStringAsFixed(0);
+      timestamp = widget.transaction.timestamp;
+      setDateTime(timestamp, TimeOfDay.fromDateTime(timestamp));
+      description = widget.transaction.description;
+      _descriptionController.text = description;
+      selectedCategory = widget.transaction.category;
+    }
   }
 
   setDateTime(DateTime date, TimeOfDay time) {
@@ -83,6 +101,7 @@ class _AddTransactionBottomSheetState extends State<AddTransactionBottomSheet> {
                   SizedBox(height: 30),
                   TextFormField(
                     focusNode: _descriptionNode,
+                    controller: _descriptionController,
                     onSaved: (v) => setState(() => description = v),
                     onFieldSubmitted: (v) =>
                         FocusScope.of(context).requestFocus(_amountNode),
@@ -93,6 +112,7 @@ class _AddTransactionBottomSheetState extends State<AddTransactionBottomSheet> {
                   SizedBox(height: 30),
                   TextFormField(
                     focusNode: _amountNode,
+                    controller: _amountController,
                     keyboardType: TextInputType.number,
                     onSaved: (v) => setState(() => amount = double.parse(v)),
                     validator: (value) {
@@ -138,7 +158,9 @@ class _AddTransactionBottomSheetState extends State<AddTransactionBottomSheet> {
                   ),
                   SizedBox(height: 30),
                   ThriftyButton(
-                    title: 'Add'.toUpperCase(),
+                    title: (widget.transaction != null)
+                        ? 'Update'.toUpperCase()
+                        : 'Add'.toUpperCase(),
                     onPressed: (this.selectedCategory != null)
                         ? this.addTransaction
                         : null,
@@ -157,12 +179,19 @@ class _AddTransactionBottomSheetState extends State<AddTransactionBottomSheet> {
     var user = Provider.of<User>(context, listen: false);
     _formKey.currentState.save();
     Transaction transaction = Transaction(
-      amount: amount * (isExpense ? -1 : 1),
+      id: id,
+      amount: amount * (selectedCategory.type == 'expense' ? -1 : 1),
       description: description,
       timestamp: timestamp,
       category: selectedCategory,
     );
-    TransactionDatabaseService(user).addTransaction(transaction);
+
+    if (widget.transaction != null) {
+      TransactionDatabaseService(user).updateTransaction(transaction);
+    } else {
+      TransactionDatabaseService(user).addTransaction(transaction);
+    }
+
     Navigator.pop(context);
   }
 

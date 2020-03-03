@@ -9,8 +9,8 @@ class AddTransactionFloatingButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton(
-      onPressed: () async {
-        await showModalBottomSheet(
+      onPressed: () {
+        showModalBottomSheet(
           elevation: 10,
           context: context,
           isDismissible: true,

@@ -3,6 +3,7 @@ import 'package:bethriftytoday/config/utils.dart';
 import 'package:bethriftytoday/models/transaction.dart';
 import 'package:bethriftytoday/models/user.dart';
 import 'package:bethriftytoday/services/database/transaction_db.dart';
+import 'package:bethriftytoday/shared/add_transaction/bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -10,7 +11,7 @@ import 'package:provider/provider.dart';
 class TransactionListTile extends StatelessWidget {
   final Transaction transaction;
 
-  const TransactionListTile(this.transaction);
+  TransactionListTile(this.transaction) : super(key: Key(transaction.id));
 
   @override
   Widget build(BuildContext context) {
@@ -20,43 +21,50 @@ class TransactionListTile extends StatelessWidget {
       return Dismissible(
         key: Key(transaction.id),
         direction: DismissDirection.endToStart,
-        onDismissed: (_) {
-          TransactionDatabaseService(user).deleteTransaction(transaction);
+        onDismissed: (direction) {
+          if (direction == DismissDirection.endToStart) {
+            TransactionDatabaseService(user).deleteTransaction(transaction);
+          }
         },
-        background: Container(
-          color: Colors.red,
-          child: Align(
-            alignment: Alignment.centerRight,
-            child: Padding(
-              padding: const EdgeInsets.only(right: 20),
-              child: Icon(
-                Icons.delete,
-                color: Colors.white,
+        background: buildRightSwipeBackground(),
+        child: InkWell(
+          onLongPress: () {
+            showModalBottomSheet(
+              elevation: 10,
+              context: context,
+              isDismissible: true,
+              useRootNavigator: true,
+              isScrollControlled: true,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.vertical(top: Radius.circular(10)),
               ),
-            ),
-          ),
-        ),
-        child: Container(
-          padding: const EdgeInsets.symmetric(vertical: 14),
-          decoration: BoxDecoration(
-            border: Border(
-              bottom: BorderSide(
-                color: isDarkMode(context)
-                    ? Colors.white.withOpacity(0.05)
-                    : Colors.black.withOpacity(0.05),
+              builder: (context) => AddTransactionBottomSheet(
+                transaction: transaction,
               ),
-            ),
-          ),
+            );
+          },
           child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Row(
-              children: <Widget>[
-                buildCategoryIcon(),
-                SizedBox(width: 10),
-                buildMeta(),
-                Spacer(),
-                buildAmount(user),
-              ],
+            padding: const EdgeInsets.symmetric(vertical: 14),
+            decoration: BoxDecoration(
+              border: Border(
+                bottom: BorderSide(
+                  color: isDarkMode(context)
+                      ? Colors.white.withOpacity(0.05)
+                      : Colors.black.withOpacity(0.05),
+                ),
+              ),
+            ),
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Row(
+                children: <Widget>[
+                  buildCategoryIcon(),
+                  SizedBox(width: 10),
+                  buildMeta(context),
+                  Spacer(),
+                  buildAmount(user),
+                ],
+              ),
             ),
           ),
         ),
@@ -65,6 +73,22 @@ class TransactionListTile extends StatelessWidget {
 
     return Center(
       child: CircularProgressIndicator(),
+    );
+  }
+
+  Container buildRightSwipeBackground() {
+    return Container(
+      color: Colors.red,
+      child: Align(
+        alignment: Alignment.centerRight,
+        child: Padding(
+          padding: const EdgeInsets.only(right: 20),
+          child: Icon(
+            Icons.delete,
+            color: Colors.white,
+          ),
+        ),
+      ),
     );
   }
 
@@ -80,7 +104,7 @@ class TransactionListTile extends StatelessWidget {
     );
   }
 
-  Column buildMeta() {
+  Column buildMeta(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -92,6 +116,7 @@ class TransactionListTile extends StatelessWidget {
           children: <Widget>[
             SizedBox(height: 2),
             Row(
+              mainAxisSize: MainAxisSize.min,
               children: <Widget>[
                 Text(
                   DateFormat().add_jm().format(transaction.timestamp),
@@ -99,6 +124,7 @@ class TransactionListTile extends StatelessWidget {
                 ),
                 (transaction.description.isNotEmpty)
                     ? Row(
+                        mainAxisSize: MainAxisSize.min,
                         children: <Widget>[
                           Padding(
                             padding: const EdgeInsets.symmetric(
@@ -106,9 +132,13 @@ class TransactionListTile extends StatelessWidget {
                             ),
                             child: Text('/', style: transactionSubtitleStyle),
                           ),
-                          Text(
-                            transaction.description,
-                            style: transactionSubtitleStyle,
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width * 0.5,
+                            child: Text(
+                              transaction.description,
+                              overflow: TextOverflow.ellipsis,
+                              style: transactionSubtitleStyle,
+                            ),
                           ),
                         ],
                       )

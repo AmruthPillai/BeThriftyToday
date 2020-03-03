@@ -9,6 +9,7 @@ class User {
   final String uid;
   final String name;
   final String email;
+  final double budget;
   final String photoURL;
   final Currency currency;
 
@@ -16,6 +17,7 @@ class User {
     this.uid,
     this.name,
     this.email,
+    this.budget,
     this.photoURL,
     this.currency,
   });
@@ -27,10 +29,18 @@ class User {
           uid: user.uid,
           name: user.displayName ?? '',
           email: user.email ?? '',
+          budget: null,
           photoURL: user.photoUrl ?? '',
           currency: null,
         )
       : null;
 
-  Map<String, dynamic> toJson() => _$UserToJson(this);
+  Map<String, dynamic> toJson() => <String, dynamic>{
+        'uid': this.uid,
+        'name': this.name,
+        'email': this.email,
+        'budget': this.budget,
+        'photoURL': this.photoURL,
+        'currency': this.currency.toJson(),
+      };
 }

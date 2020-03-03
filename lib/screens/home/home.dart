@@ -1,4 +1,5 @@
 import 'package:bethriftytoday/models/category.dart';
+import 'package:bethriftytoday/models/transaction.dart';
 import 'package:bethriftytoday/models/user.dart';
 import 'package:bethriftytoday/services/database/category_db.dart';
 import 'package:bethriftytoday/services/database/transaction_db.dart';
@@ -30,11 +31,15 @@ class _HomeScreenState extends State<HomeScreen> {
           StreamProvider<User>.value(
             value: UserDatabaseService(user).userDocument,
           ),
+          StreamProvider<double>.value(
+            value: TransactionDatabaseService(user).balance,
+          ),
           StreamProvider<List<Category>>.value(
             value: CategoryDatabaseService().categories,
           ),
-          StreamProvider<double>.value(
-            value: TransactionDatabaseService(user).balance,
+          StreamProvider<List<Transaction>>.value(
+            value: TransactionDatabaseService(user)
+                .expensesByMonth(DateTime.now()),
           ),
         ],
         child: Scaffold(
@@ -52,7 +57,9 @@ class _HomeScreenState extends State<HomeScreen> {
               children: <Widget>[
                 ThriftyAppBar(),
                 ThriftyOverview(),
-                DailyTransactionList(),
+                SingleChildScrollView(
+                  child: DailyTransactionList(),
+                ),
               ],
             ),
           ),

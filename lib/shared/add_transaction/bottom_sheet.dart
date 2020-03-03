@@ -7,6 +7,7 @@ import 'package:bethriftytoday/shared/add_transaction/category_selector.dart';
 import 'package:bethriftytoday/shared/add_transaction/txn_type_selector.dart';
 import 'package:bethriftytoday/shared/thrifty_button.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 class AddTransactionBottomSheet extends StatefulWidget {
@@ -22,14 +23,40 @@ class AddTransactionBottomSheet extends StatefulWidget {
 class _AddTransactionBottomSheetState extends State<AddTransactionBottomSheet> {
   double amount;
   String description;
+  DateTime timestamp;
   Category selectedCategory;
+
+  var _descriptionNode = FocusNode();
+  var _amountNode = FocusNode();
 
   bool isExpense = true;
   final _formKey = GlobalKey<FormState>();
+  TextEditingController _dateController = TextEditingController();
 
   setIsExpense(bool value) => setState(() => isExpense = value);
   bool get isKeyboardOpen => MediaQuery.of(context).viewInsets.bottom > 0;
   bool isNumeric(String s) => (s == null) ? false : double.tryParse(s) != null;
+
+  @override
+  void initState() {
+    super.initState();
+    var date = DateTime.now();
+    var time = TimeOfDay.now();
+
+    setDateTime(date, time);
+  }
+
+  setDateTime(DateTime date, TimeOfDay time) {
+    timestamp = DateTime(
+      date.year,
+      date.month,
+      date.day,
+      time.hour,
+      time.minute,
+    );
+
+    _dateController.text = DateFormat().add_yMMMMd().add_jm().format(timestamp);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +64,7 @@ class _AddTransactionBottomSheetState extends State<AddTransactionBottomSheet> {
       curve: Curves.easeInOutExpo,
       duration: Duration(milliseconds: 200),
       height: MediaQuery.of(context).size.height *
-          (this.isKeyboardOpen ? 0.75 : 0.55),
+          (this.isKeyboardOpen ? 0.8 : 0.6),
       margin: const EdgeInsets.symmetric(
         horizontal: 20,
         vertical: 30,
@@ -55,13 +82,17 @@ class _AddTransactionBottomSheetState extends State<AddTransactionBottomSheet> {
                   buildCategorySelector(),
                   SizedBox(height: 30),
                   TextFormField(
+                    focusNode: _descriptionNode,
                     onSaved: (v) => setState(() => description = v),
+                    onFieldSubmitted: (v) =>
+                        FocusScope.of(context).requestFocus(_amountNode),
                     decoration: InputDecoration(
                       labelText: 'Description (optional)',
                     ),
                   ),
                   SizedBox(height: 30),
                   TextFormField(
+                    focusNode: _amountNode,
                     keyboardType: TextInputType.number,
                     onSaved: (v) => setState(() => amount = double.parse(v)),
                     validator: (value) {
@@ -78,6 +109,31 @@ class _AddTransactionBottomSheetState extends State<AddTransactionBottomSheet> {
                         isExpense ? Icons.remove : Icons.add,
                       ),
                       labelText: 'Amount',
+                    ),
+                  ),
+                  SizedBox(height: 30),
+                  TextFormField(
+                    onTap: () async {
+                      var date = await showDatePicker(
+                        context: context,
+                        initialDate: DateTime.now(),
+                        firstDate: DateTime(1990),
+                        lastDate: DateTime.now(),
+                      );
+
+                      var time = await showTimePicker(
+                        context: context,
+                        initialTime: TimeOfDay.now(),
+                      );
+
+                      if (date != null || time != null) {
+                        setState(() => setDateTime(date, time));
+                      }
+                    },
+                    controller: _dateController,
+                    readOnly: true,
+                    decoration: InputDecoration(
+                      labelText: 'Date',
                     ),
                   ),
                   SizedBox(height: 30),
@@ -100,11 +156,10 @@ class _AddTransactionBottomSheetState extends State<AddTransactionBottomSheet> {
     FocusScope.of(context).unfocus();
     var user = Provider.of<User>(context, listen: false);
     _formKey.currentState.save();
-
     Transaction transaction = Transaction(
       amount: amount * (isExpense ? -1 : 1),
       description: description,
-      timestamp: DateTime.now(),
+      timestamp: timestamp,
       category: selectedCategory,
     );
     TransactionDatabaseService(user).addTransaction(transaction);

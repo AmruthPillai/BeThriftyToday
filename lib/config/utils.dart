@@ -1,4 +1,5 @@
 import 'package:bethriftytoday/config/colors.dart';
+import 'package:bethriftytoday/models/transaction.dart';
 import 'package:bethriftytoday/models/user.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -12,7 +13,15 @@ updateStatusBarColor() {
 }
 
 String formatAmount(User user, double amount) {
-  return '${amount >= 0 ? '' : '- '}${user?.currency?.symbol} ${amount?.abs()?.ceil()}';
+  return '${amount >= 0 ? '' : '- '}${user?.currency?.symbol} ${amount?.abs()?.ceil()}'
+      .replaceAllMapped(
+    new RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'),
+    (Match m) => '${m[1]},',
+  );
+}
+
+double calculateAbsoluteSum(List<Transaction> transactions) {
+  return transactions.fold<double>(0, (value, txn) => value + txn.amount).abs();
 }
 
 Future<String> getVersionCode() async {

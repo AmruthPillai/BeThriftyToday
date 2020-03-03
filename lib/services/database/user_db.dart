@@ -50,4 +50,12 @@ class UserDatabaseService {
       'currency': currency.toJson(),
     });
   }
+
+  Future updateUserBudget(double budget) async {
+    var userDoc = await getUserDocument;
+    return await _userCollection.document(this.user.uid).updateData({
+      ...userDoc.toJson(),
+      'budget': budget,
+    });
+  }
 }

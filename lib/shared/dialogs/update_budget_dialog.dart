@@ -1,0 +1,86 @@
+import 'package:bethriftytoday/models/user.dart';
+import 'package:bethriftytoday/services/database/user_db.dart';
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+class UpdateBudgetDialog extends StatefulWidget {
+  final double initialValue;
+
+  const UpdateBudgetDialog({
+    Key key,
+    this.initialValue,
+  }) : super(key: key);
+
+  @override
+  _UpdateBudgetDialogState createState() => _UpdateBudgetDialogState();
+}
+
+class _UpdateBudgetDialogState extends State<UpdateBudgetDialog> {
+  TextEditingController _budgetController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.initialValue != null) {
+      _budgetController.text = widget.initialValue.toStringAsFixed(0);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    var user = Provider.of<User>(context);
+
+    if (user != null) {
+      return Dialog(
+        child: Container(
+          width: double.infinity,
+          padding: const EdgeInsets.all(20),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              Text(
+                'Please enter a monthly budget that you feel is conservative according to your spending habits.',
+                textAlign: TextAlign.center,
+              ),
+              SizedBox(height: 20),
+              TextField(
+                controller: _budgetController,
+                keyboardType: TextInputType.number,
+                decoration: InputDecoration(
+                  labelText: 'Budget',
+                ),
+              ),
+              SizedBox(height: 10),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  FlatButton.icon(
+                    onPressed: () {
+                      UserDatabaseService(user).updateUserBudget(null);
+                      Navigator.pop(context);
+                    },
+                    textColor: Colors.red,
+                    icon: Icon(Icons.clear),
+                    label: Text('CLEAR'),
+                  ),
+                  FlatButton.icon(
+                    onPressed: () {
+                      UserDatabaseService(user).updateUserBudget(
+                        double.parse(_budgetController.text),
+                      );
+                      Navigator.pop(context);
+                    },
+                    icon: Icon(Icons.check),
+                    label: Text('SET BUDGET'),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      );
+    }
+
+    return Container();
+  }
+}

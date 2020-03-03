@@ -1,8 +1,10 @@
+import 'package:bethriftytoday/config/typography.dart';
 import 'package:bethriftytoday/config/utils.dart';
 import 'package:bethriftytoday/models/transaction.dart';
 import 'package:bethriftytoday/models/user.dart';
 import 'package:bethriftytoday/services/database/transaction_db.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 class TransactionListTile extends StatelessWidget {
@@ -84,26 +86,37 @@ class TransactionListTile extends StatelessWidget {
       children: <Widget>[
         Text(
           transaction.category.name,
-          style: TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.w500,
-          ),
+          style: transactionTitleStyle,
         ),
-        (transaction.description != null)
-            ? Column(
-                children: <Widget>[
-                  SizedBox(height: 2),
-                  Text(
-                    transaction.description,
-                    style: TextStyle(
-                      fontSize: 12,
-                      color: Colors.grey,
-                      fontWeight: FontWeight.w400,
-                    ),
-                  ),
-                ],
-              )
-            : Container(),
+        Column(
+          children: <Widget>[
+            SizedBox(height: 2),
+            Row(
+              children: <Widget>[
+                Text(
+                  DateFormat().add_jm().format(transaction.timestamp),
+                  style: transactionSubtitleStyle,
+                ),
+                (transaction.description.isNotEmpty)
+                    ? Row(
+                        children: <Widget>[
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 4,
+                            ),
+                            child: Text('/', style: transactionSubtitleStyle),
+                          ),
+                          Text(
+                            transaction.description,
+                            style: transactionSubtitleStyle,
+                          ),
+                        ],
+                      )
+                    : Container(),
+              ],
+            ),
+          ],
+        ),
       ],
     );
   }
@@ -111,10 +124,8 @@ class TransactionListTile extends StatelessWidget {
   Text buildAmount(User user) {
     return Text(
       formatAmount(user, transaction.amount),
-      style: TextStyle(
-        fontSize: 18,
-        color: (transaction.amount > 0) ? Colors.green[400] : Colors.red[700],
-        fontWeight: FontWeight.w700,
+      style: transactionAmountStyle(
+        (transaction.amount > 0) ? Colors.green[400] : Colors.red[700],
       ),
     );
   }

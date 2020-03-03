@@ -25,6 +25,22 @@ class TransactionDatabaseService {
         }).toList();
       });
 
+  Stream<List<Transaction>> expensesByMonth(DateTime date) {
+    var firstDay = new DateTime(date.year, date.month, 1);
+    var lastDay = new DateTime(date.year, date.month + 1, 0);
+
+    return _transactionCollection
+        .where('category.type', isEqualTo: 'expense')
+        .where('timestamp', isGreaterThanOrEqualTo: firstDay)
+        .where('timestamp', isLessThanOrEqualTo: lastDay)
+        .snapshots()
+        .map((x) {
+      return x.documents.map((y) {
+        return Transaction.fromJson(y.data);
+      }).toList();
+    });
+  }
+
   addTransaction(Transaction transaction) async {
     var doc = await _transactionCollection.add(transaction.toJson());
     await doc.updateData({'id': doc.documentID});

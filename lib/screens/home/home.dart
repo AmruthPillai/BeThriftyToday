@@ -57,7 +57,7 @@ class _HomeScreenState extends State<HomeScreen> {
               children: <Widget>[
                 ThriftyAppBar(),
                 ThriftyOverview(),
-                SingleChildScrollView(
+                Expanded(
                   child: DailyTransactionList(),
                 ),
               ],

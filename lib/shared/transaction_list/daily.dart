@@ -17,18 +17,15 @@ class DailyTransactionList extends StatelessWidget {
           var grouped = TransactionDatabaseService(user)
               .groupTransactionsByDate(snapshot.data);
 
-          return Container(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                ...grouped.keys.map((date) {
-                  return TransactionList(
-                    date: date,
-                    grouped: grouped,
-                  );
-                }),
-              ],
-            ),
+          return ListView.builder(
+            shrinkWrap: true,
+            itemCount: grouped.keys.length,
+            itemBuilder: (context, index) {
+              return TransactionList(
+                date: grouped.keys.elementAt(index),
+                grouped: grouped,
+              );
+            },
           );
         }
 
@@ -69,44 +66,48 @@ class _TransactionListState extends State<TransactionList> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        InkWell(
-          onTap: () {
-            setState(() => visible = !visible);
-          },
-          child: Container(
-            margin: const EdgeInsets.only(
-              top: 30,
-              bottom: 10,
-              left: 20,
-              right: 20,
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                DateLabel(widget.date),
-                Row(
-                  children: <Widget>[
-                    visible
-                        ? Container()
-                        : Text(
-                            '${widget.grouped[widget.date].length} transactions hidden',
-                            style: TextStyle(fontSize: 12, color: Colors.grey),
-                          ),
-                    SizedBox(width: 5),
-                    Icon(
-                      visible ? Icons.arrow_upward : Icons.arrow_downward,
-                      size: 12,
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-        ),
+        buildListHeader(),
         ...visible
             ? widget.grouped[widget.date].map((txn) => TransactionListTile(txn))
             : [],
       ],
+    );
+  }
+
+  InkWell buildListHeader() {
+    return InkWell(
+      onTap: () {
+        setState(() => visible = !visible);
+      },
+      child: Container(
+        margin: const EdgeInsets.only(
+          top: 30,
+          bottom: 10,
+          left: 20,
+          right: 20,
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            DateLabel(widget.date),
+            Row(
+              children: <Widget>[
+                visible
+                    ? Container()
+                    : Text(
+                        '${widget.grouped[widget.date].length} transactions hidden',
+                        style: TextStyle(fontSize: 12, color: Colors.grey),
+                      ),
+                SizedBox(width: 5),
+                Icon(
+                  visible ? Icons.arrow_upward : Icons.arrow_downward,
+                  size: 12,
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

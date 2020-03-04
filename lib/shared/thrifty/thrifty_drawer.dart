@@ -1,10 +1,10 @@
 import 'package:bethriftytoday/config/colors.dart';
 import 'package:bethriftytoday/config/utils.dart';
 import 'package:bethriftytoday/models/user.dart';
-import 'package:bethriftytoday/screens/about/about.dart';
 import 'package:bethriftytoday/screens/login/login.dart';
 import 'package:bethriftytoday/screens/settings/settings.dart';
 import 'package:bethriftytoday/services/auth.dart';
+import 'package:bethriftytoday/shared/thrifty/thrifty_logo.dart';
 import 'package:bethriftytoday/shared/wave_clipper.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -29,9 +29,22 @@ class ThriftyDrawer extends StatelessWidget {
           ),
           Divider(),
           ListTile(
-            onTap: () {
+            onTap: () async {
               Navigator.pop(context);
-              Navigator.pushNamed(context, AboutScreen.routeName);
+              showAboutDialog(
+                context: context,
+                applicationIcon: ThriftyLogo(size: 80, isLight: true),
+                applicationName: 'Be Thrifty Today',
+                applicationLegalese:
+                    'This application is open source and free-to-use, governed under the Apache License 2.0. If you are a developer, please feel free to contribute to the application on GitHub.',
+                applicationVersion: await getVersionCode(),
+                children: [
+                  SizedBox(height: 30),
+                  Text(
+                    'If you love the app and use it regularly, please donate as little as you can, enough to keep the app alive and running on it\'s own. Donation details can be found on the GitHub homepage or the website. Thank you so much!',
+                  ),
+                ],
+              );
             },
             leading: Icon(Icons.local_library),
             title: Text('About the App'),

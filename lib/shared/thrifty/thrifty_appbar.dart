@@ -2,10 +2,14 @@ import 'package:bethriftytoday/models/user.dart';
 import 'package:bethriftytoday/shared/thrifty/thrifty_logo.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:transparent_image/transparent_image.dart';
 
 class ThriftyAppBar extends StatefulWidget {
+  final bool canGoBack;
+
   const ThriftyAppBar({
     Key key,
+    this.canGoBack = false,
   }) : super(key: key);
 
   @override
@@ -22,13 +26,21 @@ class _ThriftyAppBarState extends State<ThriftyAppBar> {
       child: Row(
         children: <Widget>[
           SizedBox(width: 10),
-          IconButton(
-            onPressed: () {
-              Scaffold.of(context).openDrawer();
-            },
-            color: Theme.of(context).primaryColor,
-            icon: Icon(Icons.menu),
-          ),
+          widget.canGoBack
+              ? IconButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  color: Theme.of(context).primaryColor,
+                  icon: Icon(Icons.arrow_back_ios),
+                )
+              : IconButton(
+                  onPressed: () {
+                    Scaffold.of(context).openDrawer();
+                  },
+                  color: Theme.of(context).primaryColor,
+                  icon: Icon(Icons.menu),
+                ),
           SizedBox(width: 10),
           ThriftyLogo(size: 80),
           Spacer(),
@@ -39,18 +51,20 @@ class _ThriftyAppBarState extends State<ThriftyAppBar> {
     );
   }
 
-  CircleAvatar buildCircleAvatar(User user) {
+  Widget buildCircleAvatar(User user) {
     if (user != null) {
-      return CircleAvatar(
-        radius: 25,
-        backgroundImage: NetworkImage(user.photoURL),
-        backgroundColor: Theme.of(context).primaryColor,
-      );
-    } else {
-      return CircleAvatar(
-        radius: 25,
-        backgroundColor: Theme.of(context).primaryColor,
+      return Container(
+        width: 60,
+        child: ClipOval(
+          child: FadeInImage.memoryNetwork(
+            placeholder: kTransparentImage,
+            image: user.photoURL,
+            fit: BoxFit.contain,
+          ),
+        ),
       );
     }
+
+    return Container();
   }
 }

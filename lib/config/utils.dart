@@ -9,6 +9,7 @@ updateStatusBarColor() {
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
     statusBarColor: thriftyBlue,
     statusBarBrightness: Brightness.dark,
+    statusBarIconBrightness: Brightness.light,
   ));
 }
 

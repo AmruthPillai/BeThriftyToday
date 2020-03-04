@@ -5,6 +5,7 @@ import 'package:bethriftytoday/models/user.dart';
 import 'package:bethriftytoday/screens/splash.dart';
 import 'package:bethriftytoday/services/auth.dart';
 import 'package:bethriftytoday/services/database/currency_db.dart';
+import 'package:bethriftytoday/services/settings.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_analytics/observer.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -26,23 +27,31 @@ class _MyAppState extends State<MyApp> {
 
     return MultiProvider(
       providers: [
-        StreamProvider<User>.value(value: AuthService().user),
+        StreamProvider<User>.value(
+          value: AuthService().user,
+        ),
+        ChangeNotifierProvider<SettingsProvider>(
+          create: (context) => SettingsProvider(),
+        ),
         StreamProvider<List<Currency>>.value(
           value: CurrencyDatabaseService().currencies,
         ),
       ],
       child: GestureDetector(
         onTap: () => FocusScope.of(context).unfocus(),
-        child: MaterialApp(
-          debugShowCheckedModeBanner: false,
-          navigatorObservers: [
-            FirebaseAnalyticsObserver(analytics: analytics),
-          ],
-          title: 'Be Thrifty Today',
-          theme: theme,
-          darkTheme: darkTheme,
-          initialRoute: SplashScreen.routeName,
-          routes: routes,
+        child: Consumer<SettingsProvider>(
+          builder: (context, settings, _) => MaterialApp(
+            debugShowCheckedModeBanner: false,
+            navigatorObservers: [
+              FirebaseAnalyticsObserver(analytics: analytics),
+            ],
+            title: 'Be Thrifty Today',
+            theme: theme,
+            darkTheme: darkTheme,
+            initialRoute: SplashScreen.routeName,
+            themeMode: settings.isDarkMode ? ThemeMode.dark : ThemeMode.light,
+            routes: routes,
+          ),
         ),
       ),
     );

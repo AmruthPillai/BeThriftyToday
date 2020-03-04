@@ -1,13 +1,10 @@
 import 'package:bethriftytoday/models/user.dart';
 import 'package:bethriftytoday/services/database/user_db.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthService {
   static FirebaseAuth _auth = FirebaseAuth.instance;
-  static Firestore _db = Firestore.instance;
-  final CollectionReference userCollection = _db.collection('users');
 
   final GoogleSignIn _googleSignIn = GoogleSignIn(scopes: [
     'https://www.googleapis.com/auth/plus.me',
@@ -74,5 +71,13 @@ class AuthService {
       print(e.message);
       throw Exception('Something went horribly wrong, please try again later!');
     }
+  }
+
+  Future deleteUser() async {
+    AuthCredential credential = await getGoogleAuthCredential();
+    AuthResult authResult = await _auth.signInWithCredential(credential);
+    FirebaseUser firebaseUser = authResult.user;
+    await firebaseUser.delete();
+    signOut();
   }
 }

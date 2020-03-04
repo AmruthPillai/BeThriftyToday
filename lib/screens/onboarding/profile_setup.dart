@@ -36,69 +36,62 @@ class _ProfileSetupScreenState extends State<ProfileSetupScreen>
     var user = Provider.of<User>(context);
 
     return Scaffold(
-      body: SingleChildScrollView(
-        child: SizedBox(
-          height: MediaQuery.of(context).size.height,
-          child: Column(
-            children: <Widget>[
-              OnboardingHeader(),
-              SizedBox(height: 30),
-              Container(
-                width: 50,
-                height: 50,
-                child: Image.asset('assets/images/person.png'),
-              ),
-              SizedBox(height: 15),
-              Text(
-                'Who are you?',
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              SizedBox(height: 30),
-              Container(
-                margin: const EdgeInsets.symmetric(
-                  horizontal: 30,
-                  vertical: 15,
-                ),
-                child: TextField(
-                  controller: _nameController,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: 'Full Name',
-                    labelStyle: TextStyle(
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                ),
-              ),
-              Container(
-                margin: const EdgeInsets.symmetric(
-                  horizontal: 30,
-                  vertical: 15,
-                ),
-                child: TextField(
-                  enabled: false,
-                  controller: _emailController,
-                  decoration: InputDecoration(
-                    labelText: 'Email Address',
-                  ),
-                ),
-              ),
-              Spacer(),
-              ThriftyButton(
-                title: 'NEXT',
-                onPressed: () async {
-                  await UserDatabaseService(user)
-                      .updateUserName(_nameController.text);
-                  Navigator.pushNamed(context, CurrencySetupScreen.routeName);
-                },
-              ),
-              SizedBox(height: 30),
-            ],
+      body: Column(
+        children: <Widget>[
+          OnboardingHeader(),
+          SizedBox(height: 40),
+          Container(
+            width: 50,
+            height: 50,
+            child: Image.asset('assets/images/person.png'),
           ),
-        ),
+          SizedBox(height: 15),
+          Text(
+            'Who are you?',
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          SizedBox(height: 50),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 30),
+            child: TextField(
+              controller: _nameController,
+              decoration: InputDecoration(
+                border: OutlineInputBorder(),
+                labelText: 'Full Name',
+                labelStyle: TextStyle(
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ),
+          ),
+          SizedBox(height: 30),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 30),
+            child: TextField(
+              enabled: false,
+              controller: _emailController,
+              decoration: InputDecoration(
+                labelText: 'Email Address',
+              ),
+            ),
+          ),
+          Spacer(),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 30),
+            child: ThriftyButton(
+              title: 'NEXT',
+              onPressed: () async {
+                await UserDatabaseService(user)
+                    .updateUserName(_nameController.text);
+                Navigator.pushNamed(context, CurrencySetupScreen.routeName);
+              },
+            ),
+          ),
+          SizedBox(height: 30),
+        ],
       ),
     );
   }

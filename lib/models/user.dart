@@ -41,6 +41,6 @@ class User {
         'email': this.email,
         'budget': this.budget,
         'photoURL': this.photoURL,
-        'currency': this.currency.toJson(),
+        'currency': this.currency?.toJson(),
       };
 }

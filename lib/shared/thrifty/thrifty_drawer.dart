@@ -2,6 +2,7 @@ import 'package:bethriftytoday/config/colors.dart';
 import 'package:bethriftytoday/config/utils.dart';
 import 'package:bethriftytoday/models/user.dart';
 import 'package:bethriftytoday/screens/login/login.dart';
+import 'package:bethriftytoday/screens/settings/settings.dart';
 import 'package:bethriftytoday/screens/splash.dart';
 import 'package:bethriftytoday/services/auth.dart';
 import 'package:bethriftytoday/shared/wave_clipper.dart';
@@ -22,6 +23,14 @@ class ThriftyDrawer extends StatelessWidget {
             onTap: () {},
             leading: Icon(Icons.import_export),
             title: Text('Export as CSV'),
+          ),
+          ListTile(
+            onTap: () {
+              Navigator.pop(context); // Close the drawer
+              Navigator.pushNamed(context, SettingsScreen.routeName);
+            },
+            leading: Icon(Icons.settings),
+            title: Text('Settings'),
           ),
           Divider(),
           ListTile(

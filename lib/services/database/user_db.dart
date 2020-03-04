@@ -11,6 +11,9 @@ class UserDatabaseService {
     _userDocument = _db.collection('users').document(this.user.uid);
   }
 
+  Future<User> fetchUserDocument() =>
+      _userDocument.get().then((user) => User.fromJson(user.data));
+
   Stream<User> get userDocument =>
       _userDocument.snapshots().map((user) => User.fromJson(user.data));
 
@@ -31,22 +34,25 @@ class UserDatabaseService {
   }
 
   Future updateUserName(String name) async {
-    return await _userDocument.updateData({
-      ...this.user.toJson(),
+    var userDoc = await fetchUserDocument();
+    return _userDocument.updateData({
+      ...userDoc.toJson(),
       'name': name,
     });
   }
 
   Future updateUserCurrency(Currency currency) async {
-    return await _userDocument.updateData({
-      ...this.user.toJson(),
+    var userDoc = await fetchUserDocument();
+    return _userDocument.updateData({
+      ...userDoc.toJson(),
       'currency': currency.toJson(),
     });
   }
 
   Future updateUserBudget(double budget) async {
-    return await _userDocument.updateData({
-      ...this.user.toJson(),
+    var userDoc = await fetchUserDocument();
+    return _userDocument.updateData({
+      ...userDoc.toJson(),
       'budget': budget,
     });
   }

@@ -13,14 +13,15 @@ dependencies:
   cloud_firestore: 0.13.2+3
   collection: 1.14.11
   firebase_analytics: 5.0.11
-  firebase_messaging: 6.0.12
   firebase_auth: 0.15.3+1
   firebase_core: 0.4.3+3
+  firebase_messaging: 6.0.12
   google_sign_in: 4.1.4
   intl: 0.16.1
   json_annotation: 3.0.1
   package_info: 0.4.0+14
   provider: 4.0.4
+  transparent_image: 1.0.0
 
 dev_dependencies:
   flutter_test:

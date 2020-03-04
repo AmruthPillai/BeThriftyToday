@@ -1,7 +1,6 @@
-import 'dart:convert';
-
 import 'package:bethriftytoday/config/encrypt.dart';
 import 'package:bethriftytoday/models/category.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Transaction {
   final String id;
@@ -20,17 +19,17 @@ class Transaction {
 
   factory Transaction.fromJson(Map<String, dynamic> json) => Transaction(
         id: json['id'] as String,
-        category: Category.fromJson(jsonDecode(decrypt64(json['category']))),
+        category: Category.fromJson(json['category'] as Map<String, dynamic>),
         description: decrypt64(json['description']),
-        timestamp: DateTime.parse(decrypt64(json['timestamp'])),
+        timestamp: (json['timestamp'] as Timestamp).toDate(),
         amount: double.parse(decrypt64(json['amount'])),
       );
 
   Map<String, dynamic> toJson() => <String, dynamic>{
         'id': this.id,
-        'category': encrypt(jsonEncode(this.category)),
+        'category': this.category.toJson(),
         'description': encrypt(this.description),
-        'timestamp': encrypt(this.timestamp.toString()),
+        'timestamp': this.timestamp,
         'amount': encrypt(this.amount.toString()),
       };
 }

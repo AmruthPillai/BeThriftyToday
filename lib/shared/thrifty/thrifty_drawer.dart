@@ -8,6 +8,7 @@ import 'package:bethriftytoday/shared/thrifty/thrifty_logo.dart';
 import 'package:bethriftytoday/shared/wave_clipper.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:share/share.dart';
 
 class ThriftyDrawer extends StatelessWidget {
   @override
@@ -50,10 +51,22 @@ class ThriftyDrawer extends StatelessWidget {
             title: Text('About the App'),
           ),
           ListTile(
+            onTap: () {
+              Navigator.pop(context);
+              Share.share(
+                'Check out this app that helps you manage your income and expenses, safe and secure: https://bethrifty.today/',
+                subject: 'Be Thrifty Today!',
+              );
+            },
+            leading: Icon(Icons.favorite),
+            title: Text('Share the Love'),
+          ),
+          ListTile(
             onTap: () {},
             leading: Icon(Icons.rate_review),
             title: Text('Rate the App'),
           ),
+          Divider(),
           ListTile(
             onTap: () => logout(context),
             leading: Icon(Icons.exit_to_app),

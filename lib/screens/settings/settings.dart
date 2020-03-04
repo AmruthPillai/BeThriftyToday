@@ -233,13 +233,13 @@ class SettingsScreen extends StatelessWidget {
               color: thriftyBlue,
             ),
             title: Text(
-              'Biometric Authentication',
+              'Biometric Fortification',
               style: TextStyle(
                 fontWeight: FontWeight.w500,
               ),
             ),
             subtitle:
-                Text('Asks for a fingerprint everytime you open the app.'),
+                Text('Asks for your fingerprint everytime you open the app.'),
             trailing: Switch(
               value: settings.biometricsEnabled,
               activeColor: thriftyBlue,

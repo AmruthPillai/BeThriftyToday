@@ -7,6 +7,9 @@ ThemeData theme = ThemeData(
   accentColor: Colors.white,
   brightness: Brightness.light,
   primaryColorBrightness: Brightness.light,
+  iconTheme: IconThemeData(
+    color: thriftyBlue,
+  ),
   inputDecorationTheme: InputDecorationTheme(
     labelStyle: TextStyle(
       fontWeight: FontWeight.w600,
@@ -41,6 +44,9 @@ ThemeData darkTheme = ThemeData(
   accentColor: thriftyBlue,
   brightness: Brightness.dark,
   primaryColorBrightness: Brightness.dark,
+  iconTheme: IconThemeData(
+    color: Colors.white,
+  ),
   inputDecorationTheme: InputDecorationTheme(
     labelStyle: TextStyle(
       color: Colors.white.withOpacity(0.75),

@@ -3,7 +3,7 @@ import 'package:bethriftytoday/config/utils.dart';
 import 'package:bethriftytoday/models/transaction.dart';
 import 'package:bethriftytoday/models/user.dart';
 import 'package:bethriftytoday/services/database/transaction_db.dart';
-import 'package:bethriftytoday/shared/add_transaction/bottom_sheet.dart';
+import 'package:bethriftytoday/shared/transaction/bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -38,7 +38,7 @@ class TransactionListTile extends StatelessWidget {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.vertical(top: Radius.circular(10)),
               ),
-              builder: (context) => AddTransactionBottomSheet(
+              builder: (context) => TransactionBottomSheet(
                 transaction: transaction,
               ),
             );

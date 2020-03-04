@@ -4,7 +4,7 @@ import 'package:bethriftytoday/config/utils.dart';
 import 'package:bethriftytoday/screens/home/home.dart';
 import 'package:bethriftytoday/screens/login/login.dart';
 import 'package:bethriftytoday/services/auth.dart';
-import 'package:bethriftytoday/shared/thrifty_logo.dart';
+import 'package:bethriftytoday/shared/thrifty/thrifty_logo.dart';
 import 'package:flutter/material.dart';
 
 class SplashScreen extends StatefulWidget {

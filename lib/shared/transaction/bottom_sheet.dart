@@ -3,27 +3,26 @@ import 'package:bethriftytoday/models/transaction.dart';
 import 'package:bethriftytoday/models/user.dart';
 import 'package:bethriftytoday/services/database/category_db.dart';
 import 'package:bethriftytoday/services/database/transaction_db.dart';
-import 'package:bethriftytoday/shared/add_transaction/category_selector.dart';
-import 'package:bethriftytoday/shared/add_transaction/txn_type_selector.dart';
-import 'package:bethriftytoday/shared/thrifty_button.dart';
+import 'package:bethriftytoday/shared/transaction/category_selector.dart';
+import 'package:bethriftytoday/shared/transaction/txn_type_selector.dart';
+import 'package:bethriftytoday/shared/thrifty/thrifty_button.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
-class AddTransactionBottomSheet extends StatefulWidget {
+class TransactionBottomSheet extends StatefulWidget {
   final Transaction transaction;
 
-  const AddTransactionBottomSheet({
+  const TransactionBottomSheet({
     Key key,
     this.transaction,
   }) : super(key: key);
 
   @override
-  _AddTransactionBottomSheetState createState() =>
-      _AddTransactionBottomSheetState();
+  _TransactionBottomSheetState createState() => _TransactionBottomSheetState();
 }
 
-class _AddTransactionBottomSheetState extends State<AddTransactionBottomSheet> {
+class _TransactionBottomSheetState extends State<TransactionBottomSheet> {
   String id;
   double amount;
   String description;

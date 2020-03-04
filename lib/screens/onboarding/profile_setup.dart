@@ -4,7 +4,7 @@ import 'package:bethriftytoday/models/user.dart';
 import 'package:bethriftytoday/screens/onboarding/currency_setup.dart';
 import 'package:bethriftytoday/services/database/user_db.dart';
 import 'package:bethriftytoday/shared/onboarding_header.dart';
-import 'package:bethriftytoday/shared/thrifty_button.dart';
+import 'package:bethriftytoday/shared/thrifty/thrifty_button.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

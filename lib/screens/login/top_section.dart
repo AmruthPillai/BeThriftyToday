@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:bethriftytoday/config/colors.dart';
-import 'package:bethriftytoday/shared/thrifty_logo.dart';
+import 'package:bethriftytoday/shared/thrifty/thrifty_logo.dart';
 import 'package:flutter/material.dart';
 
 class TopSection extends StatelessWidget {

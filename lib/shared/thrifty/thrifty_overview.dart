@@ -2,7 +2,7 @@ import 'package:bethriftytoday/config/colors.dart';
 import 'package:bethriftytoday/config/utils.dart';
 import 'package:bethriftytoday/models/transaction.dart';
 import 'package:bethriftytoday/models/user.dart';
-import 'package:bethriftytoday/shared/dialogs/update_budget_dialog.dart';
+import 'package:bethriftytoday/shared/dialogs/update_budget.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -88,7 +88,7 @@ class ThriftyOverview extends StatelessWidget {
               SizedBox(width: 60),
               (user.budget != null)
                   ? buildBudgetMeter(expenses, user)
-                  : Icon(Icons.track_changes, size: 60, color: Colors.white),
+                  : Icon(Icons.category, size: 60, color: Colors.white),
             ],
           ),
         ),

@@ -38,7 +38,6 @@ flutter:
   uses-material-design: true
   assets:
     - assets/logos/
-    - assets/icons/
     - assets/images/
     - assets/categories/expense/
     - assets/categories/income/

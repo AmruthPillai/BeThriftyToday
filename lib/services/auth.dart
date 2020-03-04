@@ -60,7 +60,7 @@ class AuthService {
     User user = User.fromFirebaseUser(firebaseUser);
     try {
       if (!(await UserDatabaseService(user).checkIfUserExists)) {
-        UserDatabaseService(user).setUserData();
+        UserDatabaseService(user).createUser();
       }
     } catch (_) {}
     return user;

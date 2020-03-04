@@ -25,6 +25,15 @@ class TransactionDatabaseService {
         }).toList();
       });
 
+  Stream<double> get balance => _transactionCollection.snapshots().map((x) {
+        var transactions = x.documents.map((y) {
+          return Transaction.fromJson(y.data);
+        }).toList();
+
+        return transactions.fold(
+            0, (value, element) => (value + element.amount));
+      });
+
   Stream<List<Transaction>> expensesByMonth(DateTime date) {
     var firstDay = new DateTime(date.year, date.month, 1);
     var lastDay = new DateTime(date.year, date.month + 1, 0);
@@ -63,13 +72,4 @@ class TransactionDatabaseService {
       return DateFormat('dd MMMM y').format(txn.timestamp);
     });
   }
-
-  Stream<double> get balance => _transactionCollection.snapshots().map((x) {
-        var transactions = x.documents.map((y) {
-          return Transaction.fromJson(y.data);
-        }).toList();
-
-        return transactions.fold(
-            0, (value, element) => (value + element.amount));
-      });
 }

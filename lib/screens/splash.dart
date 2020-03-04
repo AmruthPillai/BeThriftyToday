@@ -1,3 +1,6 @@
+import 'package:bethriftytoday/services/settings.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:after_layout/after_layout.dart';
 import 'package:bethriftytoday/config/colors.dart';
 import 'package:bethriftytoday/config/utils.dart';
@@ -23,7 +26,14 @@ class _SplashScreenState extends State<SplashScreen>
     Future.delayed(Duration(seconds: 1), _checkIfUserIsLoggedIn);
   }
 
-  Future _checkIfUserIsLoggedIn() async {
+  checkColorPreferences() async {
+    var settings = Provider.of<SettingsProvider>(context);
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    settings.setDarkMode(prefs.getBool('isDarkMode') ??
+        (MediaQuery.of(context).platformBrightness == Brightness.dark));
+  }
+
+  _checkIfUserIsLoggedIn() async {
     AuthService _auth = AuthService();
     var user = await _auth.getUser;
 
@@ -36,6 +46,8 @@ class _SplashScreenState extends State<SplashScreen>
 
   @override
   Widget build(BuildContext context) {
+    checkColorPreferences();
+
     return Scaffold(
       body: Container(
         color: thriftyBlue,

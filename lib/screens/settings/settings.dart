@@ -7,7 +7,6 @@ import 'package:bethriftytoday/services/settings.dart';
 import 'package:bethriftytoday/shared/dialogs/currency_selection.dart';
 import 'package:bethriftytoday/shared/dialogs/update_name.dart';
 import 'package:bethriftytoday/shared/thrifty/thrifty_appbar.dart';
-import 'package:bethriftytoday/shared/thrifty/thrifty_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -26,9 +25,6 @@ class SettingsScreen extends StatelessWidget {
         ),
       ],
       child: Scaffold(
-        drawer: Drawer(
-          child: ThriftyDrawer(),
-        ),
         body: Consumer<User>(
           builder: (context, user, _) => SafeArea(
             child: Column(

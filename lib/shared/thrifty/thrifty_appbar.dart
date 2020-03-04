@@ -6,10 +6,12 @@ import 'package:transparent_image/transparent_image.dart';
 
 class ThriftyAppBar extends StatefulWidget {
   final bool canGoBack;
+  final bool hideAccount;
 
   const ThriftyAppBar({
     Key key,
     this.canGoBack = false,
+    this.hideAccount = false,
   }) : super(key: key);
 
   @override
@@ -44,7 +46,7 @@ class _ThriftyAppBarState extends State<ThriftyAppBar> {
           SizedBox(width: 10),
           ThriftyLogo(size: 80),
           Spacer(),
-          buildCircleAvatar(user),
+          widget.hideAccount ? Container() : buildCircleAvatar(user),
           SizedBox(width: 20),
         ],
       ),
@@ -54,7 +56,7 @@ class _ThriftyAppBarState extends State<ThriftyAppBar> {
   Widget buildCircleAvatar(User user) {
     if (user != null) {
       return Container(
-        width: 60,
+        width: 50,
         child: ClipOval(
           child: FadeInImage.memoryNetwork(
             placeholder: kTransparentImage,

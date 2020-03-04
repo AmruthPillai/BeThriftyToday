@@ -1,9 +1,9 @@
 import 'package:bethriftytoday/config/colors.dart';
 import 'package:bethriftytoday/config/utils.dart';
 import 'package:bethriftytoday/models/user.dart';
+import 'package:bethriftytoday/screens/about/about.dart';
 import 'package:bethriftytoday/screens/login/login.dart';
 import 'package:bethriftytoday/screens/settings/settings.dart';
-import 'package:bethriftytoday/screens/splash.dart';
 import 'package:bethriftytoday/services/auth.dart';
 import 'package:bethriftytoday/shared/wave_clipper.dart';
 import 'package:flutter/material.dart';
@@ -20,19 +20,22 @@ class ThriftyDrawer extends StatelessWidget {
           DrawerHeader(user),
           SizedBox(height: 10),
           ListTile(
-            onTap: () {},
-            leading: Icon(Icons.import_export),
-            title: Text('Export as CSV'),
-          ),
-          ListTile(
             onTap: () {
-              Navigator.pop(context); // Close the drawer
+              Navigator.pop(context);
               Navigator.pushNamed(context, SettingsScreen.routeName);
             },
             leading: Icon(Icons.settings),
             title: Text('Settings'),
           ),
           Divider(),
+          ListTile(
+            onTap: () {
+              Navigator.pop(context);
+              Navigator.pushNamed(context, AboutScreen.routeName);
+            },
+            leading: Icon(Icons.local_library),
+            title: Text('About the App'),
+          ),
           ListTile(
             onTap: () {},
             leading: Icon(Icons.rate_review),
@@ -67,7 +70,7 @@ class ThriftyDrawer extends StatelessWidget {
     Navigator.pushNamedAndRemoveUntil(
       context,
       LoginScreen.routeName,
-      ModalRoute.withName(SplashScreen.routeName),
+      (route) => false,
     );
   }
 }

@@ -8,10 +8,13 @@ import 'package:bethriftytoday/shared/dialogs/currency_selection.dart';
 import 'package:bethriftytoday/shared/dialogs/update_name.dart';
 import 'package:bethriftytoday/shared/thrifty/thrifty_appbar.dart';
 import 'package:flutter/material.dart';
+import 'package:local_auth/local_auth.dart';
 import 'package:provider/provider.dart';
 
 class SettingsScreen extends StatelessWidget {
   static const String routeName = '/settings';
+
+  final LocalAuthentication _localAuth = LocalAuthentication();
 
   @override
   Widget build(BuildContext context) {
@@ -37,6 +40,7 @@ class SettingsScreen extends StatelessWidget {
                   children: <Widget>[
                     buildHeader('Preferences'),
                     buildDarkModeSwitch(settings),
+                    buildBiometricsSwitch(settings),
                     Divider(),
                     buildHeader('Account'),
                     buildNameSetting(context, user),
@@ -210,6 +214,48 @@ class SettingsScreen extends StatelessWidget {
           LoginScreen.routeName,
           (route) => false,
         );
+      },
+    );
+  }
+
+  FutureBuilder<bool> buildBiometricsSwitch(SettingsProvider settings) {
+    return FutureBuilder<bool>(
+      initialData: false,
+      future: _localAuth.canCheckBiometrics,
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          var enabled = snapshot.data;
+
+          return ListTile(
+            enabled: enabled,
+            leading: Icon(
+              Icons.fingerprint,
+              color: thriftyBlue,
+            ),
+            title: Text(
+              'Biometric Authentication',
+              style: TextStyle(
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+            subtitle:
+                Text('Asks for a fingerprint everytime you open the app.'),
+            trailing: Switch(
+              value: settings.biometricsEnabled,
+              activeColor: thriftyBlue,
+              onChanged: enabled
+                  ? (value) {
+                      settings.setBiometricsEnabled(value);
+                    }
+                  : null,
+            ),
+            onTap: () {
+              settings.setBiometricsEnabled(!settings.biometricsEnabled);
+            },
+          );
+        }
+
+        return Container();
       },
     );
   }

@@ -2,7 +2,7 @@ import 'package:bethriftytoday/models/transaction.dart';
 import 'package:bethriftytoday/models/user.dart';
 import 'package:bethriftytoday/services/database/transaction_db.dart';
 import 'package:bethriftytoday/shared/transaction_list/transaction_list.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Key;
 import 'package:provider/provider.dart';
 
 class DailyTransactionList extends StatelessWidget {

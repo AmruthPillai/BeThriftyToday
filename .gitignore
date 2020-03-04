@@ -19,6 +19,9 @@
 google-services.json
 GoogleService-Info.plist
 
+# Encryption
+encrypt.dart
+
 # Flutter/Dart/Pub related
 **/doc/api/
 .dart_tool/

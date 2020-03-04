@@ -8,12 +8,21 @@ class AboutScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Column(
+        child: ListView(
           children: <Widget>[
             ThriftyAppBar(
               canGoBack: true,
               hideAccount: true,
-            )
+            ),
+            SizedBox(height: 30),
+            Container(
+              margin: const EdgeInsets.symmetric(horizontal: 30),
+              child: Column(
+                children: <Widget>[
+                  Text('Be Thrifty Today'),
+                ],
+              ),
+            ),
           ],
         ),
       ),

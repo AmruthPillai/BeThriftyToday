@@ -177,6 +177,7 @@ class _TransactionBottomSheetState extends State<TransactionBottomSheet> {
     FocusScope.of(context).unfocus();
     var user = Provider.of<User>(context, listen: false);
     _formKey.currentState.save();
+
     Transaction transaction = Transaction(
       id: id,
       amount: amount * (selectedCategory.type == 'expense' ? -1 : 1),

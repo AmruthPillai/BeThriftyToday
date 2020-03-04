@@ -122,7 +122,7 @@ class TransactionListTile extends StatelessWidget {
                   DateFormat().add_jm().format(transaction.timestamp),
                   style: transactionSubtitleStyle,
                 ),
-                (transaction.description.isNotEmpty)
+                (transaction.description != null)
                     ? Row(
                         mainAxisSize: MainAxisSize.min,
                         children: <Widget>[

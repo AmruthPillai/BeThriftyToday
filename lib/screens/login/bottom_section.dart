@@ -66,20 +66,6 @@ class _BottomSectionState extends State<BottomSection> {
             ),
           ),
         ),
-        SizedBox(height: 10),
-        Container(
-          width: MediaQuery.of(context).size.width * 0.8,
-          child: FlatButton(
-            onPressed: () => signIn(true),
-            padding: const EdgeInsets.symmetric(vertical: 14),
-            child: Text(
-              'Sign in as a Guest',
-              style: TextStyle(
-                fontSize: 16,
-              ),
-            ),
-          ),
-        ),
         Spacer(),
       ],
     );

@@ -34,7 +34,10 @@ class ThriftyDrawer extends StatelessWidget {
               Navigator.pop(context);
               showAboutDialog(
                 context: context,
-                applicationIcon: ThriftyLogo(size: 80, isLight: true),
+                applicationIcon: ThriftyLogo(
+                  size: 80,
+                  isLight: isDarkMode(context),
+                ),
                 applicationName: 'Be Thrifty Today',
                 applicationLegalese:
                     'This application is open source and free-to-use, governed under the Apache License 2.0. If you are a developer, please feel free to contribute to the application on GitHub.',

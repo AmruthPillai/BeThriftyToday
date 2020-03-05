@@ -2,9 +2,9 @@
 
 # Be Thrifty Today
 
-The simple and secure money manager app you’ve been waiting for.
+A simple and secure money manager that keeps you financially vigilant.
 
-[![Codemagic build status](https://api.codemagic.io/apps/5e608a86018eb9163eb40b1a/5e608a86018eb9163eb40b19/status_badge.svg)](https://codemagic.io/apps/5e608a86018eb9163eb40b1a/5e608a86018eb9163eb40b19/latest_build)
+[![Codemagic build status](https://api.codemagic.io/apps/5e608a86018eb9163eb40b1a/5e609fdb018eb9042699afe3/status_badge.svg)](https://codemagic.io/apps/5e608a86018eb9163eb40b1a/5e609fdb018eb9042699afe3/latest_build)
 
 ## Website
 
@@ -40,6 +40,7 @@ Oh, and in line with saving the best for last... There’s also a dark mode! �
 ## Things to Do
 
 - Ability to export income/expense transactions of a certain time period to CSV or XLSX.
+- Start development on Be Thrifty Today, the Web Version.
 
 ## License
 

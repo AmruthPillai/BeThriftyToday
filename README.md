@@ -4,6 +4,8 @@
 
 The simple and secure money manager app you’ve been waiting for.
 
+[![Codemagic build status](https://api.codemagic.io/apps/5e608a86018eb9163eb40b1a/5e608a86018eb9163eb40b19/status_badge.svg)](https://codemagic.io/apps/5e608a86018eb9163eb40b1a/5e608a86018eb9163eb40b19/latest_build)
+
 ## Website
 
 https://bethrifty.today

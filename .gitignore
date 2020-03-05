@@ -19,6 +19,10 @@
 google-services.json
 GoogleService-Info.plist
 
+# Android Code Signing
+*.jks
+key.properties
+
 # Encryption
 encrypt.dart
 

@@ -20,9 +20,9 @@ class Transaction {
   factory Transaction.fromJson(Map<String, dynamic> json) => Transaction(
         id: json['id'] as String,
         category: Category.fromJson(json['category'] as Map<String, dynamic>),
-        description: decrypt64(json['description']),
+        description: decrypt(json['description']),
         timestamp: (json['timestamp'] as Timestamp).toDate(),
-        amount: double.parse(decrypt64(json['amount'])),
+        amount: double.parse(decrypt(json['amount'])),
       );
 
   Map<String, dynamic> toJson() => <String, dynamic>{

@@ -1,4 +1,3 @@
-import 'package:bethriftytoday/screens/about/about.dart';
 import 'package:bethriftytoday/screens/home/home.dart';
 import 'package:bethriftytoday/screens/login/login.dart';
 import 'package:bethriftytoday/screens/onboarding/currency_setup.dart';
@@ -19,6 +18,5 @@ Map<String, Widget Function(BuildContext)> routes = {
 
   // In-App
   HomeScreen.routeName: (context) => HomeScreen(),
-  AboutScreen.routeName: (context) => AboutScreen(),
   SettingsScreen.routeName: (context) => SettingsScreen(),
 };

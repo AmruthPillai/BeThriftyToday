@@ -51,8 +51,8 @@ class _UpdateBudgetDialogState extends State<UpdateBudgetDialog> {
                 ),
               ),
               SizedBox(height: 10),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              Wrap(
+                alignment: WrapAlignment.center,
                 children: <Widget>[
                   FlatButton.icon(
                     onPressed: () {

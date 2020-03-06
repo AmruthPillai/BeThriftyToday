@@ -56,9 +56,13 @@ class _HomeScreenState extends State<HomeScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 ThriftyAppBar(),
-                ThriftyOverview(),
                 Expanded(
-                  child: DailyTransactionList(),
+                  child: ListView(
+                    children: <Widget>[
+                      ThriftyOverview(),
+                      DailyTransactionList(),
+                    ],
+                  ),
                 ),
               ],
             ),

@@ -32,6 +32,7 @@ Oh, and in line with saving the best for last... There’s also a dark mode! �
 - Attention to detail, user interface design and enhanced usability is at the topmost priority (so if there’s a typo, don’t hesitate to let me know).
 - No pesky push notifications, that bother you in the middle of the night.
 - It doesn’t require read/write access to your phone storage or your SMSes, it’s completely air-gapped and secure.
+- Ability to export income/expense transactions of a certain time period to CSV or JSON.
 - Your data is completely secure, there is no social aspect to this application. Your finances are yours alone, and you have complete control over them.
 - Set up biometric authentication in the Settings page so the app will allow access only to you and no one else using the phone. It uses your device’s biometrics, so you don’t need to set it up all over again. (available only on phones with fingerprint readers)
 - You can request to add new categories or new features by dropping me an email at bethriftytoday@gmail.com and I’ll add them as soon as I have the time to work on it.
@@ -39,8 +40,7 @@ Oh, and in line with saving the best for last... There’s also a dark mode! �
 
 ## Things to Do
 
-- Ability to export income/expense transactions of a certain time period to CSV or XLSX.
-- Start development on Be Thrifty Today, the Web Version.
+- Begin development on the web/desktop version of Be Thrifty Today.
 
 ## License
 

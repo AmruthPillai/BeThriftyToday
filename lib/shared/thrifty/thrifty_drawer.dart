@@ -4,6 +4,7 @@ import 'package:bethriftytoday/models/user.dart';
 import 'package:bethriftytoday/screens/login/login.dart';
 import 'package:bethriftytoday/screens/settings/settings.dart';
 import 'package:bethriftytoday/services/auth.dart';
+import 'package:bethriftytoday/shared/dialogs/export.dart';
 import 'package:bethriftytoday/shared/thrifty/thrifty_logo.dart';
 import 'package:bethriftytoday/shared/wave_clipper.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +17,7 @@ class ThriftyDrawer extends StatelessWidget {
     var user = Provider.of<User>(context);
 
     return SafeArea(
-      child: Column(
+      child: ListView(
         children: <Widget>[
           DrawerHeader(user),
           SizedBox(height: 10),
@@ -27,6 +28,17 @@ class ThriftyDrawer extends StatelessWidget {
             },
             leading: Icon(Icons.settings),
             title: Text('Settings'),
+          ),
+          ListTile(
+            onTap: () {
+              Navigator.pop(context);
+              showDialog(
+                context: context,
+                builder: (context) => ExportDialog(),
+              );
+            },
+            leading: Icon(Icons.import_export),
+            title: Text('Export to CSV/JSON'),
           ),
           Divider(),
           ListTile(
@@ -75,13 +87,14 @@ class ThriftyDrawer extends StatelessWidget {
             leading: Icon(Icons.exit_to_app),
             title: Text('Logout'),
           ),
-          Spacer(),
+          SizedBox(height: 50),
           FutureBuilder(
             initialData: '',
             future: getVersionCode(),
             builder: (context, snapshot) {
               return Text(
                 snapshot.data,
+                textAlign: TextAlign.center,
                 style: Theme.of(context).textTheme.caption,
               );
             },

@@ -1,4 +1,4 @@
-import 'package:bethriftytoday/config/colors.dart';
+import 'package:bethriftytoday/config/config.dart';
 import 'package:flutter/material.dart';
 
 class TransactionTypeSelector extends StatelessWidget {
@@ -19,7 +19,7 @@ class TransactionTypeSelector extends StatelessWidget {
       child: InkWell(
         onTap: this.onPressed,
         child: AnimatedContainer(
-          duration: Duration(milliseconds: 200),
+          duration: Duration(milliseconds: 250),
           width: double.infinity,
           height: double.infinity,
           decoration: BoxDecoration(
@@ -33,7 +33,7 @@ class TransactionTypeSelector extends StatelessWidget {
             child: Text(
               this.title.toUpperCase(),
               style: TextStyle(
-                fontSize: 16,
+                fontSize: 15,
                 color: isSelected ? Colors.white : thriftyBlue,
                 fontWeight: FontWeight.bold,
               ),

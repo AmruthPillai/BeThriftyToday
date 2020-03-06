@@ -1,6 +1,5 @@
-import 'package:bethriftytoday/config/colors.dart';
-import 'package:bethriftytoday/models/transaction.dart';
-import 'package:bethriftytoday/models/user.dart';
+import 'package:bethriftytoday/config/config.dart';
+import 'package:bethriftytoday/models/models.dart';
 import 'package:flutter/material.dart' hide Key;
 import 'package:flutter/services.dart';
 import 'package:package_info/package_info.dart';

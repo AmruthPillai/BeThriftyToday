@@ -1,8 +1,7 @@
-import 'package:bethriftytoday/config/colors.dart';
-import 'package:bethriftytoday/models/currency.dart';
-import 'package:bethriftytoday/models/user.dart';
-import 'package:bethriftytoday/screens/home/home.dart';
-import 'package:bethriftytoday/services/database/user_db.dart';
+import 'package:bethriftytoday/config/config.dart';
+import 'package:bethriftytoday/models/models.dart';
+import 'package:bethriftytoday/screens/screens.dart';
+import 'package:bethriftytoday/services/services.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

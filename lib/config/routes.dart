@@ -1,9 +1,4 @@
-import 'package:bethriftytoday/screens/home/home.dart';
-import 'package:bethriftytoday/screens/login/login.dart';
-import 'package:bethriftytoday/screens/onboarding/currency_setup.dart';
-import 'package:bethriftytoday/screens/onboarding/profile_setup.dart';
-import 'package:bethriftytoday/screens/settings/settings.dart';
-import 'package:bethriftytoday/screens/splash.dart';
+import 'package:bethriftytoday/screens/screens.dart';
 import 'package:flutter/material.dart';
 
 Map<String, Widget Function(BuildContext)> routes = {

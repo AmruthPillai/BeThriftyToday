@@ -1,16 +1,13 @@
-import 'package:bethriftytoday/services/settings.dart';
-import 'package:flutter/services.dart';
-import 'package:local_auth/local_auth.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:local_auth/local_auth.dart';
 import 'package:after_layout/after_layout.dart';
-import 'package:bethriftytoday/config/colors.dart';
-import 'package:bethriftytoday/config/utils.dart';
-import 'package:bethriftytoday/screens/home/home.dart';
-import 'package:bethriftytoday/screens/login/login.dart';
-import 'package:bethriftytoday/services/auth.dart';
-import 'package:bethriftytoday/shared/thrifty/thrifty_logo.dart';
+import 'package:bethriftytoday/config/config.dart';
+import 'package:bethriftytoday/services/services.dart';
+import 'package:bethriftytoday/screens/screens.dart';
+import 'package:bethriftytoday/shared/shared.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class SplashScreen extends StatefulWidget {
   static const String routeName = '/splash';

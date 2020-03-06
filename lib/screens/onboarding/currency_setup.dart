@@ -1,8 +1,7 @@
 import 'package:after_layout/after_layout.dart';
-import 'package:bethriftytoday/config/utils.dart';
-import 'package:bethriftytoday/models/currency.dart';
-import 'package:bethriftytoday/shared/currency_circle.dart';
-import 'package:bethriftytoday/shared/onboarding_header.dart';
+import 'package:bethriftytoday/config/config.dart';
+import 'package:bethriftytoday/models/models.dart';
+import 'package:bethriftytoday/shared/shared.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

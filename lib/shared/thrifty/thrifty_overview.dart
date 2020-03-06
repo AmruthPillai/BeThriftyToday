@@ -1,8 +1,6 @@
-import 'package:bethriftytoday/config/colors.dart';
-import 'package:bethriftytoday/config/utils.dart';
-import 'package:bethriftytoday/models/transaction.dart';
-import 'package:bethriftytoday/models/user.dart';
-import 'package:bethriftytoday/shared/dialogs/update_budget.dart';
+import 'package:bethriftytoday/config/config.dart';
+import 'package:bethriftytoday/models/models.dart';
+import 'package:bethriftytoday/shared/shared.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';

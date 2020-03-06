@@ -1,5 +1,5 @@
-import 'package:bethriftytoday/models/transaction.dart';
-import 'package:bethriftytoday/shared/transaction_list/transaction_list_tile.dart';
+import 'package:bethriftytoday/models/models.dart';
+import 'package:bethriftytoday/shared/shared.dart';
 import 'package:flutter/material.dart';
 
 class TransactionList extends StatefulWidget {

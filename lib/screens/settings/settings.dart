@@ -1,12 +1,8 @@
-import 'package:bethriftytoday/config/colors.dart';
-import 'package:bethriftytoday/models/user.dart';
-import 'package:bethriftytoday/screens/login/login.dart';
-import 'package:bethriftytoday/services/auth.dart';
-import 'package:bethriftytoday/services/database/user_db.dart';
-import 'package:bethriftytoday/services/settings.dart';
-import 'package:bethriftytoday/shared/dialogs/currency_selection.dart';
-import 'package:bethriftytoday/shared/dialogs/update_name.dart';
-import 'package:bethriftytoday/shared/thrifty/thrifty_appbar.dart';
+import 'package:bethriftytoday/config/config.dart';
+import 'package:bethriftytoday/models/models.dart';
+import 'package:bethriftytoday/screens/screens.dart';
+import 'package:bethriftytoday/services/services.dart';
+import 'package:bethriftytoday/shared/shared.dart';
 import 'package:flutter/material.dart';
 import 'package:local_auth/local_auth.dart';
 import 'package:provider/provider.dart';

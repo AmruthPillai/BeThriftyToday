@@ -1,5 +1,5 @@
-import 'package:bethriftytoday/models/user.dart';
-import 'package:bethriftytoday/services/database/user_db.dart';
+import 'package:bethriftytoday/models/models.dart';
+import 'package:bethriftytoday/services/services.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

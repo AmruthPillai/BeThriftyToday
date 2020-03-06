@@ -70,6 +70,7 @@ class _TransactionBottomSheetState extends State<TransactionBottomSheet> {
       date.day,
       time.hour,
       time.minute,
+      date.second,
     );
 
     _dateController.text = DateFormat().add_yMMMMd().add_jm().format(timestamp);
@@ -101,6 +102,7 @@ class _TransactionBottomSheetState extends State<TransactionBottomSheet> {
                   TextFormField(
                     focusNode: _descriptionNode,
                     controller: _descriptionController,
+                    textCapitalization: TextCapitalization.words,
                     onSaved: (v) => setState(() => description = v),
                     onFieldSubmitted: (v) =>
                         FocusScope.of(context).requestFocus(_amountNode),

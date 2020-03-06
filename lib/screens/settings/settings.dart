@@ -30,27 +30,21 @@ class SettingsScreen extends StatelessWidget {
       child: Scaffold(
         body: Consumer<User>(
           builder: (context, user, _) => SafeArea(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+            child: ListView(
               children: <Widget>[
                 ThriftyAppBar(canGoBack: true),
                 SizedBox(height: 20),
-                ListView(
-                  shrinkWrap: true,
-                  children: <Widget>[
-                    buildHeader('Preferences'),
-                    buildDarkModeSwitch(settings),
-                    buildBiometricsSwitch(settings),
-                    Divider(),
-                    buildHeader('Account'),
-                    buildNameSetting(context, user),
-                    buildEmailSetting(user),
-                    buildCurrencySetting(context, user),
-                    Divider(),
-                    buildHeader('Danger Zone'),
-                    buildDeleteAccount(context)
-                  ],
-                ),
+                buildHeader('Preferences'),
+                buildDarkModeSwitch(settings),
+                buildBiometricsSwitch(settings),
+                Divider(),
+                buildHeader('Account'),
+                buildNameSetting(context, user),
+                buildEmailSetting(user),
+                buildCurrencySetting(context, user),
+                Divider(),
+                buildHeader('Danger Zone'),
+                buildDeleteAccount(context)
               ],
             ),
           ),

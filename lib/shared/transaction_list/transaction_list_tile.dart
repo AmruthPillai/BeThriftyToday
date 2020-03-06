@@ -60,8 +60,7 @@ class TransactionListTile extends StatelessWidget {
                 children: <Widget>[
                   buildCategoryIcon(),
                   SizedBox(width: 10),
-                  buildMeta(context),
-                  Spacer(),
+                  Expanded(child: buildMeta(context)),
                   buildAmount(user),
                 ],
               ),
@@ -106,45 +105,30 @@ class TransactionListTile extends StatelessWidget {
 
   Column buildMeta(BuildContext context) {
     return Column(
+      mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Text(
           transaction.category.name,
           style: transactionTitleStyle,
         ),
-        Column(
+        SizedBox(height: 2),
+        Row(
           children: <Widget>[
-            SizedBox(height: 2),
-            Row(
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                Text(
-                  DateFormat().add_jm().format(transaction.timestamp),
-                  style: transactionSubtitleStyle,
-                ),
-                (transaction.description != null)
-                    ? Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: <Widget>[
-                          Padding(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 4,
-                            ),
-                            child: Text('/', style: transactionSubtitleStyle),
-                          ),
-                          SizedBox(
-                            width: MediaQuery.of(context).size.width * 0.5,
-                            child: Text(
-                              transaction.description,
-                              overflow: TextOverflow.ellipsis,
-                              style: transactionSubtitleStyle,
-                            ),
-                          ),
-                        ],
-                      )
-                    : Container(),
-              ],
+            Text(
+              DateFormat().add_jm().format(transaction.timestamp),
+              style: transactionSubtitleStyle,
             ),
+            (transaction.description != null)
+                ? Expanded(
+                    flex: 1,
+                    child: Text(
+                      ' / ' + transaction.description,
+                      overflow: TextOverflow.ellipsis,
+                      style: transactionSubtitleStyle,
+                    ),
+                  )
+                : Container(),
           ],
         ),
       ],

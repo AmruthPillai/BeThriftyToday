@@ -42,21 +42,22 @@ class _TransactionBottomSheetState extends State<TransactionBottomSheet> {
   void initState() {
     super.initState();
     var date = DateTime.now();
-    displayFormattedDate(date);
+    setDate(date);
 
     if (widget.transaction != null) {
       id = widget.transaction.id;
       amount = widget.transaction.amount;
       _amountController.text = amount.abs().toStringAsFixed(0);
       timestamp = widget.transaction.timestamp;
-      displayFormattedDate(timestamp);
+      setDate(timestamp);
       description = widget.transaction.description;
       _descriptionController.text = description;
       selectedCategory = widget.transaction.category;
     }
   }
 
-  displayFormattedDate(DateTime date) {
+  setDate(DateTime date) {
+    timestamp = date;
     _dateController.text = DateFormat().add_yMMMMd().format(date);
   }
 
@@ -122,7 +123,7 @@ class _TransactionBottomSheetState extends State<TransactionBottomSheet> {
                     );
 
                     if (date != null) {
-                      setState(() => displayFormattedDate(date));
+                      setState(() => setDate(date));
                     }
                   },
                   controller: _dateController,

@@ -55,4 +55,12 @@ class UserDatabaseService {
       'budget': budget,
     });
   }
+
+  Future updateUserPushToken(String pushToken) async {
+    var userDoc = await fetchUserDocument();
+    return _userDocument.updateData({
+      ...userDoc.toJson(),
+      'pushToken': pushToken,
+    });
+  }
 }

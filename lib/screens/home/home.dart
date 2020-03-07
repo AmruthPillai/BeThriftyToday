@@ -1,6 +1,8 @@
+import 'package:after_layout/after_layout.dart';
 import 'package:bethriftytoday/models/models.dart';
 import 'package:bethriftytoday/services/services.dart';
 import 'package:bethriftytoday/shared/shared.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -12,10 +14,16 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
+
   @override
   Widget build(BuildContext context) {
     final _scaffoldKey = GlobalKey<ScaffoldState>();
     var user = Provider.of<User>(context);
+
+    _firebaseMessaging.getToken().then((token) {
+      UserDatabaseService(user).updateUserPushToken(token);
+    });
 
     if (user != null) {
       return MultiProvider(

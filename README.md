@@ -49,3 +49,5 @@ The source code and product are governed under the Apache License 2.0 which can 
 ## Contributing
 
 If you are a developer yourself, please create a Pull Request to fix/add what you feel like and I'll review it into the application :) Thank you so much!
+
+Please be aware that running the project requires certain files such as the Google Services JSON and the Encryption Functions Dart File which I have consciously kept out of source control. To those who are willing to contribute to the project, please fork the repository and send me a DM or email and I'll share the keys with you.

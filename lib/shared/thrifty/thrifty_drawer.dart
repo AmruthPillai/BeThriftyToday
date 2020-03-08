@@ -6,6 +6,7 @@ import 'package:bethriftytoday/shared/shared.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:share/share.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ThriftyDrawer extends StatelessWidget {
   @override
@@ -77,7 +78,13 @@ class ThriftyDrawer extends StatelessWidget {
                   title: Text('Share the Love'),
                 ),
                 ListTile(
-                  onTap: () {},
+                  onTap: () async {
+                    var playStoreUrl =
+                        'https://play.google.com/store/apps/details?id=today.bethrifty.app';
+                    if (await canLaunch(playStoreUrl)) {
+                      launch(playStoreUrl);
+                    }
+                  },
                   leading: Icon(Icons.rate_review),
                   title: Text('Rate the App'),
                 ),

@@ -26,6 +26,36 @@ I do not plan to monetize this project at any time. It’s a free app without an
 
 Oh, and in line with saving the best for last... There’s also a dark mode! 🕶️
 
+## Screenshots
+
+<div style="display: flex">
+  <a target="_blank" href="https://bethrifty.today/assets/screenshots/1-splash-screen.png"><img
+      src="https://bethrifty.today/assets/screenshots/1-splash-screen.png" height="220px" alt="Splash Screen">
+  </a><a target="_blank" href="https://bethrifty.today/assets/screenshots/2-profile-setup.png"><img
+      src="https://bethrifty.today/assets/screenshots/2-profile-setup.png" height="220px" alt="Profile Setup">
+  </a><a target="_blank" href="https://bethrifty.today/assets/screenshots/3-currency-selection.png"><img
+      src="https://bethrifty.today/assets/screenshots/3-currency-selection.png" height="220px" alt="Currency Selection">
+  </a><a target="_blank" href="https://bethrifty.today/assets/screenshots/4-dashboard.png"><img
+      src="https://bethrifty.today/assets/screenshots/4-dashboard.png" height="220px" alt="Dashboard">
+  </a><a target="_blank" href="https://bethrifty.today/assets/screenshots/5-drawer.png"><img
+      src="https://bethrifty.today/assets/screenshots/5-drawer.png" height="220px" alt="Drawer">
+  </a><a target="_blank" href="https://bethrifty.today/assets/screenshots/6-settings.png"><img
+      src="https://bethrifty.today/assets/screenshots/6-settings.png" height="220px" alt="Settings">
+  </a><a target="_blank" href="https://bethrifty.today/assets/screenshots/7-expense.png"><img
+      src="https://bethrifty.today/assets/screenshots/7-expense.png" height="220px" alt="Add Expense">
+  </a><a target="_blank" href="https://bethrifty.today/assets/screenshots/8-income.png"><img
+      src="https://bethrifty.today/assets/screenshots/8-income.png" height="220px" alt="Add Income">
+  </a><a target="_blank" href="https://bethrifty.today/assets/screenshots/9-dashboard.png"><img
+      src="https://bethrifty.today/assets/screenshots/9-dashboard.png" height="220px" alt="Dashboard">
+  </a><a target="_blank" href="https://bethrifty.today/assets/screenshots/10-delete.png"><img
+      src="https://bethrifty.today/assets/screenshots/10-delete.png" height="220px" alt="Delete Expense">
+  </a><a target="_blank" href="https://bethrifty.today/assets/screenshots/11-dark-mode.png"><img
+      src="https://bethrifty.today/assets/screenshots/11-dark-mode.png" height="220px" alt="Dark Mode">
+  </a><a target="_blank" href="https://bethrifty.today/assets/screenshots/12-about.png"><img
+      src="https://bethrifty.today/assets/screenshots/12-about.png" height="220px" alt="About the App">
+  </a>
+</div>
+
 ## Features
 
 - Manage your income and expenses with ease, both on Mobile, Web & Desktop (coming soon).

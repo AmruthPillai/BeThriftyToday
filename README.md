@@ -54,4 +54,6 @@ The source code and product are governed under the Apache License 2.0 which can 
 
 If you are a developer yourself, please create a Pull Request to fix/add what you feel like and I'll review it into the application :) Thank you so much!
 
-Please be aware that running the project requires certain files such as the Google Services JSON and the Encryption Functions Dart File which I have consciously kept out of source control. To those who are willing to contribute to the project, please fork the repository and send me a DM or email and I'll share the keys with you.
+Please be aware that running the project requires certain files such as the Google Services JSON and the Encryption Functions Dart File which I have consciously kept out of source control. To those who are willing to contribute to the project, you can generate your own Firebase project and get the corresponding `google-services.json` and `Google-Service-Info.plist`.
+
+For the missing `encrypt.dart` file which is required to build the application, here is a gist with the file's contents, stripped off of the encryption key which is used in the production app: https://gist.github.com/AmruthPillai/3d99758a3836b909d331a90601023f53

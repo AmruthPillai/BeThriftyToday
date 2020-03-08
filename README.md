@@ -6,6 +6,8 @@ A simple and secure money manager that keeps you financially vigilant.
 
 [![Codemagic build status](https://api.codemagic.io/apps/5e608a86018eb9163eb40b1a/5e609fdb018eb9042699afe3/status_badge.svg)](https://codemagic.io/apps/5e608a86018eb9163eb40b1a/5e609fdb018eb9042699afe3/latest_build)
 
+[![Get the App on Google Play Store](https://bethrifty.today/assets/buttons/google-play-badge.png)](https://play.google.com/store/apps/details?id=today.bethrifty.app)
+
 ## Website
 
 https://bethrifty.today

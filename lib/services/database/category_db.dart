@@ -1,4 +1,4 @@
-import 'package:bethriftytoday/models/category.dart';
+import 'package:bethriftytoday/models/models.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class CategoryDatabaseService {

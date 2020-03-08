@@ -1,6 +1,5 @@
-import 'package:bethriftytoday/config/colors.dart';
-import 'package:bethriftytoday/shared/thrifty/thrifty_logo.dart';
-import 'package:bethriftytoday/shared/wave_clipper.dart';
+import 'package:bethriftytoday/config/config.dart';
+import 'package:bethriftytoday/shared/shared.dart';
 import 'package:flutter/material.dart';
 
 class OnboardingHeader extends StatelessWidget {

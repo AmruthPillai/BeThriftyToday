@@ -6,9 +6,11 @@ A simple and secure money manager that keeps you financially vigilant.
 
 [![Codemagic build status](https://api.codemagic.io/apps/5e608a86018eb9163eb40b1a/5e609fdb018eb9042699afe3/status_badge.svg)](https://codemagic.io/apps/5e608a86018eb9163eb40b1a/5e609fdb018eb9042699afe3/latest_build)
 
+<a href="https://play.google.com/store/apps/details?id=today.bethrifty.app" target="_blank"><img src="https://bethrifty.today/assets/buttons/google-play-badge.png" width="200px" alt="Get the App on the Google Play Store" /></a>
+
 ## Website
 
-https://bethrifty.today
+<a href="https://bethrifty.today" target="_blank">https://bethrifty.today</a>
 
 ## Short Description
 
@@ -38,9 +40,11 @@ Oh, and in line with saving the best for last... There’s also a dark mode! �
 - You can request to add new categories or new features by dropping me an email at bethriftytoday@gmail.com and I’ll add them as soon as I have the time to work on it.
 - This app is ad-free, and always will be.
 
-## Things to Do
+## Security
 
-- Begin development on the web/desktop version of Be Thrifty Today.
+As mentioned above, I've used a simple but uncrackable method to encrypt the sensitive information of a user's transactions so you can use the app in peace, knowing that no one else can ever read your data except you. In the spirit of complete transparency, here's a snapshot of the database
+
+<a href="https://user-images.githubusercontent.com/1134738/76155841-f291b980-6117-11ea-9f81-69d8abab13ed.png" target="_blank"><img src="https://user-images.githubusercontent.com/1134738/76155841-f291b980-6117-11ea-9f81-69d8abab13ed.png" height="400" alt="Snapshot of the Database" /></a>
 
 ## License
 

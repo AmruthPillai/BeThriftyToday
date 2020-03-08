@@ -1,11 +1,7 @@
-import 'package:bethriftytoday/config/routes.dart';
-import 'package:bethriftytoday/config/theme.dart';
-import 'package:bethriftytoday/models/currency.dart';
-import 'package:bethriftytoday/models/user.dart';
-import 'package:bethriftytoday/screens/splash.dart';
-import 'package:bethriftytoday/services/auth.dart';
-import 'package:bethriftytoday/services/database/currency_db.dart';
-import 'package:bethriftytoday/services/settings.dart';
+import 'package:bethriftytoday/config/config.dart';
+import 'package:bethriftytoday/models/models.dart';
+import 'package:bethriftytoday/screens/screens.dart';
+import 'package:bethriftytoday/services/services.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_analytics/observer.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';

@@ -1,15 +1,12 @@
-import 'package:bethriftytoday/config/colors.dart';
-import 'package:bethriftytoday/config/utils.dart';
-import 'package:bethriftytoday/models/user.dart';
-import 'package:bethriftytoday/screens/login/login.dart';
-import 'package:bethriftytoday/screens/settings/settings.dart';
-import 'package:bethriftytoday/services/auth.dart';
-import 'package:bethriftytoday/shared/dialogs/export.dart';
-import 'package:bethriftytoday/shared/thrifty/thrifty_logo.dart';
-import 'package:bethriftytoday/shared/wave_clipper.dart';
+import 'package:bethriftytoday/config/config.dart';
+import 'package:bethriftytoday/models/models.dart';
+import 'package:bethriftytoday/screens/screens.dart';
+import 'package:bethriftytoday/services/services.dart';
+import 'package:bethriftytoday/shared/shared.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:share/share.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ThriftyDrawer extends StatelessWidget {
   @override
@@ -17,89 +14,103 @@ class ThriftyDrawer extends StatelessWidget {
     var user = Provider.of<User>(context);
 
     return SafeArea(
-      child: ListView(
+      child: Column(
         children: <Widget>[
-          DrawerHeader(user),
-          SizedBox(height: 10),
-          ListTile(
-            onTap: () {
-              Navigator.pop(context);
-              Navigator.pushNamed(context, SettingsScreen.routeName);
-            },
-            leading: Icon(Icons.settings),
-            title: Text('Settings'),
-          ),
-          ListTile(
-            onTap: () {
-              Navigator.pop(context);
-              showDialog(
-                context: context,
-                builder: (context) => ExportDialog(),
-              );
-            },
-            leading: Icon(Icons.import_export),
-            title: Text('Export to CSV/JSON'),
-          ),
-          Divider(),
-          ListTile(
-            onTap: () async {
-              Navigator.pop(context);
-              showAboutDialog(
-                context: context,
-                applicationIcon: ThriftyLogo(
-                  size: 80,
-                  isLight: isDarkMode(context),
+          Expanded(
+            child: ListView(
+              shrinkWrap: true,
+              children: <Widget>[
+                DrawerHeader(user),
+                SizedBox(height: 10),
+                ListTile(
+                  onTap: () {
+                    Navigator.pop(context);
+                    Navigator.pushNamed(context, SettingsScreen.routeName);
+                  },
+                  leading: Icon(Icons.settings),
+                  title: Text('Settings'),
                 ),
-                applicationName: 'Be Thrifty Today',
-                applicationLegalese:
-                    'This application is open source and free-to-use, governed under the Apache License 2.0. If you are a developer, please feel free to contribute to the application on GitHub.',
-                applicationVersion: await getVersionCode(),
-                children: [
-                  SizedBox(height: 30),
-                  Text(
-                    'If you love the app and use it regularly, please donate as little as you can, enough to keep the app alive and running on it\'s own. Donation details can be found on the GitHub homepage or the website. Thank you so much!',
-                  ),
-                ],
-              );
-            },
-            leading: Icon(Icons.local_library),
-            title: Text('About the App'),
+                ListTile(
+                  onTap: () {
+                    Navigator.pop(context);
+                    showDialog(
+                      context: context,
+                      builder: (context) => ExportDialog(),
+                    );
+                  },
+                  leading: Icon(Icons.import_export),
+                  title: Text('Export to CSV/JSON'),
+                ),
+                Divider(),
+                ListTile(
+                  onTap: () async {
+                    Navigator.pop(context);
+                    showAboutDialog(
+                      context: context,
+                      applicationIcon: ThriftyLogo(
+                        size: 80,
+                        isLight: isDarkMode(context),
+                      ),
+                      applicationName: 'Be Thrifty Today',
+                      applicationLegalese:
+                          'This application is open source and free-to-use, governed under the Apache License 2.0. If you are a developer, please feel free to contribute to the application on GitHub.',
+                      applicationVersion: await getVersionCode(),
+                      children: [
+                        SizedBox(height: 30),
+                        Text(
+                          'If you love the app and use it regularly, please donate as little as you can, enough to keep the app alive and running on it\'s own. Donation details can be found on the GitHub homepage or the website. Thank you so much!',
+                        ),
+                      ],
+                    );
+                  },
+                  leading: Icon(Icons.local_library),
+                  title: Text('About the App'),
+                ),
+                ListTile(
+                  onTap: () {
+                    Navigator.pop(context);
+                    Share.share(
+                      'Check out this app that helps you manage your income and expenses, safe and secure: https://bethrifty.today/',
+                      subject: 'Be Thrifty Today!',
+                    );
+                  },
+                  leading: Icon(Icons.favorite),
+                  title: Text('Share the Love'),
+                ),
+                ListTile(
+                  onTap: () async {
+                    var playStoreUrl =
+                        'https://play.google.com/store/apps/details?id=today.bethrifty.app';
+                    if (await canLaunch(playStoreUrl)) {
+                      launch(playStoreUrl);
+                    }
+                  },
+                  leading: Icon(Icons.rate_review),
+                  title: Text('Rate the App'),
+                ),
+                Divider(),
+                ListTile(
+                  onTap: () => logout(context),
+                  leading: Icon(Icons.exit_to_app),
+                  title: Text('Logout'),
+                ),
+              ],
+            ),
           ),
-          ListTile(
-            onTap: () {
-              Navigator.pop(context);
-              Share.share(
-                'Check out this app that helps you manage your income and expenses, safe and secure: https://bethrifty.today/',
-                subject: 'Be Thrifty Today!',
-              );
-            },
-            leading: Icon(Icons.favorite),
-            title: Text('Share the Love'),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 10),
+            child: FutureBuilder(
+              initialData: '',
+              future: getVersionCode(),
+              builder: (context, snapshot) {
+                return Text(
+                  snapshot.data,
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context).textTheme.caption,
+                );
+              },
+            ),
           ),
-          ListTile(
-            onTap: () {},
-            leading: Icon(Icons.rate_review),
-            title: Text('Rate the App'),
-          ),
-          Divider(),
-          ListTile(
-            onTap: () => logout(context),
-            leading: Icon(Icons.exit_to_app),
-            title: Text('Logout'),
-          ),
-          SizedBox(height: 50),
-          FutureBuilder(
-            initialData: '',
-            future: getVersionCode(),
-            builder: (context, snapshot) {
-              return Text(
-                snapshot.data,
-                textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.caption,
-              );
-            },
-          ),
-          SizedBox(height: 10),
         ],
       ),
     );

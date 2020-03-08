@@ -1,4 +1,4 @@
-import 'package:bethriftytoday/config/colors.dart';
+import 'package:bethriftytoday/config/config.dart';
 import 'package:flutter/material.dart';
 
 class ThriftyButton extends StatefulWidget {

@@ -1,5 +1,5 @@
-import 'package:bethriftytoday/config/encrypt.dart';
-import 'package:bethriftytoday/models/category.dart';
+import 'package:bethriftytoday/config/config.dart';
+import 'package:bethriftytoday/models/models.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Transaction {

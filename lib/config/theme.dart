@@ -1,4 +1,4 @@
-import 'package:bethriftytoday/config/colors.dart';
+import 'package:bethriftytoday/config/config.dart';
 import 'package:flutter/material.dart';
 
 ThemeData theme = ThemeData(
@@ -9,6 +9,13 @@ ThemeData theme = ThemeData(
   primaryColorBrightness: Brightness.light,
   iconTheme: IconThemeData(
     color: thriftyBlue,
+  ),
+  pageTransitionsTheme: PageTransitionsTheme(
+    builders: {
+      TargetPlatform.android: CupertinoPageTransitionsBuilder(),
+      TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
+      TargetPlatform.fuchsia: CupertinoPageTransitionsBuilder(),
+    },
   ),
   inputDecorationTheme: InputDecorationTheme(
     labelStyle: TextStyle(
@@ -46,6 +53,13 @@ ThemeData darkTheme = ThemeData(
   primaryColorBrightness: Brightness.dark,
   iconTheme: IconThemeData(
     color: Colors.white,
+  ),
+  pageTransitionsTheme: PageTransitionsTheme(
+    builders: {
+      TargetPlatform.android: CupertinoPageTransitionsBuilder(),
+      TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
+      TargetPlatform.fuchsia: CupertinoPageTransitionsBuilder(),
+    },
   ),
   inputDecorationTheme: InputDecorationTheme(
     labelStyle: TextStyle(

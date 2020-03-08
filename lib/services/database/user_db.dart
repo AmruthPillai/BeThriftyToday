@@ -1,5 +1,4 @@
-import 'package:bethriftytoday/models/currency.dart';
-import 'package:bethriftytoday/models/user.dart';
+import 'package:bethriftytoday/models/models.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class UserDatabaseService {
@@ -54,6 +53,14 @@ class UserDatabaseService {
     return _userDocument.updateData({
       ...userDoc.toJson(),
       'budget': budget,
+    });
+  }
+
+  Future updateUserPushToken(String pushToken) async {
+    var userDoc = await fetchUserDocument();
+    return _userDocument.updateData({
+      ...userDoc.toJson(),
+      'pushToken': pushToken,
     });
   }
 }

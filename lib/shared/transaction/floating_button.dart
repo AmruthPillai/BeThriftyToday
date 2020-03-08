@@ -1,4 +1,4 @@
-import 'package:bethriftytoday/shared/transaction/bottom_sheet.dart';
+import 'package:bethriftytoday/shared/shared.dart';
 import 'package:flutter/material.dart';
 
 class AddTransactionFloatingButton extends StatelessWidget {
@@ -11,14 +11,8 @@ class AddTransactionFloatingButton extends StatelessWidget {
     return FloatingActionButton(
       onPressed: () {
         showModalBottomSheet(
-          elevation: 10,
           context: context,
-          isDismissible: true,
-          useRootNavigator: true,
           isScrollControlled: true,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.vertical(top: Radius.circular(10)),
-          ),
           builder: (context) => TransactionBottomSheet(),
         );
       },

@@ -1,5 +1,5 @@
-import 'package:bethriftytoday/models/user.dart';
-import 'package:bethriftytoday/shared/thrifty/thrifty_logo.dart';
+import 'package:bethriftytoday/models/models.dart';
+import 'package:bethriftytoday/shared/shared.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:transparent_image/transparent_image.dart';

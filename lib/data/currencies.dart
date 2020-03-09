@@ -4,11 +4,6 @@ import 'package:flutter/material.dart';
 final List<Currency> baseCurrencies = [
   Currency(
     id: UniqueKey().toString(),
-    name: 'Singapore Dollar',
-    symbol: 'S\$',
-  ),
-  Currency(
-    id: UniqueKey().toString(),
     name: 'Dollar',
     symbol: '\$',
   ),

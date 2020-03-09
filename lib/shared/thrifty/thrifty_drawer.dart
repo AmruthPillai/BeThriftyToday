@@ -1,6 +1,7 @@
 import 'package:bethriftytoday/config/config.dart';
 import 'package:bethriftytoday/models/models.dart';
 import 'package:bethriftytoday/screens/categories/categories.dart';
+import 'package:bethriftytoday/screens/currencies/currencies.dart';
 import 'package:bethriftytoday/screens/screens.dart';
 import 'package:bethriftytoday/services/services.dart';
 import 'package:bethriftytoday/shared/shared.dart';
@@ -30,6 +31,14 @@ class ThriftyDrawer extends StatelessWidget {
                   },
                   leading: Icon(Icons.category),
                   title: Text('Categories'),
+                ),
+                ListTile(
+                  onTap: () {
+                    Navigator.pop(context);
+                    Navigator.pushNamed(context, CurrenciesScreen.routeName);
+                  },
+                  leading: Icon(Icons.attach_money),
+                  title: Text('Currencies'),
                 ),
                 Divider(),
                 ListTile(

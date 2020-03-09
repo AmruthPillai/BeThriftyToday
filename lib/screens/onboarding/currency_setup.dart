@@ -1,5 +1,6 @@
 import 'package:bethriftytoday/models/models.dart';
 import 'package:bethriftytoday/screens/screens.dart';
+import 'package:bethriftytoday/services/currency.dart';
 import 'package:bethriftytoday/services/database/user_db.dart';
 import 'package:bethriftytoday/shared/shared.dart';
 import 'package:flutter/material.dart';
@@ -53,16 +54,22 @@ class CurrencyGridView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var currencies = Provider.of<List<Currency>>(context);
+    var user = Provider.of<User>(context);
+    var currencyProvider = Provider.of<CurrencyProvider>(context);
 
-    if (currencies != null) {
+    if (currencyProvider.currencies != null) {
       return GridView.count(
         crossAxisCount: 3,
         childAspectRatio: 2,
         mainAxisSpacing: 40,
         shrinkWrap: true,
-        children: currencies
-            .map((Currency currency) => CurrencyCircle(currency))
+        children: currencyProvider.currencies
+            .map((Currency currency) => CurrencyCircle(
+                currency: currency,
+                onPressed: () async {
+                  await UserDatabaseService(user).updateUserCurrency(currency);
+                  Navigator.pushReplacementNamed(context, HomeScreen.routeName);
+                }))
             .toList(),
       );
     }
@@ -75,22 +82,22 @@ class CurrencyGridView extends StatelessWidget {
 
 class CurrencyCircle extends StatelessWidget {
   final Currency currency;
+  final Function onPressed;
 
-  const CurrencyCircle(this.currency);
+  const CurrencyCircle({
+    Key key,
+    this.currency,
+    this.onPressed,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    var user = Provider.of<User>(context);
-
     return FloatingActionButton(
       elevation: 0,
       heroTag: currency.name,
       backgroundColor: Theme.of(context).accentColor,
       foregroundColor: Colors.white,
-      onPressed: () async {
-        await UserDatabaseService(user).updateUserCurrency(currency);
-        Navigator.pushReplacementNamed(context, HomeScreen.routeName);
-      },
+      onPressed: this.onPressed,
       child: Text(
         currency.symbol,
         style: TextStyle(

@@ -66,13 +66,22 @@ class _TransactionBottomSheetState extends State<TransactionBottomSheet> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.height * 0.8,
+      height: MediaQuery.of(context).size.height * 0.85,
       padding: const EdgeInsets.symmetric(
         vertical: 20,
         horizontal: 20,
       ),
       child: ListView(
         children: <Widget>[
+          Text(
+            'Add New Transaction',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+          SizedBox(height: 20),
           buildTypeSelector(),
           SizedBox(height: 20),
           Form(

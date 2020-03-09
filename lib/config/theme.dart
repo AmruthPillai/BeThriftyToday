@@ -63,8 +63,8 @@ ThemeData darkTheme = ThemeData(
   accentColor: thriftyBlue,
   brightness: Brightness.dark,
   primaryColorBrightness: Brightness.dark,
-  scaffoldBackgroundColor: Color(0xFF202020),
-  backgroundColor: Color(0xFF202020),
+  scaffoldBackgroundColor: Color(0xFF212121),
+  backgroundColor: Color(0xFF212121),
   appBarTheme: AppBarTheme(
     color: Colors.white,
     brightness: Brightness.dark,

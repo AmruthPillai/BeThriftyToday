@@ -70,6 +70,15 @@ Oh, and in line with saving the best for last... There’s also a dark mode! �
 - You can request to add new categories or new features by dropping me an email at bethriftytoday@gmail.com and I’ll add them as soon as I have the time to work on it.
 - This app is ad-free, and always will be.
 
+### Features that were released in v1.1.0
+
+- You can now choose between 3 themes (Light, Dark and AMOLED)
+- You can pick any accent colour from the choices, making it completely personalisable
+- Users can sign in as a guest (still syncs your data to the cloud), but you won't have to divulge any personal information
+- You can now create your own income/expense categories
+- You can now enter your own currency symbols and use them within the app
+- All values now have decimal places up to 2 places
+
 ## Security
 
 As mentioned above, I've used a simple but uncrackable method to encrypt the sensitive information of a user's transactions so you can use the app in peace, knowing that no one else can ever read your data except you. In the spirit of complete transparency, here's a snapshot of the database

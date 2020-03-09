@@ -1,6 +1,7 @@
-import 'package:after_layout/after_layout.dart';
-import 'package:bethriftytoday/config/config.dart';
 import 'package:bethriftytoday/models/models.dart';
+import 'package:bethriftytoday/screens/screens.dart';
+import 'package:bethriftytoday/services/currency.dart';
+import 'package:bethriftytoday/services/database/user_db.dart';
 import 'package:bethriftytoday/shared/shared.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -12,13 +13,7 @@ class CurrencySetupScreen extends StatefulWidget {
   _CurrencySetupScreenState createState() => _CurrencySetupScreenState();
 }
 
-class _CurrencySetupScreenState extends State<CurrencySetupScreen>
-    with AfterLayoutMixin<CurrencySetupScreen> {
-  @override
-  void afterFirstLayout(BuildContext context) async {
-    updateStatusBarColor();
-  }
-
+class _CurrencySetupScreenState extends State<CurrencySetupScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,11 +23,11 @@ class _CurrencySetupScreenState extends State<CurrencySetupScreen>
           child: Column(
             children: <Widget>[
               OnboardingHeader(),
-              SizedBox(height: 30),
-              Container(
-                width: 50,
-                height: 50,
-                child: Image.asset('assets/images/currency.png'),
+              SizedBox(height: 50),
+              Icon(
+                Icons.attach_money,
+                size: 42,
+                color: Theme.of(context).accentColor,
               ),
               SizedBox(height: 15),
               Text(
@@ -42,47 +37,11 @@ class _CurrencySetupScreenState extends State<CurrencySetupScreen>
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              SizedBox(height: 30),
+              SizedBox(height: 50),
               CurrencyGridView(),
-              Spacer(),
-              RequestCurrencyButton(),
-              SizedBox(height: 10),
             ],
           ),
         ),
-      ),
-    );
-  }
-}
-
-class RequestCurrencyButton extends StatelessWidget {
-  const RequestCurrencyButton({
-    Key key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return FlatButton(
-      onPressed: () {},
-      padding: const EdgeInsets.symmetric(
-        horizontal: 40,
-        vertical: 10,
-      ),
-      child: Column(
-        children: <Widget>[
-          Text(
-            'Don\'t see your currency?',
-            style: Theme.of(context).textTheme.caption,
-          ),
-          SizedBox(height: 3),
-          Text(
-            'Request for it here.',
-            style: Theme.of(context)
-                .textTheme
-                .caption
-                .copyWith(fontWeight: FontWeight.w600),
-          ),
-        ],
       ),
     );
   }
@@ -95,22 +54,57 @@ class CurrencyGridView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var currencies = Provider.of<List<Currency>>(context);
+    var user = Provider.of<User>(context);
+    var currencyProvider = Provider.of<CurrencyProvider>(context);
 
-    if (currencies != null) {
+    if (currencyProvider.currencies != null) {
       return GridView.count(
         crossAxisCount: 3,
         childAspectRatio: 2,
         mainAxisSpacing: 40,
         shrinkWrap: true,
-        children: currencies
-            .map((Currency currency) => CurrencyCircle(currency))
+        children: currencyProvider.currencies
+            .map((Currency currency) => CurrencyCircle(
+                currency: currency,
+                onPressed: () async {
+                  await UserDatabaseService(user).updateUserCurrency(currency);
+                  Navigator.pushReplacementNamed(context, HomeScreen.routeName);
+                }))
             .toList(),
       );
     }
 
     return Center(
       child: CircularProgressIndicator(),
+    );
+  }
+}
+
+class CurrencyCircle extends StatelessWidget {
+  final Currency currency;
+  final Function onPressed;
+
+  const CurrencyCircle({
+    Key key,
+    this.currency,
+    this.onPressed,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return FloatingActionButton(
+      elevation: 0,
+      heroTag: currency.name,
+      backgroundColor: Theme.of(context).accentColor,
+      foregroundColor: Colors.white,
+      onPressed: this.onPressed,
+      child: Text(
+        currency.symbol,
+        style: TextStyle(
+          fontSize: 30,
+          fontWeight: FontWeight.w500,
+        ),
+      ),
     );
   }
 }

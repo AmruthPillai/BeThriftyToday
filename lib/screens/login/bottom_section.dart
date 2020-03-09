@@ -1,4 +1,3 @@
-import 'package:bethriftytoday/config/config.dart';
 import 'package:bethriftytoday/screens/screens.dart';
 import 'package:bethriftytoday/services/services.dart';
 import 'package:flutter/material.dart';
@@ -17,54 +16,51 @@ class _BottomSectionState extends State<BottomSection> {
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        Spacer(),
+        Spacer(flex: 2),
         Container(
           width: MediaQuery.of(context).size.width * 0.8,
           child: Text(
-            'A simple money management app for those who want to be in control of their financial life.',
+            'Be Thrifty Today is a simple and secure money management app that helps you track your incomes and expenses.',
             textAlign: TextAlign.center,
             style: TextStyle(
+              height: 1.6,
               fontSize: 16,
+              fontWeight: FontWeight.w500,
             ),
           ),
         ),
-        SizedBox(height: 20),
-        Text(
-          'For those who want to be in control.',
-          textAlign: TextAlign.center,
-          style: TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.w800,
+        Spacer(flex: 2),
+        Container(
+          width: MediaQuery.of(context).size.width * 0.8,
+          child: FlatButton.icon(
+            onPressed: () => signIn(false),
+            color: Theme.of(context).primaryColor,
+            textColor: Colors.blue[800],
+            padding: const EdgeInsets.symmetric(vertical: 15),
+            icon: Image.asset(
+              'assets/images/google_icon.png',
+              width: 28,
+              height: 28,
+            ),
+            label: Text(
+              'Login with Google',
+              style: TextStyle(fontSize: 16),
+            ),
           ),
         ),
-        Spacer(),
+        SizedBox(height: 15),
         Container(
           width: MediaQuery.of(context).size.width * 0.8,
           child: FlatButton(
-            onPressed: () => signIn(false),
-            color: isDarkMode(context) ? Colors.black54 : Colors.white,
-            padding: const EdgeInsets.symmetric(vertical: 14),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Image.asset(
-                  'assets/images/google_icon.png',
-                  width: 28,
-                  height: 28,
-                ),
-                SizedBox(width: 15),
-                Text(
-                  'Login with Google',
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: Theme.of(context).primaryColor,
-                  ),
-                ),
-              ],
+            onPressed: () => signIn(true),
+            padding: const EdgeInsets.symmetric(vertical: 15),
+            child: Text(
+              'Login as Guest',
+              style: TextStyle(fontSize: 16),
             ),
           ),
         ),
-        Spacer(),
+        Spacer(flex: 2),
       ],
     );
   }

@@ -4,10 +4,12 @@ part 'currency.g.dart';
 
 @JsonSerializable()
 class Currency {
+  final String id;
   final String name;
   final String symbol;
 
   Currency({
+    this.id,
     this.name,
     this.symbol,
   });

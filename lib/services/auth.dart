@@ -74,9 +74,12 @@ class AuthService {
   }
 
   Future deleteUser() async {
-    AuthCredential credential = await getGoogleAuthCredential();
-    AuthResult authResult = await _auth.signInWithCredential(credential);
-    FirebaseUser firebaseUser = authResult.user;
+    FirebaseUser firebaseUser = await _auth.currentUser();
+    if (firebaseUser.providerId != 'firebase') {
+      AuthCredential credential = await getGoogleAuthCredential();
+      AuthResult authResult = await _auth.signInWithCredential(credential);
+      firebaseUser = authResult.user;
+    }
     await firebaseUser.delete();
     signOut();
   }

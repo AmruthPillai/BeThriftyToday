@@ -10,7 +10,7 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    updateStatusBarColor();
+    updateStatusBarColor(context);
 
     return Scaffold(
       body: SafeArea(

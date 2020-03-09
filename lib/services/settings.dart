@@ -1,19 +1,31 @@
 import 'package:flutter/material.dart';
+import 'package:bethriftytoday/config/colors.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+enum ThemeOptions { light, dark, amoled }
+
 class SettingsProvider extends ChangeNotifier {
-  bool isDarkMode;
+  Color accentColor;
+  ThemeOptions themePref;
   bool biometricsEnabled;
 
   SettingsProvider() {
-    isDarkMode = false;
+    accentColor = thriftyBlue;
     biometricsEnabled = false;
+    themePref = ThemeOptions.light;
   }
 
-  setDarkMode(bool value) async {
+  setAccentColor(Color color) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setBool('isDarkMode', value);
-    isDarkMode = value;
+    await prefs.setInt('accentColor', color.value);
+    accentColor = color;
+    notifyListeners();
+  }
+
+  setTheme(ThemeOptions themeOption) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setInt('themePref', themeOption.index);
+    themePref = themeOption;
     notifyListeners();
   }
 

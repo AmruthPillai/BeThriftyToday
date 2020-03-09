@@ -1,5 +1,7 @@
 import 'package:bethriftytoday/config/config.dart';
 import 'package:bethriftytoday/models/models.dart';
+import 'package:bethriftytoday/screens/categories/categories.dart';
+import 'package:bethriftytoday/screens/currencies/currencies.dart';
 import 'package:bethriftytoday/screens/screens.dart';
 import 'package:bethriftytoday/services/services.dart';
 import 'package:bethriftytoday/shared/shared.dart';
@@ -25,21 +27,39 @@ class ThriftyDrawer extends StatelessWidget {
                 ListTile(
                   onTap: () {
                     Navigator.pop(context);
-                    Navigator.pushNamed(context, SettingsScreen.routeName);
+                    Navigator.pushNamed(context, CategoriesScreen.routeName);
                   },
-                  leading: Icon(Icons.settings),
-                  title: Text('Settings'),
+                  leading: Icon(Icons.category),
+                  title: Text('Categories'),
                 ),
                 ListTile(
                   onTap: () {
                     Navigator.pop(context);
-                    showDialog(
+                    Navigator.pushNamed(context, CurrenciesScreen.routeName);
+                  },
+                  leading: Icon(Icons.attach_money),
+                  title: Text('Currencies'),
+                ),
+                Divider(),
+                ListTile(
+                  onTap: () {
+                    Navigator.pop(context);
+                    showModalBottomSheet(
                       context: context,
+                      isScrollControlled: true,
                       builder: (context) => ExportDialog(),
                     );
                   },
                   leading: Icon(Icons.import_export),
                   title: Text('Export to CSV/JSON'),
+                ),
+                ListTile(
+                  onTap: () {
+                    Navigator.pop(context);
+                    Navigator.pushNamed(context, SettingsScreen.routeName);
+                  },
+                  leading: Icon(Icons.settings),
+                  title: Text('Settings'),
                 ),
                 Divider(),
                 ListTile(
@@ -49,7 +69,7 @@ class ThriftyDrawer extends StatelessWidget {
                       context: context,
                       applicationIcon: ThriftyLogo(
                         size: 80,
-                        isLight: isDarkMode(context),
+                        color: Theme.of(context).accentColor,
                       ),
                       applicationName: 'Be Thrifty Today',
                       applicationLegalese:
@@ -70,7 +90,7 @@ class ThriftyDrawer extends StatelessWidget {
                   onTap: () {
                     Navigator.pop(context);
                     Share.share(
-                      'Check out this app that helps you manage your income and expenses, safe and secure: https://bethrifty.today/',
+                      'Check out this app that helps you manage your income and expenses, safe and secure: https://pillai.xyz/thrifty',
                       subject: 'Be Thrifty Today!',
                     );
                   },
@@ -79,11 +99,10 @@ class ThriftyDrawer extends StatelessWidget {
                 ),
                 ListTile(
                   onTap: () async {
+                    Navigator.pop(context);
                     var playStoreUrl =
                         'https://play.google.com/store/apps/details?id=today.bethrifty.app';
-                    if (await canLaunch(playStoreUrl)) {
-                      launch(playStoreUrl);
-                    }
+                    if (await canLaunch(playStoreUrl)) launch(playStoreUrl);
                   },
                   leading: Icon(Icons.rate_review),
                   title: Text('Rate the App'),
@@ -139,7 +158,7 @@ class DrawerHeader extends StatelessWidget {
       child: Container(
         width: double.infinity,
         height: 180,
-        color: thriftyBlue,
+        color: Theme.of(context).accentColor,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[

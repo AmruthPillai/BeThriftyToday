@@ -31,52 +31,54 @@ class _UpdateBudgetDialogState extends State<UpdateBudgetDialog> {
     var user = Provider.of<User>(context);
 
     if (user != null) {
-      return Dialog(
-        child: Container(
-          width: double.infinity,
-          padding: const EdgeInsets.all(20),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              Text(
-                'Please enter a monthly budget that you feel is conservative according to your spending habits.',
-                textAlign: TextAlign.center,
+      return Container(
+        margin: EdgeInsets.only(
+          bottom: MediaQuery.of(context).viewInsets.bottom,
+        ),
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            Text(
+              'Please enter a monthly budget that you feel is conservative according to your spending habits.',
+              textAlign: TextAlign.center,
+            ),
+            SizedBox(height: 20),
+            TextField(
+              controller: _budgetController,
+              keyboardType: TextInputType.number,
+              decoration: InputDecoration(
+                labelText: 'Budget',
               ),
-              SizedBox(height: 20),
-              TextField(
-                controller: _budgetController,
-                keyboardType: TextInputType.number,
-                decoration: InputDecoration(
-                  labelText: 'Budget',
+            ),
+            SizedBox(height: 10),
+            Wrap(
+              alignment: WrapAlignment.center,
+              children: <Widget>[
+                FlatButton.icon(
+                  onPressed: () {
+                    UserDatabaseService(user).updateUserBudget(null);
+                    Navigator.pop(context);
+                  },
+                  textColor: Colors.red,
+                  icon: Icon(Icons.clear),
+                  label: Text('CLEAR'),
                 ),
-              ),
-              SizedBox(height: 10),
-              Wrap(
-                alignment: WrapAlignment.center,
-                children: <Widget>[
-                  FlatButton.icon(
-                    onPressed: () {
-                      UserDatabaseService(user).updateUserBudget(null);
-                      Navigator.pop(context);
-                    },
-                    textColor: Colors.red,
-                    icon: Icon(Icons.clear),
-                    label: Text('CLEAR'),
-                  ),
-                  FlatButton.icon(
-                    onPressed: () {
-                      UserDatabaseService(user).updateUserBudget(
-                        double.parse(_budgetController.text),
-                      );
-                      Navigator.pop(context);
-                    },
-                    icon: Icon(Icons.check),
-                    label: Text('SET BUDGET'),
-                  ),
-                ],
-              ),
-            ],
-          ),
+                FlatButton.icon(
+                  textColor: Theme.of(context).accentColor,
+                  onPressed: () {
+                    if (_budgetController.text.isEmpty) return;
+                    UserDatabaseService(user).updateUserBudget(
+                      double.parse(_budgetController.text),
+                    );
+                    Navigator.pop(context);
+                  },
+                  icon: Icon(Icons.check),
+                  label: Text('SET BUDGET'),
+                ),
+              ],
+            ),
+          ],
         ),
       );
     }

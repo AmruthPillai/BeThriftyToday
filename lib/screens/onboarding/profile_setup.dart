@@ -1,5 +1,4 @@
 import 'package:after_layout/after_layout.dart';
-import 'package:bethriftytoday/config/config.dart';
 import 'package:bethriftytoday/models/models.dart';
 import 'package:bethriftytoday/screens/screens.dart';
 import 'package:bethriftytoday/services/services.dart';
@@ -16,17 +15,20 @@ class ProfileSetupScreen extends StatefulWidget {
 
 class _ProfileSetupScreenState extends State<ProfileSetupScreen>
     with AfterLayoutMixin<ProfileSetupScreen> {
+  bool isGuest = false;
   TextEditingController _nameController = TextEditingController();
   TextEditingController _emailController = TextEditingController();
 
   @override
   void afterFirstLayout(BuildContext context) async {
-    updateStatusBarColor();
-
     Future.delayed(Duration(milliseconds: 500), () {
       var user = Provider.of<User>(context, listen: false);
+
       _nameController.text = user.name;
       _emailController.text = user.email;
+
+      if (user.email == null || user.email.isEmpty)
+        setState(() => this.isGuest = true);
     });
   }
 
@@ -35,18 +37,19 @@ class _ProfileSetupScreenState extends State<ProfileSetupScreen>
     var user = Provider.of<User>(context);
 
     return Scaffold(
-      body: Column(
+      body: ListView(
         children: <Widget>[
           OnboardingHeader(),
-          SizedBox(height: 40),
-          Container(
-            width: 50,
-            height: 50,
-            child: Image.asset('assets/images/person.png'),
+          SizedBox(height: 50),
+          Icon(
+            Icons.person,
+            size: 42,
+            color: Theme.of(context).accentColor,
           ),
-          SizedBox(height: 15),
+          SizedBox(height: 10),
           Text(
             'Who are you?',
+            textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.bold,
@@ -54,42 +57,46 @@ class _ProfileSetupScreenState extends State<ProfileSetupScreen>
           ),
           SizedBox(height: 50),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 30),
+            padding: const EdgeInsets.symmetric(horizontal: 20),
             child: TextField(
               controller: _nameController,
               decoration: InputDecoration(
-                border: OutlineInputBorder(),
                 labelText: 'Full Name',
-                labelStyle: TextStyle(
-                  fontWeight: FontWeight.w500,
-                ),
               ),
             ),
           ),
-          SizedBox(height: 30),
+          SizedBox(height: 20),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 30),
+            padding: const EdgeInsets.symmetric(horizontal: 20),
             child: TextField(
-              enabled: false,
+              enabled: isGuest,
               controller: _emailController,
               decoration: InputDecoration(
                 labelText: 'Email Address',
               ),
             ),
           ),
-          Spacer(),
+          SizedBox(height: 50),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 30),
+            padding: const EdgeInsets.symmetric(horizontal: 20),
             child: ThriftyButton(
               title: 'NEXT',
               onPressed: () async {
+                if (_nameController.text.isEmpty ||
+                    _emailController.text.isEmpty) return;
+
                 await UserDatabaseService(user)
                     .updateUserName(_nameController.text);
-                Navigator.pushNamed(context, CurrencySetupScreen.routeName);
+                await UserDatabaseService(user)
+                    .updateUserEmail(_emailController.text);
+
+                Navigator.pushReplacementNamed(
+                  context,
+                  CurrencySetupScreen.routeName,
+                );
               },
             ),
           ),
-          SizedBox(height: 30),
         ],
       ),
     );

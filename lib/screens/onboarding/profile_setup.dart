@@ -90,7 +90,10 @@ class _ProfileSetupScreenState extends State<ProfileSetupScreen>
                 await UserDatabaseService(user)
                     .updateUserEmail(_emailController.text);
 
-                Navigator.pushNamed(context, CurrencySetupScreen.routeName);
+                Navigator.pushReplacementNamed(
+                  context,
+                  CurrencySetupScreen.routeName,
+                );
               },
             ),
           ),

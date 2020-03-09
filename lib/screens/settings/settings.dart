@@ -192,8 +192,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 onPressed: () async {
                   Navigator.pop(context);
                   try {
-                    await AuthService().deleteUser();
-
+                    AuthService().deleteUser();
                     Navigator.pushNamedAndRemoveUntil(
                       context,
                       LoginScreen.routeName,

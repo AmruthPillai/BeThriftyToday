@@ -2,6 +2,7 @@ import 'package:bethriftytoday/config/config.dart';
 import 'package:bethriftytoday/models/models.dart';
 import 'package:bethriftytoday/screens/screens.dart';
 import 'package:bethriftytoday/services/category.dart';
+import 'package:bethriftytoday/services/currency.dart';
 import 'package:bethriftytoday/services/services.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_analytics/observer.dart';
@@ -30,6 +31,9 @@ class _MyAppState extends State<MyApp> {
         ),
         ChangeNotifierProvider<CategoryProvider>(
           create: (context) => CategoryProvider(),
+        ),
+        ChangeNotifierProvider<CurrencyProvider>(
+          create: (context) => CurrencyProvider(),
         ),
         ChangeNotifierProvider<SettingsProvider>(
           create: (context) => SettingsProvider(),

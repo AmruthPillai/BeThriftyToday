@@ -9,10 +9,10 @@ class CategoryProvider extends ChangeNotifier {
   Future<Database> database;
 
   CategoryProvider() {
-    this.initDB();
+    this.initializeDB();
   }
 
-  Future<void> initDB() async {
+  Future<void> initializeDB() async {
     database = openDatabase(
       join(await getDatabasesPath(), 'categories.db'),
       version: 1,
@@ -78,18 +78,12 @@ class CategoryProvider extends ChangeNotifier {
   Future delete(Category category) async {
     final db = await database;
 
-    var res = await db.delete(
+    await db.delete(
       'categories',
       where: "id = ?",
       whereArgs: [category.id],
     );
 
-    print(res);
-
     await this.fetch();
-  }
-
-  Future deleteDB() async {
-    deleteDatabase(join(await getDatabasesPath(), 'categories.db'));
   }
 }

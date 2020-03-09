@@ -31,7 +31,7 @@ class SettingsScreen extends StatelessWidget {
                 ThriftyAppBar(canGoBack: true),
                 SizedBox(height: 20),
                 buildHeader('Preferences'),
-                buildDarkModeSwitch(settings),
+                buildThemeSelector(settings),
                 buildBiometricsSwitch(settings),
                 Divider(),
                 buildHeader('Account'),
@@ -250,28 +250,38 @@ class SettingsScreen extends StatelessWidget {
     );
   }
 
-  ListTile buildDarkModeSwitch(SettingsProvider settings) {
+  ListTile buildThemeSelector(SettingsProvider settings) {
     return ListTile(
       leading: Icon(
         Icons.brightness_medium,
         color: thriftyBlue,
       ),
       title: Text(
-        'Dark Mode',
+        'Theme',
         style: TextStyle(
           fontWeight: FontWeight.w500,
         ),
       ),
-      trailing: Switch(
-        value: settings.isDarkMode,
-        activeColor: thriftyBlue,
-        onChanged: (value) {
-          settings.setDarkMode(value);
+      trailing: DropdownButton<ThemeOptions>(
+        onChanged: (val) {
+          settings.setTheme(val);
         },
+        value: settings.themePref,
+        items: [
+          DropdownMenuItem(
+            value: ThemeOptions.light,
+            child: Text('Light'),
+          ),
+          DropdownMenuItem(
+            value: ThemeOptions.dark,
+            child: Text('Dark'),
+          ),
+          DropdownMenuItem(
+            value: ThemeOptions.amoled,
+            child: Text('AMOLED'),
+          ),
+        ],
       ),
-      onTap: () {
-        settings.setDarkMode(!settings.isDarkMode);
-      },
     );
   }
 }

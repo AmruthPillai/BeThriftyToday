@@ -31,8 +31,15 @@ class _SplashScreenState extends State<SplashScreen>
   checkUserPreferences() async {
     var settings = Provider.of<SettingsProvider>(context);
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    settings.setDarkMode(prefs.getBool('isDarkMode') ??
-        (MediaQuery.of(context).platformBrightness == Brightness.dark));
+    try {
+      settings.setTheme(ThemeOptions.values[prefs.getInt('themePref')]);
+    } catch (_) {
+      settings.setTheme(
+        MediaQuery.of(context).platformBrightness == Brightness.dark
+            ? ThemeOptions.dark
+            : ThemeOptions.light,
+      );
+    }
     settings.setBiometricsEnabled(prefs.getBool('biometricsEnabled') ?? false);
   }
 

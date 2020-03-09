@@ -1,19 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+enum ThemeOptions { light, dark, amoled }
+
 class SettingsProvider extends ChangeNotifier {
-  bool isDarkMode;
+  ThemeOptions themePref;
   bool biometricsEnabled;
 
   SettingsProvider() {
-    isDarkMode = false;
+    themePref = ThemeOptions.light;
     biometricsEnabled = false;
   }
 
-  setDarkMode(bool value) async {
+  setTheme(ThemeOptions value) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setBool('isDarkMode', value);
-    isDarkMode = value;
+    await prefs.setInt('themePref', value.index);
+    themePref = value;
     notifyListeners();
   }
 

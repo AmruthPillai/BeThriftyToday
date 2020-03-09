@@ -46,15 +46,26 @@ class _MyAppState extends State<MyApp> {
               FirebaseAnalyticsObserver(analytics: analytics),
             ],
             title: 'Be Thrifty Today',
-            theme: theme,
-            darkTheme: darkTheme,
+            theme: themeSelector(settings.themePref),
             initialRoute: SplashScreen.routeName,
-            themeMode: settings.isDarkMode ? ThemeMode.dark : ThemeMode.light,
             routes: routes,
           ),
         ),
       ),
     );
+  }
+
+  ThemeData themeSelector(ThemeOptions option) {
+    switch (option) {
+      case ThemeOptions.light:
+        return theme;
+      case ThemeOptions.dark:
+        return darkTheme;
+      case ThemeOptions.amoled:
+        return amoledTheme;
+      default:
+        return theme;
+    }
   }
 
   setupCloudMessaging() async {

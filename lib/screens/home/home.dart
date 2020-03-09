@@ -1,3 +1,4 @@
+import 'package:bethriftytoday/config/utils.dart';
 import 'package:bethriftytoday/models/models.dart';
 import 'package:bethriftytoday/services/services.dart';
 import 'package:bethriftytoday/shared/shared.dart';
@@ -19,6 +20,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     final _scaffoldKey = GlobalKey<ScaffoldState>();
     var user = Provider.of<User>(context);
+    updateStatusBarColor(context);
 
     if (user != null) {
       _firebaseMessaging.getToken().then((token) {

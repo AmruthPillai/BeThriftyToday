@@ -40,6 +40,14 @@ class UserDatabaseService {
     });
   }
 
+  Future updateUserEmail(String email) async {
+    var userDoc = await fetchUserDocument();
+    return _userDocument.updateData({
+      ...userDoc.toJson(),
+      'email': email,
+    });
+  }
+
   Future updateUserCurrency(Currency currency) async {
     var userDoc = await fetchUserDocument();
     return _userDocument.updateData({

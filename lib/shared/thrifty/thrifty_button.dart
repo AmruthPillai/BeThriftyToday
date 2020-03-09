@@ -1,4 +1,3 @@
-import 'package:bethriftytoday/config/config.dart';
 import 'package:flutter/material.dart';
 
 class ThriftyButton extends StatefulWidget {
@@ -24,8 +23,8 @@ class _ThriftyButtonState extends State<ThriftyButton> {
       child: FlatButton(
         onPressed: this.widget.onPressed,
         padding: const EdgeInsets.symmetric(horizontal: 30),
-        color: thriftyBlue,
-        disabledColor: thriftyBlue.withOpacity(0.5),
+        color: Theme.of(context).accentColor,
+        disabledColor: Theme.of(context).accentColor.withOpacity(0.5),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[

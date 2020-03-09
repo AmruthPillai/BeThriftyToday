@@ -34,15 +34,16 @@ class _AddCategoryDialogState extends State<AddCategoryDialog> {
     var categoryProvider = Provider.of<CategoryProvider>(context);
 
     return Container(
-      padding: const EdgeInsets.symmetric(
-        horizontal: 20,
-        vertical: 20,
+      margin: EdgeInsets.only(
+        bottom: MediaQuery.of(context).viewInsets.bottom,
       ),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
+      padding: const EdgeInsets.all(20),
+      child: ListView(
+        shrinkWrap: true,
         children: <Widget>[
           Text(
             'Add a New ${widget.type[0].toUpperCase()}${widget.type.substring(1)} Category',
+            textAlign: TextAlign.center,
             style: TextStyle(
               fontWeight: FontWeight.w500,
             ),
@@ -112,7 +113,8 @@ class _AddCategoryDialogState extends State<AddCategoryDialog> {
               ),
               FlatButton.icon(
                 onPressed: () {
-                  if (_nameController.text.isEmpty) return;
+                  if (_nameController.text.isEmpty || _selectedIcon == null)
+                    return;
                   categoryProvider.insert(Category(
                     id: 'custom_${UniqueKey().toString()}',
                     icon: _selectedIcon,
@@ -121,7 +123,7 @@ class _AddCategoryDialogState extends State<AddCategoryDialog> {
                   ));
                   Navigator.pop(context);
                 },
-                textColor: Colors.green[600],
+                textColor: Theme.of(context).accentColor,
                 icon: Icon(Icons.check),
                 label: Text('Add'),
               ),

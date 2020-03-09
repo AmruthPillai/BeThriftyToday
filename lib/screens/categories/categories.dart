@@ -1,4 +1,3 @@
-import 'package:bethriftytoday/config/colors.dart';
 import 'package:bethriftytoday/models/models.dart';
 import 'package:bethriftytoday/services/category.dart';
 import 'package:bethriftytoday/shared/dialogs/add_category.dart';
@@ -25,10 +24,10 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
         key: _scaffoldKey,
         appBar: AppBar(
           elevation: 0,
-          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           title: Text('Categories'),
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           bottom: TabBar(
-            indicatorColor: thriftyBlue,
+            indicatorColor: Theme.of(context).accentColor,
             tabs: <Widget>[
               Tab(
                 child: Text('Income'),
@@ -39,37 +38,45 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
             ],
           ),
         ),
-        body: TabBarView(
-          children: <Widget>[
-            GridView.count(
-              crossAxisCount: 5,
-              children: <Widget>[
-                ...buildCategories(
-                  categoryProvider,
-                  categoryProvider.categories.where((x) => x.type == 'income'),
-                ),
-                buildAddButton(() {
-                  _scaffoldKey.currentState.showBottomSheet((context) {
-                    return AddCategoryDialog('income');
-                  });
-                })
-              ],
-            ),
-            GridView.count(
-              crossAxisCount: 5,
-              children: <Widget>[
-                ...buildCategories(
-                  categoryProvider,
-                  categoryProvider.categories.where((x) => x.type == 'expense'),
-                ),
-                buildAddButton(() {
-                  _scaffoldKey.currentState.showBottomSheet((context) {
-                    return AddCategoryDialog('expense');
-                  });
-                })
-              ],
-            ),
-          ],
+        body: Builder(
+          builder: (context) => TabBarView(
+            children: <Widget>[
+              GridView.count(
+                crossAxisCount: 4,
+                children: <Widget>[
+                  ...buildCategories(
+                    categoryProvider,
+                    categoryProvider.categories
+                        .where((x) => x.type == 'income'),
+                  ),
+                  buildAddButton(() {
+                    showModalBottomSheet(
+                      context: context,
+                      isScrollControlled: true,
+                      builder: (context) => AddCategoryDialog('income'),
+                    );
+                  })
+                ],
+              ),
+              GridView.count(
+                crossAxisCount: 4,
+                children: <Widget>[
+                  ...buildCategories(
+                    categoryProvider,
+                    categoryProvider.categories
+                        .where((x) => x.type == 'expense'),
+                  ),
+                  buildAddButton(() {
+                    showModalBottomSheet(
+                      context: context,
+                      isScrollControlled: true,
+                      builder: (context) => AddCategoryDialog('expense'),
+                    );
+                  })
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -112,10 +119,24 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
     return categories
         .map((x) => InkWell(
               onLongPress: (x.id.contains('custom'))
-                  ? () {
-                      categoryProvider.delete(x);
+                  ? () async {
+                      await categoryProvider.delete(x);
+
+                      _scaffoldKey.currentState.showSnackBar(SnackBar(
+                        content: Text(
+                          'Your custom category has been deleted',
+                          textAlign: TextAlign.center,
+                        ),
+                      ));
                     }
-                  : null,
+                  : () {
+                      _scaffoldKey.currentState.showSnackBar(SnackBar(
+                        content: Text(
+                          'You can\'t delete an original category',
+                          textAlign: TextAlign.center,
+                        ),
+                      ));
+                    },
               child: Container(
                 key: Key(x.id),
                 padding: const EdgeInsets.all(16),
@@ -135,7 +156,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                         'assets/categories/${x.icon}',
                       ),
                     ),
-                    SizedBox(height: 10),
+                    SizedBox(height: 12),
                     Text(
                       x.name,
                       overflow: TextOverflow.ellipsis,

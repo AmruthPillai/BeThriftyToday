@@ -28,14 +28,8 @@ class TransactionListTile extends StatelessWidget {
         child: InkWell(
           onLongPress: () {
             showModalBottomSheet(
-              elevation: 10,
               context: context,
-              isDismissible: true,
-              useRootNavigator: true,
               isScrollControlled: true,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.vertical(top: Radius.circular(10)),
-              ),
               builder: (context) => TransactionBottomSheet(
                 transaction: transaction,
               ),
@@ -46,9 +40,7 @@ class TransactionListTile extends StatelessWidget {
             decoration: BoxDecoration(
               border: Border(
                 bottom: BorderSide(
-                  color: isDarkMode(context)
-                      ? Colors.white.withOpacity(0.05)
-                      : Colors.black.withOpacity(0.05),
+                  color: Colors.grey[200],
                 ),
               ),
             ),

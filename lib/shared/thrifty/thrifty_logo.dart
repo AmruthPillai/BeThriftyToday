@@ -1,14 +1,14 @@
-import 'package:bethriftytoday/config/config.dart';
+import 'dart:ui';
 import 'package:flutter/material.dart';
 
 class ThriftyLogo extends StatelessWidget {
   final double size;
-  final bool isLight;
+  final Color color;
 
   const ThriftyLogo({
     Key key,
-    this.size,
-    this.isLight = false,
+    @required this.size,
+    this.color = Colors.white,
   }) : super(key: key);
 
   @override
@@ -16,10 +16,9 @@ class ThriftyLogo extends StatelessWidget {
     return Container(
       width: size,
       height: size,
-      child: Image.asset(
-        (isLight || isDarkMode(context))
-            ? 'assets/logos/logo_white.png'
-            : 'assets/logos/logo_blue.png',
+      child: ColorFiltered(
+        colorFilter: ColorFilter.mode(this.color, BlendMode.modulate),
+        child: Image.asset('assets/logos/logo_white.png'),
       ),
     );
   }

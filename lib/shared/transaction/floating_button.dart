@@ -17,9 +17,9 @@ class AddTransactionFloatingButton extends StatelessWidget {
         );
       },
       elevation: 0,
-      splashColor: Theme.of(context).accentColor.withOpacity(0.5),
-      backgroundColor: Theme.of(context).primaryColor,
-      foregroundColor: Theme.of(context).accentColor,
+      splashColor: Colors.white.withOpacity(0.5),
+      backgroundColor: Theme.of(context).accentColor,
+      foregroundColor: Colors.white,
       child: Icon(
         Icons.add,
         size: 32,

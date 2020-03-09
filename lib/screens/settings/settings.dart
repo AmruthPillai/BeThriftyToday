@@ -1,4 +1,4 @@
-import 'package:bethriftytoday/config/config.dart';
+import 'package:bethriftytoday/config/utils.dart';
 import 'package:bethriftytoday/models/models.dart';
 import 'package:bethriftytoday/screens/screens.dart';
 import 'package:bethriftytoday/services/services.dart';
@@ -7,15 +7,22 @@ import 'package:flutter/material.dart';
 import 'package:local_auth/local_auth.dart';
 import 'package:provider/provider.dart';
 
-class SettingsScreen extends StatelessWidget {
+class SettingsScreen extends StatefulWidget {
   static const String routeName = '/settings';
 
+  @override
+  _SettingsScreenState createState() => _SettingsScreenState();
+}
+
+class _SettingsScreenState extends State<SettingsScreen> {
   final LocalAuthentication _localAuth = LocalAuthentication();
 
   @override
   Widget build(BuildContext context) {
     var user = Provider.of<User>(context);
     var settings = Provider.of<SettingsProvider>(context);
+
+    updateStatusBarColor(context);
 
     return MultiProvider(
       providers: [
@@ -31,16 +38,17 @@ class SettingsScreen extends StatelessWidget {
                 ThriftyAppBar(canGoBack: true),
                 SizedBox(height: 20),
                 buildHeader('Preferences'),
+                buildAccentColorSelector(settings),
                 buildThemeSelector(settings),
                 buildBiometricsSwitch(settings),
                 Divider(),
                 buildHeader('Account'),
-                buildNameSetting(context, user),
+                buildNameSetting(user),
                 buildEmailSetting(user),
-                buildCurrencySetting(context, user),
+                buildCurrencySetting(user),
                 Divider(),
                 buildHeader('Danger Zone'),
-                buildDeleteAccount(context)
+                buildDeleteAccount()
               ],
             ),
           ),
@@ -49,11 +57,11 @@ class SettingsScreen extends StatelessWidget {
     );
   }
 
-  ListTile buildNameSetting(BuildContext context, User user) {
+  ListTile buildNameSetting(User user) {
     return ListTile(
       leading: Icon(
         Icons.person,
-        color: thriftyBlue,
+        color: Theme.of(context).accentColor,
       ),
       title: Text(
         'Name',
@@ -62,15 +70,16 @@ class SettingsScreen extends StatelessWidget {
         ),
       ),
       trailing: Text(
-        user.name ?? '',
+        user?.name ?? '',
         textAlign: TextAlign.end,
         style: TextStyle(
           color: Colors.grey,
         ),
       ),
       onTap: () {
-        showDialog(
+        showModalBottomSheet(
           context: context,
+          isScrollControlled: true,
           builder: (context) => UpdateNameDialog(
             name: user.name,
           ),
@@ -84,7 +93,7 @@ class SettingsScreen extends StatelessWidget {
       enabled: false,
       leading: Icon(
         Icons.mail,
-        color: thriftyBlue,
+        color: Theme.of(context).accentColor,
       ),
       title: Text(
         'Email',
@@ -93,7 +102,7 @@ class SettingsScreen extends StatelessWidget {
         ),
       ),
       trailing: Text(
-        user.email ?? '',
+        user?.email ?? '',
         textAlign: TextAlign.end,
         style: TextStyle(
           color: Colors.grey,
@@ -102,11 +111,11 @@ class SettingsScreen extends StatelessWidget {
     );
   }
 
-  ListTile buildCurrencySetting(BuildContext context, User user) {
+  ListTile buildCurrencySetting(User user) {
     return ListTile(
       leading: Icon(
         Icons.monetization_on,
-        color: thriftyBlue,
+        color: Theme.of(context).accentColor,
       ),
       title: Text(
         'Currency',
@@ -122,8 +131,9 @@ class SettingsScreen extends StatelessWidget {
         ),
       ),
       onTap: () {
-        showDialog(
+        showModalBottomSheet(
           context: context,
+          isScrollControlled: true,
           builder: (context) => CurrencySelectionDialog(),
         );
       },
@@ -141,14 +151,14 @@ class SettingsScreen extends StatelessWidget {
       child: Text(
         title.toUpperCase(),
         style: TextStyle(
-          color: thriftyBlue,
+          color: Theme.of(context).accentColor,
           fontWeight: FontWeight.w700,
         ),
       ),
     );
   }
 
-  ListTile buildDeleteAccount(BuildContext context) {
+  ListTile buildDeleteAccount() {
     return ListTile(
       leading: Icon(
         Icons.delete_sweep,
@@ -161,8 +171,8 @@ class SettingsScreen extends StatelessWidget {
           fontWeight: FontWeight.w500,
         ),
       ),
-      onTap: () async {
-        await showDialog(
+      onTap: () {
+        showDialog(
           context: context,
           builder: (context) => AlertDialog(
             title: Text(
@@ -179,10 +189,16 @@ class SettingsScreen extends StatelessWidget {
                 child: Text('No, I don\'t want to leave'),
               ),
               FlatButton(
-                onPressed: () {
+                onPressed: () async {
                   Navigator.pop(context);
                   try {
-                    AuthService().deleteUser();
+                    await AuthService().deleteUser();
+
+                    Navigator.pushNamedAndRemoveUntil(
+                      context,
+                      LoginScreen.routeName,
+                      (route) => false,
+                    );
                   } catch (error) {
                     print('Something went wrong, please try again!');
                   }
@@ -197,12 +213,6 @@ class SettingsScreen extends StatelessWidget {
               ),
             ],
           ),
-        );
-
-        Navigator.pushNamedAndRemoveUntil(
-          context,
-          LoginScreen.routeName,
-          (route) => false,
         );
       },
     );
@@ -220,7 +230,7 @@ class SettingsScreen extends StatelessWidget {
             enabled: enabled,
             leading: Icon(
               Icons.fingerprint,
-              color: thriftyBlue,
+              color: Theme.of(context).accentColor,
             ),
             title: Text(
               'Biometric Fortification',
@@ -232,7 +242,7 @@ class SettingsScreen extends StatelessWidget {
                 Text('Asks for your fingerprint everytime you open the app.'),
             trailing: Switch(
               value: settings.biometricsEnabled,
-              activeColor: thriftyBlue,
+              activeColor: Theme.of(context).accentColor,
               onChanged: enabled
                   ? (value) {
                       settings.setBiometricsEnabled(value);
@@ -254,7 +264,7 @@ class SettingsScreen extends StatelessWidget {
     return ListTile(
       leading: Icon(
         Icons.brightness_medium,
-        color: thriftyBlue,
+        color: Theme.of(context).accentColor,
       ),
       title: Text(
         'Theme',
@@ -263,9 +273,7 @@ class SettingsScreen extends StatelessWidget {
         ),
       ),
       trailing: DropdownButton<ThemeOptions>(
-        onChanged: (val) {
-          settings.setTheme(val);
-        },
+        onChanged: settings.setTheme,
         value: settings.themePref,
         items: [
           DropdownMenuItem(
@@ -281,6 +289,47 @@ class SettingsScreen extends StatelessWidget {
             child: Text('AMOLED'),
           ),
         ],
+      ),
+    );
+  }
+
+  ListTile buildAccentColorSelector(SettingsProvider settings) {
+    List<Color> colorOptions = [
+      Color(0xFF1B54A9),
+      Colors.red[800],
+      Colors.pink[600],
+      Colors.teal[600],
+      Colors.green[800],
+      Colors.deepOrange[800],
+      Colors.deepPurple[700],
+    ];
+
+    return ListTile(
+      leading: Icon(
+        Icons.color_lens,
+        color: Theme.of(context).accentColor,
+      ),
+      title: Text(
+        'Accent Color',
+        style: TextStyle(
+          fontWeight: FontWeight.w500,
+        ),
+      ),
+      trailing: DropdownButton<Color>(
+        underline: Container(),
+        onChanged: settings.setAccentColor,
+        value: settings.accentColor,
+        items: colorOptions
+            .map(
+              (x) => DropdownMenuItem(
+                value: x,
+                child: CircleAvatar(
+                  radius: 10,
+                  backgroundColor: x,
+                ),
+              ),
+            )
+            .toList(),
       ),
     );
   }

@@ -20,6 +20,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     FirebaseAnalytics analytics = FirebaseAnalytics();
+    updateStatusBarColor(context);
     setupCloudMessaging();
 
     return MultiProvider(
@@ -46,7 +47,9 @@ class _MyAppState extends State<MyApp> {
               FirebaseAnalyticsObserver(analytics: analytics),
             ],
             title: 'Be Thrifty Today',
-            theme: themeSelector(settings.themePref),
+            theme: themeSelector(settings.themePref).copyWith(
+              accentColor: settings.accentColor,
+            ),
             initialRoute: SplashScreen.routeName,
             routes: routes,
           ),

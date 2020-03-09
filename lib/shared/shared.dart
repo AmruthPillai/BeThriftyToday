@@ -1,4 +1,3 @@
-export 'currency_circle.dart';
 export 'dialogs/currency_selection.dart';
 export 'dialogs/export.dart';
 export 'dialogs/update_budget.dart';

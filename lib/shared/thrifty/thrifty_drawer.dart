@@ -43,8 +43,9 @@ class ThriftyDrawer extends StatelessWidget {
                 ListTile(
                   onTap: () {
                     Navigator.pop(context);
-                    showDialog(
+                    showModalBottomSheet(
                       context: context,
+                      isScrollControlled: true,
                       builder: (context) => ExportDialog(),
                     );
                   },
@@ -59,7 +60,7 @@ class ThriftyDrawer extends StatelessWidget {
                       context: context,
                       applicationIcon: ThriftyLogo(
                         size: 80,
-                        isLight: isDarkMode(context),
+                        color: Theme.of(context).accentColor,
                       ),
                       applicationName: 'Be Thrifty Today',
                       applicationLegalese:
@@ -148,7 +149,7 @@ class DrawerHeader extends StatelessWidget {
       child: Container(
         width: double.infinity,
         height: 180,
-        color: thriftyBlue,
+        color: Theme.of(context).accentColor,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[

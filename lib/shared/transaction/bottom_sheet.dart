@@ -54,6 +54,7 @@ class _TransactionBottomSheetState extends State<TransactionBottomSheet> {
       description = widget.transaction.description;
       _descriptionController.text = description;
       selectedCategory = widget.transaction.category;
+      isExpense = selectedCategory.type == 'expense';
     }
   }
 
@@ -109,6 +110,7 @@ class _TransactionBottomSheetState extends State<TransactionBottomSheet> {
                   decoration: InputDecoration(
                     prefixIcon: Icon(
                       isExpense ? Icons.remove : Icons.add,
+                      color: Theme.of(context).accentColor,
                     ),
                     labelText: 'Amount',
                   ),
@@ -231,69 +233,6 @@ class _TransactionBottomSheetState extends State<TransactionBottomSheet> {
       },
     );
   }
-
-  // StreamBuilder<List<Category>> buildCategorySelector() {
-  //   return StreamBuilder<List<Category>>(
-  //     stream: CategoryDatabaseService().categories,
-  //     builder: (context, snapshot) {
-  //       if (snapshot.hasData) {
-  //         var categories = snapshot.data
-  //             .where((x) => x.type == (isExpense ? 'expense' : 'income'))
-  //             .toList();
-  //         return Row(
-  //           mainAxisSize: MainAxisSize.min,
-  //           children: <Widget>[
-  //             (selectedCategory != null)
-  //                 ? Row(
-  //                     children: <Widget>[
-  //                       Container(
-  //                         width: 80,
-  //                         height: 80,
-  //                         child: CategorySelector(
-  //                           isSelected: false,
-  //                           category: selectedCategory,
-  //                         ),
-  //                         decoration: BoxDecoration(
-  //                           border: Border(
-  //                             right: BorderSide(
-  //                               width: 1,
-  //                               color: Colors.grey.withOpacity(0.5),
-  //                             ),
-  //                           ),
-  //                         ),
-  //                       ),
-  //                       SizedBox(width: 10),
-  //                     ],
-  //                   )
-  //                 : Container(),
-  //             Expanded(
-  //               child: Container(
-  //                 width: double.infinity,
-  //                 height: 80,
-  //                 child: ListView.builder(
-  //                   itemExtent: 90,
-  //                   shrinkWrap: true,
-  //                   itemCount: categories.length,
-  //                   scrollDirection: Axis.horizontal,
-  //                   physics: BouncingScrollPhysics(),
-  //                   itemBuilder: (context, index) {
-  //                     var x = categories[index];
-  //                     return CategorySelector(
-  //                       category: x,
-  //                       isSelected: x.name == selectedCategory?.name,
-  //                       onPressed: () => setState(() => selectedCategory = x),
-  //                     );
-  //                   },
-  //                 ),
-  //               ),
-  //             ),
-  //           ],
-  //         );
-  //       }
-  //       return CircularProgressIndicator();
-  //     },
-  //   );
-  // }
 
   Container buildTypeSelector() {
     return Container(

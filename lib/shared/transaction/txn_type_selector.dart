@@ -1,4 +1,3 @@
-import 'package:bethriftytoday/config/config.dart';
 import 'package:flutter/material.dart';
 
 class TransactionTypeSelector extends StatelessWidget {
@@ -23,10 +22,11 @@ class TransactionTypeSelector extends StatelessWidget {
           width: double.infinity,
           height: double.infinity,
           decoration: BoxDecoration(
-            color: isSelected ? thriftyBlue : Colors.transparent,
+            color:
+                isSelected ? Theme.of(context).accentColor : Colors.transparent,
             border: Border.all(
               width: 2,
-              color: thriftyBlue,
+              color: Theme.of(context).accentColor,
             ),
           ),
           child: Center(
@@ -34,7 +34,8 @@ class TransactionTypeSelector extends StatelessWidget {
               this.title.toUpperCase(),
               style: TextStyle(
                 fontSize: 15,
-                color: isSelected ? Colors.white : thriftyBlue,
+                color:
+                    isSelected ? Colors.white : Theme.of(context).accentColor,
                 fontWeight: FontWeight.bold,
               ),
             ),

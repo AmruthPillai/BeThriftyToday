@@ -23,8 +23,7 @@ class _SplashScreenState extends State<SplashScreen>
 
   @override
   void afterFirstLayout(BuildContext context) async {
-    updateStatusBarColor();
-
+    updateStatusBarColor(context);
     Future.delayed(Duration(seconds: 1), _checkIfUserIsLoggedIn);
   }
 
@@ -32,15 +31,17 @@ class _SplashScreenState extends State<SplashScreen>
     var settings = Provider.of<SettingsProvider>(context);
     SharedPreferences prefs = await SharedPreferences.getInstance();
     try {
+      settings.setAccentColor(Color(prefs.getInt('accentColor')));
       settings.setTheme(ThemeOptions.values[prefs.getInt('themePref')]);
+      settings.setBiometricsEnabled(prefs.getBool('biometricsEnabled'));
     } catch (_) {
+      settings.setAccentColor(thriftyBlue);
       settings.setTheme(
-        MediaQuery.of(context).platformBrightness == Brightness.dark
-            ? ThemeOptions.dark
-            : ThemeOptions.light,
-      );
+          MediaQuery.of(context).platformBrightness == Brightness.dark
+              ? ThemeOptions.dark
+              : ThemeOptions.light);
+      settings.setBiometricsEnabled(false);
     }
-    settings.setBiometricsEnabled(prefs.getBool('biometricsEnabled') ?? false);
   }
 
   _checkIfUserIsLoggedIn() async {
@@ -101,11 +102,10 @@ class _SplashScreenState extends State<SplashScreen>
     return Scaffold(
       key: _scaffoldKey,
       body: Container(
-        color: thriftyBlue,
+        color: Theme.of(context).accentColor,
         child: Center(
           child: ThriftyLogo(
             size: 100,
-            isLight: true,
           ),
         ),
       ),

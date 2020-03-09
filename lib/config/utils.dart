@@ -1,19 +1,18 @@
-import 'package:bethriftytoday/config/config.dart';
 import 'package:bethriftytoday/models/models.dart';
 import 'package:flutter/material.dart' hide Key;
 import 'package:flutter/services.dart';
 import 'package:package_info/package_info.dart';
 
-updateStatusBarColor() {
+updateStatusBarColor(BuildContext context) {
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-    statusBarColor: thriftyBlue,
+    statusBarColor: Theme.of(context).accentColor,
     statusBarBrightness: Brightness.dark,
     statusBarIconBrightness: Brightness.light,
   ));
 }
 
 String formatAmount(User user, double amount) {
-  return '${amount >= 0 ? '' : '- '}${user?.currency?.symbol} ${amount?.abs()?.ceil()}'
+  return '${amount >= 0 ? '' : '- '}${user?.currency?.symbol} ${amount?.abs()?.toStringAsFixed(2)}'
       .replaceAllMapped(
     new RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'),
     (Match m) => '${m[1]},',
@@ -31,6 +30,3 @@ Future<String> getVersionCode() async {
 
   return '$version ($buildNumber)';
 }
-
-bool isDarkMode(BuildContext context) =>
-    Theme.of(context).brightness == Brightness.dark;

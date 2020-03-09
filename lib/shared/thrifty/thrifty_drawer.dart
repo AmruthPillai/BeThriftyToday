@@ -1,5 +1,6 @@
 import 'package:bethriftytoday/config/config.dart';
 import 'package:bethriftytoday/models/models.dart';
+import 'package:bethriftytoday/screens/categories/categories.dart';
 import 'package:bethriftytoday/screens/screens.dart';
 import 'package:bethriftytoday/services/services.dart';
 import 'package:bethriftytoday/shared/shared.dart';
@@ -22,6 +23,15 @@ class ThriftyDrawer extends StatelessWidget {
               children: <Widget>[
                 DrawerHeader(user),
                 SizedBox(height: 10),
+                ListTile(
+                  onTap: () {
+                    Navigator.pop(context);
+                    Navigator.pushNamed(context, CategoriesScreen.routeName);
+                  },
+                  leading: Icon(Icons.category),
+                  title: Text('Categories'),
+                ),
+                Divider(),
                 ListTile(
                   onTap: () {
                     Navigator.pop(context);
@@ -70,7 +80,7 @@ class ThriftyDrawer extends StatelessWidget {
                   onTap: () {
                     Navigator.pop(context);
                     Share.share(
-                      'Check out this app that helps you manage your income and expenses, safe and secure: https://bethrifty.today/',
+                      'Check out this app that helps you manage your income and expenses, safe and secure: https://pillai.xyz/thrifty',
                       subject: 'Be Thrifty Today!',
                     );
                   },
@@ -79,11 +89,10 @@ class ThriftyDrawer extends StatelessWidget {
                 ),
                 ListTile(
                   onTap: () async {
+                    Navigator.pop(context);
                     var playStoreUrl =
                         'https://play.google.com/store/apps/details?id=today.bethrifty.app';
-                    if (await canLaunch(playStoreUrl)) {
-                      launch(playStoreUrl);
-                    }
+                    if (await canLaunch(playStoreUrl)) launch(playStoreUrl);
                   },
                   leading: Icon(Icons.rate_review),
                   title: Text('Rate the App'),

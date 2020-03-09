@@ -1,3 +1,4 @@
+import 'package:bethriftytoday/screens/categories/categories.dart';
 import 'package:bethriftytoday/screens/screens.dart';
 import 'package:flutter/material.dart';
 
@@ -13,5 +14,6 @@ Map<String, Widget Function(BuildContext)> routes = {
 
   // In-App
   HomeScreen.routeName: (context) => HomeScreen(),
+  CategoriesScreen.routeName: (context) => CategoriesScreen(),
   SettingsScreen.routeName: (context) => SettingsScreen(),
 };

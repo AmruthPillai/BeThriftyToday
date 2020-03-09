@@ -7,6 +7,10 @@ ThemeData theme = ThemeData(
   accentColor: Colors.white,
   brightness: Brightness.light,
   primaryColorBrightness: Brightness.light,
+  appBarTheme: AppBarTheme(
+    color: Colors.white,
+    brightness: Brightness.dark,
+  ),
   iconTheme: IconThemeData(
     color: thriftyBlue,
   ),
@@ -51,6 +55,10 @@ ThemeData darkTheme = ThemeData(
   accentColor: thriftyBlue,
   brightness: Brightness.dark,
   primaryColorBrightness: Brightness.dark,
+  appBarTheme: AppBarTheme(
+    color: Colors.white,
+    brightness: Brightness.dark,
+  ),
   iconTheme: IconThemeData(
     color: Colors.white,
   ),

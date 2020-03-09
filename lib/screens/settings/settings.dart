@@ -62,7 +62,7 @@ class SettingsScreen extends StatelessWidget {
         ),
       ),
       trailing: Text(
-        user.name,
+        user.name ?? '',
         textAlign: TextAlign.end,
         style: TextStyle(
           color: Colors.grey,
@@ -93,7 +93,7 @@ class SettingsScreen extends StatelessWidget {
         ),
       ),
       trailing: Text(
-        user.email,
+        user.email ?? '',
         textAlign: TextAlign.end,
         style: TextStyle(
           color: Colors.grey,
@@ -115,7 +115,7 @@ class SettingsScreen extends StatelessWidget {
         ),
       ),
       trailing: Text(
-        '${user.currency.symbol} (${user.currency.name})',
+        '${user?.currency?.symbol} (${user?.currency?.name})' ?? '',
         textAlign: TextAlign.end,
         style: TextStyle(
           color: Colors.grey,

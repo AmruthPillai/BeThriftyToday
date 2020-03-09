@@ -20,11 +20,11 @@ class _HomeScreenState extends State<HomeScreen> {
     final _scaffoldKey = GlobalKey<ScaffoldState>();
     var user = Provider.of<User>(context);
 
-    _firebaseMessaging.getToken().then((token) {
-      UserDatabaseService(user).updateUserPushToken(token);
-    });
-
     if (user != null) {
+      _firebaseMessaging.getToken().then((token) {
+        UserDatabaseService(user).updateUserPushToken(token);
+      });
+
       return MultiProvider(
         providers: [
           StreamProvider<User>.value(

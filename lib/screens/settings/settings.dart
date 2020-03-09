@@ -295,6 +295,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   ListTile buildAccentColorSelector(SettingsProvider settings) {
     List<Color> colorOptions = [
       Color(0xFF1B54A9),
+      Colors.black,
       Colors.red[800],
       Colors.pink[600],
       Colors.teal[600],

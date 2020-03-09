@@ -35,14 +35,6 @@ class ThriftyDrawer extends StatelessWidget {
                 ListTile(
                   onTap: () {
                     Navigator.pop(context);
-                    Navigator.pushNamed(context, SettingsScreen.routeName);
-                  },
-                  leading: Icon(Icons.settings),
-                  title: Text('Settings'),
-                ),
-                ListTile(
-                  onTap: () {
-                    Navigator.pop(context);
                     showModalBottomSheet(
                       context: context,
                       isScrollControlled: true,
@@ -51,6 +43,14 @@ class ThriftyDrawer extends StatelessWidget {
                   },
                   leading: Icon(Icons.import_export),
                   title: Text('Export to CSV/JSON'),
+                ),
+                ListTile(
+                  onTap: () {
+                    Navigator.pop(context);
+                    Navigator.pushNamed(context, SettingsScreen.routeName);
+                  },
+                  leading: Icon(Icons.settings),
+                  title: Text('Settings'),
                 ),
                 Divider(),
                 ListTile(

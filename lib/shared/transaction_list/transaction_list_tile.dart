@@ -40,7 +40,7 @@ class TransactionListTile extends StatelessWidget {
             decoration: BoxDecoration(
               border: Border(
                 bottom: BorderSide(
-                  color: Colors.grey[200],
+                  color: Colors.grey.withOpacity(0.15),
                 ),
               ),
             ),

@@ -20,9 +20,13 @@ class _BottomSectionState extends State<BottomSection> {
         Container(
           width: MediaQuery.of(context).size.width * 0.8,
           child: Text(
-            'A simple and secure money manager that keeps you financially vigilant.',
+            'Be Thrifty Today is a simple and secure money management app that helps you track your incomes and expenses.',
             textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 16),
+            style: TextStyle(
+              height: 1.6,
+              fontSize: 16,
+              fontWeight: FontWeight.w500,
+            ),
           ),
         ),
         Spacer(flex: 2),
@@ -50,7 +54,10 @@ class _BottomSectionState extends State<BottomSection> {
           child: FlatButton(
             onPressed: () => signIn(true),
             padding: const EdgeInsets.symmetric(vertical: 15),
-            child: Text('Login as Guest'),
+            child: Text(
+              'Login as Guest',
+              style: TextStyle(fontSize: 16),
+            ),
           ),
         ),
         Spacer(flex: 2),

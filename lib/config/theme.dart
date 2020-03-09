@@ -7,6 +7,8 @@ ThemeData theme = ThemeData(
   accentColor: thriftyBlue,
   brightness: Brightness.light,
   primaryColorBrightness: Brightness.light,
+  scaffoldBackgroundColor: Color(0xFFFFFFFF),
+  backgroundColor: Color(0xFFFFFFFF),
   appBarTheme: AppBarTheme(
     color: Colors.white,
     brightness: Brightness.dark,
@@ -60,6 +62,9 @@ ThemeData darkTheme = ThemeData(
   primaryColor: Colors.grey[800],
   accentColor: thriftyBlue,
   brightness: Brightness.dark,
+  primaryColorBrightness: Brightness.dark,
+  scaffoldBackgroundColor: Color(0xFF202020),
+  backgroundColor: Color(0xFF202020),
   appBarTheme: AppBarTheme(
     color: Colors.white,
     brightness: Brightness.dark,

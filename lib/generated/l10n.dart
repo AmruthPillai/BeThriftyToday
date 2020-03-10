@@ -218,24 +218,6 @@ class S {
     );
   }
 
-  String get exportBottomSheetDropdownTextCSV {
-    return Intl.message(
-      'Comma-Separated Values (CSV)',
-      name: 'exportBottomSheetDropdownTextCSV',
-      desc: '',
-      args: [],
-    );
-  }
-
-  String get exportBottomSheetDropdownTextJSON {
-    return Intl.message(
-      'JavaScript Object Notation (JSON)',
-      name: 'exportBottomSheetDropdownTextJSON',
-      desc: '',
-      args: [],
-    );
-  }
-
   String get exportBottomSheetHeadingText {
     return Intl.message(
       'Export as CSV/JSON',
@@ -748,7 +730,7 @@ class AppLocalizationDelegate extends LocalizationsDelegate<S> {
 
   List<Locale> get supportedLocales {
     return const <Locale>[
-      Locale('en', ''),
+      Locale('es', ''), Locale('en', ''),
     ];
   }
 

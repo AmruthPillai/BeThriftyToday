@@ -50,8 +50,6 @@ class MessageLookup extends MessageLookupByLibrary {
     "deleteAccountDialogTitle" : MessageLookupByLibrary.simpleMessage("Do you really want to delete your account?"),
     "exportBottomSheetButtonTextDownload" : MessageLookupByLibrary.simpleMessage("DOWNLOAD"),
     "exportBottomSheetButtonTextExport" : MessageLookupByLibrary.simpleMessage("EXPORT"),
-    "exportBottomSheetDropdownTextCSV" : MessageLookupByLibrary.simpleMessage("Comma-Separated Values (CSV)"),
-    "exportBottomSheetDropdownTextJSON" : MessageLookupByLibrary.simpleMessage("JavaScript Object Notation (JSON)"),
     "exportBottomSheetHeadingText" : MessageLookupByLibrary.simpleMessage("Export as CSV/JSON"),
     "exportBottomSheetLabelTextEndDate" : MessageLookupByLibrary.simpleMessage("End Date"),
     "exportBottomSheetLabelTextStartDate" : MessageLookupByLibrary.simpleMessage("Start Date"),

@@ -110,11 +110,11 @@ class _ExportDialogState extends State<ExportDialog> {
             items: [
               DropdownMenuItem(
                 value: 'csv',
-                child: Text(S.of(context).exportBottomSheetDropdownTextCSV),
+                child: Text('Comma Separated Values (CSV)'),
               ),
               DropdownMenuItem(
                 value: 'json',
-                child: Text(S.of(context).exportBottomSheetDropdownTextJSON),
+                child: Text('JavaScript Object Notation (JSON)'),
               ),
             ],
           ),

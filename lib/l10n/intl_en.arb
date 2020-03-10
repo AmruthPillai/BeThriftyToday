@@ -21,8 +21,6 @@
   "deleteAccountDialogTitle": "Do you really want to delete your account?",
   "exportBottomSheetButtonTextDownload": "DOWNLOAD",
   "exportBottomSheetButtonTextExport": "EXPORT",
-  "exportBottomSheetDropdownTextCSV": "Comma-Separated Values (CSV)",
-  "exportBottomSheetDropdownTextJSON": "JavaScript Object Notation (JSON)",
   "exportBottomSheetHeadingText": "Export as CSV/JSON",
   "exportBottomSheetLabelTextEndDate": "End Date",
   "exportBottomSheetLabelTextStartDate": "Start Date",

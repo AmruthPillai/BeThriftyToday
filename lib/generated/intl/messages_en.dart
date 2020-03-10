@@ -19,13 +19,28 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
+  static m2(type) => "Add New ${type} Category";
+
   static m0(category) => "${Intl.select(category, {'Automobile': 'Automobile', 'Awards': 'Awards', 'BabyCare': 'Baby Care', 'Bonus': 'Bonus', 'Books': 'Books', 'Charity': 'Charity', 'Clothing': 'Clothing', 'Drinks': 'Drinks', 'Education': 'Education', 'Electronics': 'Electronics', 'Entertainment': 'Entertainment', 'Food': 'Food', 'Freelance': 'Freelance', 'FriendsFamily': 'Friends & Family', 'Gifts': 'Gifts', 'Grants': 'Grants', 'Groceries': 'Groceries', 'Health': 'Health', 'Hobbies': 'Hobbies', 'Insurance': 'Insurance', 'Interest': 'Interest', 'Investments': 'Investments', 'Laundry': 'Laundry', 'Lottery': 'Lottery', 'Mobile': 'Mobile', 'Office': 'Office', 'Others': 'Others', 'Pets': 'Pets', 'Refunds': 'Refunds', 'Rent': 'Rent', 'Salary': 'Salary', 'Sale': 'Sale', 'SalonSpa': 'Salon & Spa', 'Shopping': 'Shopping', 'Tax': 'Tax', 'Transportation': 'Transportation', 'Travel': 'Travel', 'Utilities': 'Utilities', 'other': '${category}', })}";
 
   static m1(symbol, spendAmount, budgetAmount, monthYear) => "You have spent ${symbol} ${spendAmount} of your total budget of ${symbol} ${budgetAmount} in the month of ${monthYear}.";
 
+  static m3(howMany) => "${Intl.plural(howMany, one: '1 transaction hidden', other: '${howMany} transactions hidden')}";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function> {
+    "addCategoryBottomSheetButtonTextAdd" : MessageLookupByLibrary.simpleMessage("ADD"),
+    "addCategoryBottomSheetButtonTextCancel" : MessageLookupByLibrary.simpleMessage("CANCEL"),
+    "addCategoryBottomSheetHeadingText" : m2,
+    "addCategoryBottomSheetLabelTextCategoryName" : MessageLookupByLibrary.simpleMessage("Category Name"),
     "appName" : MessageLookupByLibrary.simpleMessage("Be Thrifty Today"),
+    "categoriesScreenAppBarTitle" : MessageLookupByLibrary.simpleMessage("Categories"),
+    "categoriesScreenButtonTextAddNew" : MessageLookupByLibrary.simpleMessage("Add New"),
+    "categoriesScreenSnackbarTextDeleteMessage" : MessageLookupByLibrary.simpleMessage("The category has been successfully deleted"),
+    "categoriesScreenSnackbarTextResetCategoriesConfirmation" : MessageLookupByLibrary.simpleMessage("Are you sure you want to reset all categories to the original?"),
+    "categoriesScreenSnackbarTextResetCategoriesSuccess" : MessageLookupByLibrary.simpleMessage("All categories have been reset successfully"),
+    "categoriesScreenTabBarTextExpense" : MessageLookupByLibrary.simpleMessage("Expense"),
+    "categoriesScreenTabBarTextIncome" : MessageLookupByLibrary.simpleMessage("Income"),
     "categoryName" : m0,
     "currencySetupTextHeadline" : MessageLookupByLibrary.simpleMessage("What\'s your currency?"),
     "homeDailyNoTransactionsTextSubtitle" : MessageLookupByLibrary.simpleMessage("Tap on the + button below to add a new income/expense."),
@@ -59,6 +74,11 @@ class MessageLookup extends MessageLookupByLibrary {
     "transactionBottomSheetLabelTextDate" : MessageLookupByLibrary.simpleMessage("Date"),
     "transactionBottomSheetLabelTextDescription" : MessageLookupByLibrary.simpleMessage("Description (optional)"),
     "transactionBottomSheetTextHeadingAdd" : MessageLookupByLibrary.simpleMessage("Add New Transaction"),
-    "transactionBottomSheetTextHeadingUpdate" : MessageLookupByLibrary.simpleMessage("Update Transaction")
+    "transactionBottomSheetTextHeadingUpdate" : MessageLookupByLibrary.simpleMessage("Update Transaction"),
+    "transactionListHiddenTransactionText" : m3,
+    "updateBudgetBottomSheetButtonTextClear" : MessageLookupByLibrary.simpleMessage("CLEAR"),
+    "updateBudgetBottomSheetButtonTextSetBudget" : MessageLookupByLibrary.simpleMessage("SET BUDGET"),
+    "updateBudgetBottomSheetHeadingText" : MessageLookupByLibrary.simpleMessage("Please enter a monthly budget that you feel is conservative according to your spending habits."),
+    "updateBudgetBottomSheetLabelTextBudget" : MessageLookupByLibrary.simpleMessage("Budget")
   };
 }

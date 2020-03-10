@@ -1,4 +1,5 @@
 import 'package:bethriftytoday/config/config.dart';
+import 'package:bethriftytoday/generated/l10n.dart';
 import 'package:bethriftytoday/models/models.dart';
 import 'package:bethriftytoday/services/category.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +18,7 @@ class _AddCategoryDialogState extends State<AddCategoryDialog> {
   String _selectedIcon;
   TextEditingController _nameController = TextEditingController();
 
-  final List<String> customIcons = [
+  final List<String> icons = [
     'custom/custom_blue.png',
     'custom/custom_brown.png',
     'custom/custom_green.png',
@@ -27,6 +28,48 @@ class _AddCategoryDialogState extends State<AddCategoryDialog> {
     'custom/custom_red.png',
     'custom/custom_teal.png',
     'custom/custom_yellow.png',
+    'income/awards.png',
+    'income/bonus.png',
+    'income/freelance.png',
+    'income/friends.png',
+    'income/grants.png',
+    'income/interest.png',
+    'income/investments.png',
+    'income/lottery.png',
+    'income/others.png',
+    'income/refunds.png',
+    'income/rent.png',
+    'income/salary.png',
+    'income/sale.png',
+    'expense/automobile.png',
+    'expense/baby.png',
+    'expense/books.png',
+    'expense/charity.png',
+    'expense/clothing.png',
+    'expense/drinks.png',
+    'expense/education.png',
+    'expense/electronics.png',
+    'expense/entertainment.png',
+    'expense/food.png',
+    'expense/friends.png',
+    'expense/gifts.png',
+    'expense/groceries.png',
+    'expense/health.png',
+    'expense/hobbies.png',
+    'expense/insurance.png',
+    'expense/investments.png',
+    'expense/laundry.png',
+    'expense/mobile.png',
+    'expense/office.png',
+    'expense/others.png',
+    'expense/pets.png',
+    'expense/rent.png',
+    'expense/salon.png',
+    'expense/shopping.png',
+    'expense/tax.png',
+    'expense/transportation.png',
+    'expense/travel.png',
+    'expense/utilities.png',
   ];
 
   @override
@@ -42,7 +85,8 @@ class _AddCategoryDialogState extends State<AddCategoryDialog> {
         shrinkWrap: true,
         children: <Widget>[
           Text(
-            'Add a New ${widget.type[0].toUpperCase()}${widget.type.substring(1)} Category',
+            S.of(context).addCategoryBottomSheetHeadingText(
+                '${widget.type[0].toUpperCase()}${widget.type.substring(1)}'),
             textAlign: TextAlign.center,
             style: TextStyle(
               fontWeight: FontWeight.w500,
@@ -63,7 +107,7 @@ class _AddCategoryDialogState extends State<AddCategoryDialog> {
                               ),
                             ),
                           ),
-                          child: CustomCategoryIcon(
+                          child: CategoryIcon(
                             icon: _selectedIcon,
                           ),
                         ),
@@ -77,14 +121,14 @@ class _AddCategoryDialogState extends State<AddCategoryDialog> {
                   child: ListView.builder(
                     shrinkWrap: true,
                     scrollDirection: Axis.horizontal,
-                    itemCount: customIcons.length,
+                    itemCount: icons.length,
                     itemBuilder: (context, index) {
-                      return CustomCategoryIcon(
+                      return CategoryIcon(
                         onTap: () {
-                          setState(() => _selectedIcon = customIcons[index]);
+                          setState(() => _selectedIcon = icons[index]);
                         },
-                        isSelected: _selectedIcon == customIcons[index],
-                        icon: customIcons[index],
+                        isSelected: _selectedIcon == icons[index],
+                        icon: icons[index],
                       );
                     },
                   ),
@@ -96,7 +140,8 @@ class _AddCategoryDialogState extends State<AddCategoryDialog> {
           TextField(
             controller: _nameController,
             decoration: InputDecoration(
-              labelText: 'Category Name',
+              labelText:
+                  S.of(context).addCategoryBottomSheetLabelTextCategoryName,
             ),
           ),
           SizedBox(height: 15),
@@ -109,7 +154,9 @@ class _AddCategoryDialogState extends State<AddCategoryDialog> {
                 },
                 textColor: Colors.red[600],
                 icon: Icon(Icons.clear),
-                label: Text('Cancel'),
+                label: Text(
+                  S.of(context).addCategoryBottomSheetButtonTextCancel,
+                ),
               ),
               FlatButton.icon(
                 onPressed: () {
@@ -125,7 +172,9 @@ class _AddCategoryDialogState extends State<AddCategoryDialog> {
                 },
                 textColor: Theme.of(context).accentColor,
                 icon: Icon(Icons.check),
-                label: Text('Add'),
+                label: Text(
+                  S.of(context).addCategoryBottomSheetButtonTextAdd,
+                ),
               ),
             ],
           ),
@@ -135,12 +184,12 @@ class _AddCategoryDialogState extends State<AddCategoryDialog> {
   }
 }
 
-class CustomCategoryIcon extends StatelessWidget {
+class CategoryIcon extends StatelessWidget {
   final Function onTap;
   final bool isSelected;
   final String icon;
 
-  const CustomCategoryIcon({
+  const CategoryIcon({
     Key key,
     this.onTap,
     this.isSelected = false,
@@ -151,26 +200,29 @@ class CustomCategoryIcon extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: this.onTap,
-      child: Stack(
-        children: <Widget>[
-          isSelected
-              ? Align(
-                  alignment: Alignment.center,
-                  child: Container(
-                    width: 80,
-                    color: thriftyBlue.withOpacity(0.2),
-                  ),
-                )
-              : Container(),
-          Container(
-            width: 80,
-            height: 80,
-            padding: const EdgeInsets.all(8),
-            child: Image.asset(
-              'assets/categories/$icon',
+      child: Container(
+        width: 80,
+        height: 80,
+        child: Stack(
+          children: <Widget>[
+            isSelected
+                ? Center(
+                    child: Container(
+                      width: 80,
+                      color: thriftyBlue.withOpacity(0.2),
+                    ),
+                  )
+                : Container(),
+            Center(
+              child: Container(
+                width: 60,
+                height: 60,
+                padding: const EdgeInsets.all(8),
+                child: Image.asset('assets/categories/$icon'),
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

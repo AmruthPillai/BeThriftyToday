@@ -1,6 +1,17 @@
 {
   "@@locale": "en",
+  "addCategoryBottomSheetButtonTextAdd": "ADD",
+  "addCategoryBottomSheetButtonTextCancel": "CANCEL",
+  "addCategoryBottomSheetHeadingText": "Add New {type} Category",
+  "addCategoryBottomSheetLabelTextCategoryName": "Category Name",
   "appName": "Be Thrifty Today",
+  "categoriesScreenAppBarTitle": "Categories",
+  "categoriesScreenButtonTextAddNew": "Add New",
+  "categoriesScreenSnackbarTextDeleteMessage": "The category has been successfully deleted",
+  "categoriesScreenSnackbarTextResetCategoriesConfirmation": "Are you sure you want to reset all categories to the original?",
+  "categoriesScreenSnackbarTextResetCategoriesSuccess": "All categories have been reset successfully",
+  "categoriesScreenTabBarTextExpense": "Expense",
+  "categoriesScreenTabBarTextIncome": "Income",
   "categoryName": "{category, select, Automobile {Automobile} Awards {Awards} BabyCare {Baby Care} Bonus {Bonus} Books {Books} Charity {Charity} Clothing {Clothing} Drinks {Drinks} Education {Education} Electronics {Electronics} Entertainment {Entertainment} Food {Food} Freelance {Freelance} FriendsFamily {Friends & Family} Gifts {Gifts} Grants {Grants} Groceries {Groceries} Health {Health} Hobbies {Hobbies} Insurance {Insurance} Interest {Interest} Investments {Investments} Laundry {Laundry} Lottery {Lottery} Mobile {Mobile} Office {Office} Others {Others} Pets {Pets} Refunds {Refunds} Rent {Rent} Salary {Salary} Sale {Sale} SalonSpa {Salon & Spa} Shopping {Shopping} Tax {Tax} Transportation {Transportation} Travel {Travel} Utilities {Utilities} other {{category}}}",
   "currencySetupTextHeadline": "What's your currency?",
   "homeDailyNoTransactionsTextSubtitle": "Tap on the + button below to add a new income/expense.",
@@ -34,5 +45,10 @@
   "transactionBottomSheetLabelTextDate": "Date",
   "transactionBottomSheetLabelTextDescription": "Description (optional)",
   "transactionBottomSheetTextHeadingAdd": "Add New Transaction",
-  "transactionBottomSheetTextHeadingUpdate": "Update Transaction"
+  "transactionBottomSheetTextHeadingUpdate": "Update Transaction",
+  "transactionListHiddenTransactionText": "{howMany, plural, one {1 transaction hidden} other {{howMany} transactions hidden}}",
+  "updateBudgetBottomSheetButtonTextClear": "CLEAR",
+  "updateBudgetBottomSheetButtonTextSetBudget": "SET BUDGET",
+  "updateBudgetBottomSheetHeadingText": "Please enter a monthly budget that you feel is conservative according to your spending habits.",
+  "updateBudgetBottomSheetLabelTextBudget": "Budget"
 }

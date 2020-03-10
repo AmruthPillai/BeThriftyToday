@@ -29,10 +29,109 @@ class S {
 
   final String localeName;
 
+  String get addCategoryBottomSheetButtonTextAdd {
+    return Intl.message(
+      'ADD',
+      name: 'addCategoryBottomSheetButtonTextAdd',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get addCategoryBottomSheetButtonTextCancel {
+    return Intl.message(
+      'CANCEL',
+      name: 'addCategoryBottomSheetButtonTextCancel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String addCategoryBottomSheetHeadingText(dynamic type) {
+    return Intl.message(
+      'Add New $type Category',
+      name: 'addCategoryBottomSheetHeadingText',
+      desc: '',
+      args: [type],
+    );
+  }
+
+  String get addCategoryBottomSheetLabelTextCategoryName {
+    return Intl.message(
+      'Category Name',
+      name: 'addCategoryBottomSheetLabelTextCategoryName',
+      desc: '',
+      args: [],
+    );
+  }
+
   String get appName {
     return Intl.message(
       'Be Thrifty Today',
       name: 'appName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get categoriesScreenAppBarTitle {
+    return Intl.message(
+      'Categories',
+      name: 'categoriesScreenAppBarTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get categoriesScreenButtonTextAddNew {
+    return Intl.message(
+      'Add New',
+      name: 'categoriesScreenButtonTextAddNew',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get categoriesScreenSnackbarTextDeleteMessage {
+    return Intl.message(
+      'The category has been successfully deleted',
+      name: 'categoriesScreenSnackbarTextDeleteMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get categoriesScreenSnackbarTextResetCategoriesConfirmation {
+    return Intl.message(
+      'Are you sure you want to reset all categories to the original?',
+      name: 'categoriesScreenSnackbarTextResetCategoriesConfirmation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get categoriesScreenSnackbarTextResetCategoriesSuccess {
+    return Intl.message(
+      'All categories have been reset successfully',
+      name: 'categoriesScreenSnackbarTextResetCategoriesSuccess',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get categoriesScreenTabBarTextExpense {
+    return Intl.message(
+      'Expense',
+      name: 'categoriesScreenTabBarTextExpense',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get categoriesScreenTabBarTextIncome {
+    return Intl.message(
+      'Income',
+      name: 'categoriesScreenTabBarTextIncome',
       desc: '',
       args: [],
     );
@@ -339,6 +438,53 @@ class S {
     return Intl.message(
       'Update Transaction',
       name: 'transactionBottomSheetTextHeadingUpdate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String transactionListHiddenTransactionText(dynamic howMany) {
+    return Intl.plural(
+      howMany,
+      one: '1 transaction hidden',
+      other: '$howMany transactions hidden',
+      name: 'transactionListHiddenTransactionText',
+      desc: '',
+      args: [howMany],
+    );
+  }
+
+  String get updateBudgetBottomSheetButtonTextClear {
+    return Intl.message(
+      'CLEAR',
+      name: 'updateBudgetBottomSheetButtonTextClear',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get updateBudgetBottomSheetButtonTextSetBudget {
+    return Intl.message(
+      'SET BUDGET',
+      name: 'updateBudgetBottomSheetButtonTextSetBudget',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get updateBudgetBottomSheetHeadingText {
+    return Intl.message(
+      'Please enter a monthly budget that you feel is conservative according to your spending habits.',
+      name: 'updateBudgetBottomSheetHeadingText',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get updateBudgetBottomSheetLabelTextBudget {
+    return Intl.message(
+      'Budget',
+      name: 'updateBudgetBottomSheetLabelTextBudget',
       desc: '',
       args: [],
     );

@@ -7,5 +7,6 @@
   "profileSetupButtonTextNext": "ಮುಂದುವರಿಸಿ",
   "profileSetupLabelTextEmailAddress": "ಇಮೇಲ್ ವಿಳಾಸ",
   "profileSetupLabelTextFullName": "ಪೂರ್ಣ ಹೆಸರು",
-  "profileSetupTextHeadline": "ನೀವು ಯಾರು?"
+  "profileSetupTextHeadline": "ನೀವು ಯಾರು?",
+  "categoryName": "{category, select, Automobile {Automobile}}"
 }

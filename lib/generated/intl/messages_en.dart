@@ -19,11 +19,14 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
-  static m0(symbol, spendAmount, budgetAmount, monthYear) => "You have spent ${symbol} ${spendAmount} of your total budget of ${symbol} ${budgetAmount} in the month of ${monthYear}.";
+  static m0(category) => "${Intl.select(category, {'Automobile': 'Automobile', 'Awards': 'Awards', 'BabyCare': 'Baby Care', 'Bonus': 'Bonus', 'Books': 'Books', 'Charity': 'Charity', 'Clothing': 'Clothing', 'Drinks': 'Drinks', 'Education': 'Education', 'Electronics': 'Electronics', 'Entertainment': 'Entertainment', 'Food': 'Food', 'Freelance': 'Freelance', 'FriendsFamily': 'Friends & Family', 'Gifts': 'Gifts', 'Grants': 'Grants', 'Groceries': 'Groceries', 'Health': 'Health', 'Hobbies': 'Hobbies', 'Insurance': 'Insurance', 'Interest': 'Interest', 'Investments': 'Investments', 'Laundry': 'Laundry', 'Lottery': 'Lottery', 'Mobile': 'Mobile', 'Office': 'Office', 'Others': 'Others', 'Pets': 'Pets', 'Refunds': 'Refunds', 'Rent': 'Rent', 'Salary': 'Salary', 'Sale': 'Sale', 'SalonSpa': 'Salon & Spa', 'Shopping': 'Shopping', 'Tax': 'Tax', 'Transportation': 'Transportation', 'Travel': 'Travel', 'Utilities': 'Utilities', 'other': '${category}', })}";
+
+  static m1(symbol, spendAmount, budgetAmount, monthYear) => "You have spent ${symbol} ${spendAmount} of your total budget of ${symbol} ${budgetAmount} in the month of ${monthYear}.";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function> {
     "appName" : MessageLookupByLibrary.simpleMessage("Be Thrifty Today"),
+    "categoryName" : m0,
     "currencySetupTextHeadline" : MessageLookupByLibrary.simpleMessage("What\'s your currency?"),
     "homeDailyNoTransactionsTextSubtitle" : MessageLookupByLibrary.simpleMessage("Tap on the + button below to add a new income/expense."),
     "homeDailyNoTransactionsTextTitle" : MessageLookupByLibrary.simpleMessage("This list is looking a little bit empty..."),
@@ -46,7 +49,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "thriftyDrawerTextSettings" : MessageLookupByLibrary.simpleMessage("Settings"),
     "thriftyDrawerTextShare" : MessageLookupByLibrary.simpleMessage("Spread the Love"),
     "thriftyOverviewTextBalanceHeading" : MessageLookupByLibrary.simpleMessage("YOUR BALANCE"),
-    "thriftyOverviewTextBudgetSet" : m0,
+    "thriftyOverviewTextBudgetSet" : m1,
     "thriftyOverviewTextBudgetUnset" : MessageLookupByLibrary.simpleMessage("Tap here to set a monthly budget and manage your expenses efficiently."),
     "transactionBottomSheetButtonTextAdd" : MessageLookupByLibrary.simpleMessage("ADD"),
     "transactionBottomSheetButtonTextExpense" : MessageLookupByLibrary.simpleMessage("Expense"),

@@ -49,7 +49,7 @@ class _MyAppState extends State<MyApp> {
         child: Consumer<SettingsProvider>(
           builder: (context, settings, _) => MaterialApp(
             debugShowCheckedModeBanner: false,
-            locale: Locale('kn'),
+            locale: Locale('en'),
             supportedLocales: S.delegate.supportedLocales,
             localizationsDelegates: [
               S.delegate,

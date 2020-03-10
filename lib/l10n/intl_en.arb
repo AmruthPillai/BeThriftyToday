@@ -1,6 +1,7 @@
 {
   "@@locale": "en",
   "appName": "Be Thrifty Today",
+  "categoryName": "{category, select, Automobile {Automobile} Awards {Awards} BabyCare {Baby Care} Bonus {Bonus} Books {Books} Charity {Charity} Clothing {Clothing} Drinks {Drinks} Education {Education} Electronics {Electronics} Entertainment {Entertainment} Food {Food} Freelance {Freelance} FriendsFamily {Friends & Family} Gifts {Gifts} Grants {Grants} Groceries {Groceries} Health {Health} Hobbies {Hobbies} Insurance {Insurance} Interest {Interest} Investments {Investments} Laundry {Laundry} Lottery {Lottery} Mobile {Mobile} Office {Office} Others {Others} Pets {Pets} Refunds {Refunds} Rent {Rent} Salary {Salary} Sale {Sale} SalonSpa {Salon & Spa} Shopping {Shopping} Tax {Tax} Transportation {Transportation} Travel {Travel} Utilities {Utilities} other {{category}}}",
   "currencySetupTextHeadline": "What's your currency?",
   "homeDailyNoTransactionsTextSubtitle": "Tap on the + button below to add a new income/expense.",
   "homeDailyNoTransactionsTextTitle": "This list is looking a little bit empty...",
@@ -25,13 +26,13 @@
   "thriftyOverviewTextBalanceHeading": "YOUR BALANCE",
   "thriftyOverviewTextBudgetSet": "You have spent {symbol} {spendAmount} of your total budget of {symbol} {budgetAmount} in the month of {monthYear}.",
   "thriftyOverviewTextBudgetUnset": "Tap here to set a monthly budget and manage your expenses efficiently.",
+  "transactionBottomSheetButtonTextAdd": "ADD",
   "transactionBottomSheetButtonTextExpense": "Expense",
   "transactionBottomSheetButtonTextIncome": "Income",
-  "transactionBottomSheetTextHeadingAdd": "Add New Transaction",
-  "transactionBottomSheetTextHeadingUpdate": "Update Transaction",
-  "transactionBottomSheetLabelTextDescription": "Description (optional)",
+  "transactionBottomSheetButtonTextUpdate": "UPDATE",
   "transactionBottomSheetLabelTextAmount": "Amount",
   "transactionBottomSheetLabelTextDate": "Date",
-  "transactionBottomSheetButtonTextAdd": "ADD",
-  "transactionBottomSheetButtonTextUpdate": "UPDATE"
+  "transactionBottomSheetLabelTextDescription": "Description (optional)",
+  "transactionBottomSheetTextHeadingAdd": "Add New Transaction",
+  "transactionBottomSheetTextHeadingUpdate": "Update Transaction"
 }

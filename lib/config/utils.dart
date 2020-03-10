@@ -23,6 +23,10 @@ double calculateAbsoluteSum(List<Transaction> transactions) {
   return transactions.fold<double>(0, (value, txn) => value + txn.amount).abs();
 }
 
+String transformCategoryToKey(Category category) {
+  return category.name.replaceAll(new RegExp(r'[& ]'), '');
+}
+
 Future<String> getVersionCode() async {
   PackageInfo packageInfo = await PackageInfo.fromPlatform();
   String version = packageInfo.version;

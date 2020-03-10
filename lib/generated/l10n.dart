@@ -38,6 +38,15 @@ class S {
     );
   }
 
+  String categoryName(dynamic category) {
+    return Intl.message(
+      '{category, select, Automobile {Automobile} Awards {Awards} BabyCare {Baby Care} Bonus {Bonus} Books {Books} Charity {Charity} Clothing {Clothing} Drinks {Drinks} Education {Education} Electronics {Electronics} Entertainment {Entertainment} Food {Food} Freelance {Freelance} FriendsFamily {Friends & Family} Gifts {Gifts} Grants {Grants} Groceries {Groceries} Health {Health} Hobbies {Hobbies} Insurance {Insurance} Interest {Interest} Investments {Investments} Laundry {Laundry} Lottery {Lottery} Mobile {Mobile} Office {Office} Others {Others} Pets {Pets} Refunds {Refunds} Rent {Rent} Salary {Salary} Sale {Sale} SalonSpa {Salon & Spa} Shopping {Shopping} Tax {Tax} Transportation {Transportation} Travel {Travel} Utilities {Utilities} other {{category}}}',
+      name: 'categoryName',
+      desc: '',
+      args: [category],
+    );
+  }
+
   String get currencySetupTextHeadline {
     return Intl.message(
       'What\'s your currency?',
@@ -254,6 +263,15 @@ class S {
     );
   }
 
+  String get transactionBottomSheetButtonTextAdd {
+    return Intl.message(
+      'ADD',
+      name: 'transactionBottomSheetButtonTextAdd',
+      desc: '',
+      args: [],
+    );
+  }
+
   String get transactionBottomSheetButtonTextExpense {
     return Intl.message(
       'Expense',
@@ -272,28 +290,10 @@ class S {
     );
   }
 
-  String get transactionBottomSheetTextHeadingAdd {
+  String get transactionBottomSheetButtonTextUpdate {
     return Intl.message(
-      'Add New Transaction',
-      name: 'transactionBottomSheetTextHeadingAdd',
-      desc: '',
-      args: [],
-    );
-  }
-
-  String get transactionBottomSheetTextHeadingUpdate {
-    return Intl.message(
-      'Update Transaction',
-      name: 'transactionBottomSheetTextHeadingUpdate',
-      desc: '',
-      args: [],
-    );
-  }
-
-  String get transactionBottomSheetLabelTextDescription {
-    return Intl.message(
-      'Description (optional)',
-      name: 'transactionBottomSheetLabelTextDescription',
+      'UPDATE',
+      name: 'transactionBottomSheetButtonTextUpdate',
       desc: '',
       args: [],
     );
@@ -317,19 +317,28 @@ class S {
     );
   }
 
-  String get transactionBottomSheetButtonTextAdd {
+  String get transactionBottomSheetLabelTextDescription {
     return Intl.message(
-      'ADD',
-      name: 'transactionBottomSheetButtonTextAdd',
+      'Description (optional)',
+      name: 'transactionBottomSheetLabelTextDescription',
       desc: '',
       args: [],
     );
   }
 
-  String get transactionBottomSheetButtonTextUpdate {
+  String get transactionBottomSheetTextHeadingAdd {
     return Intl.message(
-      'UPDATE',
-      name: 'transactionBottomSheetButtonTextUpdate',
+      'Add New Transaction',
+      name: 'transactionBottomSheetTextHeadingAdd',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get transactionBottomSheetTextHeadingUpdate {
+    return Intl.message(
+      'Update Transaction',
+      name: 'transactionBottomSheetTextHeadingUpdate',
       desc: '',
       args: [],
     );

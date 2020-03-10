@@ -19,8 +19,11 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'kn';
 
+  static m0(category) => "${Intl.select(category, {'Automobile': 'Automobile', })}";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function> {
+    "categoryName" : m0,
     "currencySetupTextHeadline" : MessageLookupByLibrary.simpleMessage("ನಿಮ್ಮ ಕರೆನ್ಸಿ ಏನು?"),
     "loginButtonTextGoogle" : MessageLookupByLibrary.simpleMessage("ಗೂಗಲ್ ನೊಂದಿಗೆ ಲಾಗಿನ್ ಮಾಡಿ"),
     "loginButtonTextGuest" : MessageLookupByLibrary.simpleMessage("ಅತಿಥಿಯಾಗಿ ಲಾಗಿನ್ ಮಾಡಿ"),

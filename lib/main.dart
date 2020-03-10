@@ -40,16 +40,13 @@ class _MyAppState extends State<MyApp> {
         ChangeNotifierProvider<SettingsProvider>(
           create: (context) => SettingsProvider(),
         ),
-        StreamProvider<List<Currency>>.value(
-          value: CurrencyDatabaseService().currencies,
-        ),
       ],
       child: GestureDetector(
         onTap: () => FocusScope.of(context).unfocus(),
         child: Consumer<SettingsProvider>(
           builder: (context, settings, _) => MaterialApp(
             debugShowCheckedModeBanner: false,
-            locale: Locale('en'),
+            locale: settings.appLang,
             supportedLocales: S.delegate.supportedLocales,
             localizationsDelegates: [
               S.delegate,

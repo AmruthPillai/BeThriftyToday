@@ -146,10 +146,127 @@ class S {
     );
   }
 
+  String get currenciesScreenAppBarTitle {
+    return Intl.message(
+      'Currencies',
+      name: 'currenciesScreenAppBarTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
   String get currencySetupTextHeadline {
     return Intl.message(
       'What\'s your currency?',
       name: 'currencySetupTextHeadline',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get deleteAccountDialogButtonTextCancel {
+    return Intl.message(
+      'No, I don\'t want to leave!',
+      name: 'deleteAccountDialogButtonTextCancel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get deleteAccountDialogButtonTextDelete {
+    return Intl.message(
+      'Yes, delete my data!',
+      name: 'deleteAccountDialogButtonTextDelete',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get deleteAccountDialogContent {
+    return Intl.message(
+      'You will lose all the data (including profile information and you transaction history) when you delete your account. This is an irreversible process, are you sure you want to go through with it?',
+      name: 'deleteAccountDialogContent',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get deleteAccountDialogTitle {
+    return Intl.message(
+      'Do you really want to delete your account?',
+      name: 'deleteAccountDialogTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get exportBottomSheetButtonTextDownload {
+    return Intl.message(
+      'DOWNLOAD',
+      name: 'exportBottomSheetButtonTextDownload',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get exportBottomSheetButtonTextExport {
+    return Intl.message(
+      'EXPORT',
+      name: 'exportBottomSheetButtonTextExport',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get exportBottomSheetDropdownTextCSV {
+    return Intl.message(
+      'Comma-Separated Values (CSV)',
+      name: 'exportBottomSheetDropdownTextCSV',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get exportBottomSheetDropdownTextJSON {
+    return Intl.message(
+      'JavaScript Object Notation (JSON)',
+      name: 'exportBottomSheetDropdownTextJSON',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get exportBottomSheetHeadingText {
+    return Intl.message(
+      'Export as CSV/JSON',
+      name: 'exportBottomSheetHeadingText',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get exportBottomSheetLabelTextEndDate {
+    return Intl.message(
+      'End Date',
+      name: 'exportBottomSheetLabelTextEndDate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get exportBottomSheetLabelTextStartDate {
+    return Intl.message(
+      'Start Date',
+      name: 'exportBottomSheetLabelTextStartDate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get exportBottomSheetTextDateValidationError {
+    return Intl.message(
+      'Start Date must be earlier than End Date',
+      name: 'exportBottomSheetTextDateValidationError',
       desc: '',
       args: [],
     );
@@ -231,6 +348,141 @@ class S {
     return Intl.message(
       'Who are you?',
       name: 'profileSetupTextHeadline',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get settingsScreenHeaderTitleAccount {
+    return Intl.message(
+      'Account',
+      name: 'settingsScreenHeaderTitleAccount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get settingsScreenHeaderTitleDangerZone {
+    return Intl.message(
+      'Danger Zone',
+      name: 'settingsScreenHeaderTitleDangerZone',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get settingsScreenHeaderTitlePreferences {
+    return Intl.message(
+      'Preferences',
+      name: 'settingsScreenHeaderTitlePreferences',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get settingsScreenSettingTitleAccentColor {
+    return Intl.message(
+      'Accent Color',
+      name: 'settingsScreenSettingTitleAccentColor',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get settingsScreenSettingTitleBiometric {
+    return Intl.message(
+      'Biometric Fortification',
+      name: 'settingsScreenSettingTitleBiometric',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get settingsScreenSettingTitleBiometricDescription {
+    return Intl.message(
+      'Asks for your fingerprint everytime you open the app.',
+      name: 'settingsScreenSettingTitleBiometricDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get settingsScreenSettingTitleCurrency {
+    return Intl.message(
+      'Currency',
+      name: 'settingsScreenSettingTitleCurrency',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get settingsScreenSettingTitleDeleteAccount {
+    return Intl.message(
+      'Delete Account',
+      name: 'settingsScreenSettingTitleDeleteAccount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get settingsScreenSettingTitleEmailAddress {
+    return Intl.message(
+      'Email Address',
+      name: 'settingsScreenSettingTitleEmailAddress',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get settingsScreenSettingTitleLanguage {
+    return Intl.message(
+      'Language',
+      name: 'settingsScreenSettingTitleLanguage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get settingsScreenSettingTitleName {
+    return Intl.message(
+      'Name',
+      name: 'settingsScreenSettingTitleName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get settingsScreenSettingTitleTheme {
+    return Intl.message(
+      'Theme',
+      name: 'settingsScreenSettingTitleTheme',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get settingsScreenSettingTitleThemeAMOLED {
+    return Intl.message(
+      'AMOLED',
+      name: 'settingsScreenSettingTitleThemeAMOLED',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get settingsScreenSettingTitleThemeDark {
+    return Intl.message(
+      'Dark',
+      name: 'settingsScreenSettingTitleThemeDark',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get settingsScreenSettingTitleThemeLight {
+    return Intl.message(
+      'Light',
+      name: 'settingsScreenSettingTitleThemeLight',
       desc: '',
       args: [],
     );
@@ -496,7 +748,7 @@ class AppLocalizationDelegate extends LocalizationsDelegate<S> {
 
   List<Locale> get supportedLocales {
     return const <Locale>[
-      Locale('kn', ''), Locale('en', ''),
+      Locale('en', ''),
     ];
   }
 

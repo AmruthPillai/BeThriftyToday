@@ -35,9 +35,6 @@ class _HomeScreenState extends State<HomeScreen> {
           StreamProvider<double>.value(
             value: TransactionDatabaseService(user).balance,
           ),
-          StreamProvider<List<Category>>.value(
-            value: CategoryDatabaseService().categories,
-          ),
           StreamProvider<List<Transaction>>.value(
             value: TransactionDatabaseService(user)
                 .expensesByMonth(DateTime.now()),

@@ -19,11 +19,11 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
-  static m2(type) => "Add New ${type} Category";
+  static m0(type) => "Add New ${type} Category";
 
-  static m0(category) => "${Intl.select(category, {'Automobile': 'Automobile', 'Awards': 'Awards', 'BabyCare': 'Baby Care', 'Bonus': 'Bonus', 'Books': 'Books', 'Charity': 'Charity', 'Clothing': 'Clothing', 'Drinks': 'Drinks', 'Education': 'Education', 'Electronics': 'Electronics', 'Entertainment': 'Entertainment', 'Food': 'Food', 'Freelance': 'Freelance', 'FriendsFamily': 'Friends & Family', 'Gifts': 'Gifts', 'Grants': 'Grants', 'Groceries': 'Groceries', 'Health': 'Health', 'Hobbies': 'Hobbies', 'Insurance': 'Insurance', 'Interest': 'Interest', 'Investments': 'Investments', 'Laundry': 'Laundry', 'Lottery': 'Lottery', 'Mobile': 'Mobile', 'Office': 'Office', 'Others': 'Others', 'Pets': 'Pets', 'Refunds': 'Refunds', 'Rent': 'Rent', 'Salary': 'Salary', 'Sale': 'Sale', 'SalonSpa': 'Salon & Spa', 'Shopping': 'Shopping', 'Tax': 'Tax', 'Transportation': 'Transportation', 'Travel': 'Travel', 'Utilities': 'Utilities', 'other': '${category}', })}";
+  static m1(category) => "${Intl.select(category, {'Automobile': 'Automobile', 'Awards': 'Awards', 'BabyCare': 'Baby Care', 'Bonus': 'Bonus', 'Books': 'Books', 'Charity': 'Charity', 'Clothing': 'Clothing', 'Drinks': 'Drinks', 'Education': 'Education', 'Electronics': 'Electronics', 'Entertainment': 'Entertainment', 'Food': 'Food', 'Freelance': 'Freelance', 'FriendsFamily': 'Friends & Family', 'Gifts': 'Gifts', 'Grants': 'Grants', 'Groceries': 'Groceries', 'Health': 'Health', 'Hobbies': 'Hobbies', 'Insurance': 'Insurance', 'Interest': 'Interest', 'Investments': 'Investments', 'Laundry': 'Laundry', 'Lottery': 'Lottery', 'Mobile': 'Mobile', 'Office': 'Office', 'Others': 'Others', 'Pets': 'Pets', 'Refunds': 'Refunds', 'Rent': 'Rent', 'Salary': 'Salary', 'Sale': 'Sale', 'SalonSpa': 'Salon & Spa', 'Shopping': 'Shopping', 'Tax': 'Tax', 'Transportation': 'Transportation', 'Travel': 'Travel', 'Utilities': 'Utilities', 'other': '${category}', })}";
 
-  static m1(symbol, spendAmount, budgetAmount, monthYear) => "You have spent ${symbol} ${spendAmount} of your total budget of ${symbol} ${budgetAmount} in the month of ${monthYear}.";
+  static m2(symbol, spendAmount, budgetAmount, monthYear) => "You have spent ${symbol} ${spendAmount} of your total budget of ${symbol} ${budgetAmount} in the month of ${monthYear}.";
 
   static m3(howMany) => "${Intl.plural(howMany, one: '1 transaction hidden', other: '${howMany} transactions hidden')}";
 
@@ -31,7 +31,7 @@ class MessageLookup extends MessageLookupByLibrary {
   static _notInlinedMessages(_) => <String, Function> {
     "addCategoryBottomSheetButtonTextAdd" : MessageLookupByLibrary.simpleMessage("ADD"),
     "addCategoryBottomSheetButtonTextCancel" : MessageLookupByLibrary.simpleMessage("CANCEL"),
-    "addCategoryBottomSheetHeadingText" : m2,
+    "addCategoryBottomSheetHeadingText" : m0,
     "addCategoryBottomSheetLabelTextCategoryName" : MessageLookupByLibrary.simpleMessage("Category Name"),
     "appName" : MessageLookupByLibrary.simpleMessage("Be Thrifty Today"),
     "categoriesScreenAppBarTitle" : MessageLookupByLibrary.simpleMessage("Categories"),
@@ -41,8 +41,21 @@ class MessageLookup extends MessageLookupByLibrary {
     "categoriesScreenSnackbarTextResetCategoriesSuccess" : MessageLookupByLibrary.simpleMessage("All categories have been reset successfully"),
     "categoriesScreenTabBarTextExpense" : MessageLookupByLibrary.simpleMessage("Expense"),
     "categoriesScreenTabBarTextIncome" : MessageLookupByLibrary.simpleMessage("Income"),
-    "categoryName" : m0,
+    "categoryName" : m1,
+    "currenciesScreenAppBarTitle" : MessageLookupByLibrary.simpleMessage("Currencies"),
     "currencySetupTextHeadline" : MessageLookupByLibrary.simpleMessage("What\'s your currency?"),
+    "deleteAccountDialogButtonTextCancel" : MessageLookupByLibrary.simpleMessage("No, I don\'t want to leave!"),
+    "deleteAccountDialogButtonTextDelete" : MessageLookupByLibrary.simpleMessage("Yes, delete my data!"),
+    "deleteAccountDialogContent" : MessageLookupByLibrary.simpleMessage("You will lose all the data (including profile information and you transaction history) when you delete your account. This is an irreversible process, are you sure you want to go through with it?"),
+    "deleteAccountDialogTitle" : MessageLookupByLibrary.simpleMessage("Do you really want to delete your account?"),
+    "exportBottomSheetButtonTextDownload" : MessageLookupByLibrary.simpleMessage("DOWNLOAD"),
+    "exportBottomSheetButtonTextExport" : MessageLookupByLibrary.simpleMessage("EXPORT"),
+    "exportBottomSheetDropdownTextCSV" : MessageLookupByLibrary.simpleMessage("Comma-Separated Values (CSV)"),
+    "exportBottomSheetDropdownTextJSON" : MessageLookupByLibrary.simpleMessage("JavaScript Object Notation (JSON)"),
+    "exportBottomSheetHeadingText" : MessageLookupByLibrary.simpleMessage("Export as CSV/JSON"),
+    "exportBottomSheetLabelTextEndDate" : MessageLookupByLibrary.simpleMessage("End Date"),
+    "exportBottomSheetLabelTextStartDate" : MessageLookupByLibrary.simpleMessage("Start Date"),
+    "exportBottomSheetTextDateValidationError" : MessageLookupByLibrary.simpleMessage("Start Date must be earlier than End Date"),
     "homeDailyNoTransactionsTextSubtitle" : MessageLookupByLibrary.simpleMessage("Tap on the + button below to add a new income/expense."),
     "homeDailyNoTransactionsTextTitle" : MessageLookupByLibrary.simpleMessage("This list is looking a little bit empty..."),
     "loginButtonTextGoogle" : MessageLookupByLibrary.simpleMessage("Login with Google"),
@@ -52,6 +65,21 @@ class MessageLookup extends MessageLookupByLibrary {
     "profileSetupLabelTextEmailAddress" : MessageLookupByLibrary.simpleMessage("Email Address"),
     "profileSetupLabelTextFullName" : MessageLookupByLibrary.simpleMessage("Full Name"),
     "profileSetupTextHeadline" : MessageLookupByLibrary.simpleMessage("Who are you?"),
+    "settingsScreenHeaderTitleAccount" : MessageLookupByLibrary.simpleMessage("Account"),
+    "settingsScreenHeaderTitleDangerZone" : MessageLookupByLibrary.simpleMessage("Danger Zone"),
+    "settingsScreenHeaderTitlePreferences" : MessageLookupByLibrary.simpleMessage("Preferences"),
+    "settingsScreenSettingTitleAccentColor" : MessageLookupByLibrary.simpleMessage("Accent Color"),
+    "settingsScreenSettingTitleBiometric" : MessageLookupByLibrary.simpleMessage("Biometric Fortification"),
+    "settingsScreenSettingTitleBiometricDescription" : MessageLookupByLibrary.simpleMessage("Asks for your fingerprint everytime you open the app."),
+    "settingsScreenSettingTitleCurrency" : MessageLookupByLibrary.simpleMessage("Currency"),
+    "settingsScreenSettingTitleDeleteAccount" : MessageLookupByLibrary.simpleMessage("Delete Account"),
+    "settingsScreenSettingTitleEmailAddress" : MessageLookupByLibrary.simpleMessage("Email Address"),
+    "settingsScreenSettingTitleLanguage" : MessageLookupByLibrary.simpleMessage("Language"),
+    "settingsScreenSettingTitleName" : MessageLookupByLibrary.simpleMessage("Name"),
+    "settingsScreenSettingTitleTheme" : MessageLookupByLibrary.simpleMessage("Theme"),
+    "settingsScreenSettingTitleThemeAMOLED" : MessageLookupByLibrary.simpleMessage("AMOLED"),
+    "settingsScreenSettingTitleThemeDark" : MessageLookupByLibrary.simpleMessage("Dark"),
+    "settingsScreenSettingTitleThemeLight" : MessageLookupByLibrary.simpleMessage("Light"),
     "thriftyDrawerMessageShare" : MessageLookupByLibrary.simpleMessage("Check out this app that helps you manage your income and expenses, safe and secure: https://pillai.xyz/thrifty"),
     "thriftyDrawerTextAbout" : MessageLookupByLibrary.simpleMessage("About the App"),
     "thriftyDrawerTextAboutAppLegalese" : MessageLookupByLibrary.simpleMessage("This application is open source and free-to-use, governed under the Apache License 2.0. If you are a developer, please feel free to contribute to the application on GitHub."),
@@ -64,7 +92,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "thriftyDrawerTextSettings" : MessageLookupByLibrary.simpleMessage("Settings"),
     "thriftyDrawerTextShare" : MessageLookupByLibrary.simpleMessage("Spread the Love"),
     "thriftyOverviewTextBalanceHeading" : MessageLookupByLibrary.simpleMessage("YOUR BALANCE"),
-    "thriftyOverviewTextBudgetSet" : m1,
+    "thriftyOverviewTextBudgetSet" : m2,
     "thriftyOverviewTextBudgetUnset" : MessageLookupByLibrary.simpleMessage("Tap here to set a monthly budget and manage your expenses efficiently."),
     "transactionBottomSheetButtonTextAdd" : MessageLookupByLibrary.simpleMessage("ADD"),
     "transactionBottomSheetButtonTextExpense" : MessageLookupByLibrary.simpleMessage("Expense"),

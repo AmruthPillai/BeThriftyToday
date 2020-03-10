@@ -1,16 +1,13 @@
-import 'package:bethriftytoday/services/settings.dart';
-import 'package:flutter/services.dart';
-import 'package:local_auth/local_auth.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:local_auth/local_auth.dart';
 import 'package:after_layout/after_layout.dart';
-import 'package:bethriftytoday/config/colors.dart';
-import 'package:bethriftytoday/config/utils.dart';
-import 'package:bethriftytoday/screens/home/home.dart';
-import 'package:bethriftytoday/screens/login/login.dart';
-import 'package:bethriftytoday/services/auth.dart';
-import 'package:bethriftytoday/shared/thrifty/thrifty_logo.dart';
+import 'package:bethriftytoday/config/config.dart';
+import 'package:bethriftytoday/services/services.dart';
+import 'package:bethriftytoday/screens/screens.dart';
+import 'package:bethriftytoday/shared/shared.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class SplashScreen extends StatefulWidget {
   static const String routeName = '/splash';
@@ -26,17 +23,27 @@ class _SplashScreenState extends State<SplashScreen>
 
   @override
   void afterFirstLayout(BuildContext context) async {
-    updateStatusBarColor();
-
+    updateStatusBarColor(context);
     Future.delayed(Duration(seconds: 1), _checkIfUserIsLoggedIn);
   }
 
   checkUserPreferences() async {
     var settings = Provider.of<SettingsProvider>(context);
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    settings.setDarkMode(prefs.getBool('isDarkMode') ??
-        (MediaQuery.of(context).platformBrightness == Brightness.dark));
-    settings.setBiometricsEnabled(prefs.getBool('biometricsEnabled') ?? false);
+    try {
+      settings.setAppLanguage(Locale(prefs.getString('appLang')));
+      settings.setAccentColor(Color(prefs.getInt('accentColor')));
+      settings.setBiometricsEnabled(prefs.getBool('biometricsEnabled'));
+      settings.setTheme(ThemeOptions.values[prefs.getInt('themePref')]);
+    } catch (_) {
+      settings.setAccentColor(thriftyBlue);
+      settings.setAppLanguage(Locale('en'));
+      settings.setBiometricsEnabled(false);
+      settings.setTheme(
+          MediaQuery.of(context).platformBrightness == Brightness.dark
+              ? ThemeOptions.dark
+              : ThemeOptions.light);
+    }
   }
 
   _checkIfUserIsLoggedIn() async {
@@ -97,11 +104,10 @@ class _SplashScreenState extends State<SplashScreen>
     return Scaffold(
       key: _scaffoldKey,
       body: Container(
-        color: thriftyBlue,
+        color: Theme.of(context).accentColor,
         child: Center(
           child: ThriftyLogo(
             size: 100,
-            isLight: true,
           ),
         ),
       ),

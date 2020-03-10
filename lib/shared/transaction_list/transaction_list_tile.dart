@@ -1,9 +1,7 @@
-import 'package:bethriftytoday/config/typography.dart';
-import 'package:bethriftytoday/config/utils.dart';
-import 'package:bethriftytoday/models/transaction.dart';
-import 'package:bethriftytoday/models/user.dart';
-import 'package:bethriftytoday/services/database/transaction_db.dart';
-import 'package:bethriftytoday/shared/transaction/bottom_sheet.dart';
+import 'package:bethriftytoday/config/config.dart';
+import 'package:bethriftytoday/models/models.dart';
+import 'package:bethriftytoday/services/services.dart';
+import 'package:bethriftytoday/shared/shared.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -30,14 +28,8 @@ class TransactionListTile extends StatelessWidget {
         child: InkWell(
           onLongPress: () {
             showModalBottomSheet(
-              elevation: 10,
               context: context,
-              isDismissible: true,
-              useRootNavigator: true,
               isScrollControlled: true,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.vertical(top: Radius.circular(10)),
-              ),
               builder: (context) => TransactionBottomSheet(
                 transaction: transaction,
               ),
@@ -48,9 +40,7 @@ class TransactionListTile extends StatelessWidget {
             decoration: BoxDecoration(
               border: Border(
                 bottom: BorderSide(
-                  color: isDarkMode(context)
-                      ? Colors.white.withOpacity(0.05)
-                      : Colors.black.withOpacity(0.05),
+                  color: Colors.grey.withOpacity(0.15),
                 ),
               ),
             ),
@@ -60,8 +50,7 @@ class TransactionListTile extends StatelessWidget {
                 children: <Widget>[
                   buildCategoryIcon(),
                   SizedBox(width: 10),
-                  buildMeta(context),
-                  Spacer(),
+                  Expanded(child: buildMeta(context)),
                   buildAmount(user),
                 ],
               ),
@@ -106,45 +95,30 @@ class TransactionListTile extends StatelessWidget {
 
   Column buildMeta(BuildContext context) {
     return Column(
+      mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Text(
           transaction.category.name,
           style: transactionTitleStyle,
         ),
-        Column(
+        SizedBox(height: 2),
+        Row(
           children: <Widget>[
-            SizedBox(height: 2),
-            Row(
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                Text(
-                  DateFormat().add_jm().format(transaction.timestamp),
-                  style: transactionSubtitleStyle,
-                ),
-                (transaction.description != null)
-                    ? Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: <Widget>[
-                          Padding(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 4,
-                            ),
-                            child: Text('/', style: transactionSubtitleStyle),
-                          ),
-                          SizedBox(
-                            width: MediaQuery.of(context).size.width * 0.5,
-                            child: Text(
-                              transaction.description,
-                              overflow: TextOverflow.ellipsis,
-                              style: transactionSubtitleStyle,
-                            ),
-                          ),
-                        ],
-                      )
-                    : Container(),
-              ],
+            Text(
+              DateFormat().add_jm().format(transaction.timestamp),
+              style: transactionSubtitleStyle,
             ),
+            (transaction.description != null)
+                ? Expanded(
+                    flex: 1,
+                    child: Text(
+                      ' / ' + transaction.description,
+                      overflow: TextOverflow.ellipsis,
+                      style: transactionSubtitleStyle,
+                    ),
+                  )
+                : Container(),
           ],
         ),
       ],

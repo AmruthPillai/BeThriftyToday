@@ -1,5 +1,5 @@
-import 'package:bethriftytoday/models/user.dart';
-import 'package:bethriftytoday/shared/thrifty/thrifty_logo.dart';
+import 'package:bethriftytoday/models/models.dart';
+import 'package:bethriftytoday/shared/shared.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:transparent_image/transparent_image.dart';
@@ -33,18 +33,21 @@ class _ThriftyAppBarState extends State<ThriftyAppBar> {
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  color: Theme.of(context).primaryColor,
+                  color: Theme.of(context).accentColor,
                   icon: Icon(Icons.arrow_back_ios),
                 )
               : IconButton(
                   onPressed: () {
                     Scaffold.of(context).openDrawer();
                   },
-                  color: Theme.of(context).primaryColor,
+                  color: Theme.of(context).accentColor,
                   icon: Icon(Icons.menu),
                 ),
           SizedBox(width: 10),
-          ThriftyLogo(size: 80),
+          ThriftyLogo(
+            size: 80,
+            color: Theme.of(context).accentColor,
+          ),
           Spacer(),
           widget.hideAccount ? Container() : buildCircleAvatar(user),
           SizedBox(width: 20),
@@ -54,7 +57,7 @@ class _ThriftyAppBarState extends State<ThriftyAppBar> {
   }
 
   Widget buildCircleAvatar(User user) {
-    if (user != null) {
+    if (user != null && user.photoURL.isNotEmpty) {
       return Container(
         width: 50,
         child: ClipOval(

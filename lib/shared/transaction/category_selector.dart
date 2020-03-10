@@ -1,5 +1,6 @@
-import 'package:bethriftytoday/config/colors.dart';
-import 'package:bethriftytoday/models/category.dart';
+import 'package:bethriftytoday/config/config.dart';
+import 'package:bethriftytoday/generated/l10n.dart';
+import 'package:bethriftytoday/models/models.dart';
 import 'package:flutter/material.dart';
 
 class CategorySelector extends StatelessWidget {
@@ -18,12 +19,20 @@ class CategorySelector extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: this.onPressed,
-      child: Container(
-        width: 80,
-        child: Stack(
-          children: <Widget>[
-            Align(
-              alignment: Alignment.center,
+      child: Stack(
+        children: <Widget>[
+          isSelected
+              ? Align(
+                  alignment: Alignment.center,
+                  child: Container(
+                    color: thriftyBlue.withOpacity(0.15),
+                  ),
+                )
+              : Container(),
+          Align(
+            alignment: Alignment.center,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 2),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
@@ -35,7 +44,9 @@ class CategorySelector extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    category.name,
+                    S
+                        .of(context)
+                        .categoryName(transformCategoryToKey(category)),
                     textAlign: TextAlign.center,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
@@ -45,17 +56,8 @@ class CategorySelector extends StatelessWidget {
                 ],
               ),
             ),
-            isSelected
-                ? Align(
-                    alignment: Alignment.topRight,
-                    child: Icon(
-                      Icons.check_box,
-                      color: thriftyBlue,
-                    ),
-                  )
-                : Container(),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

@@ -1,7 +1,7 @@
-import 'package:bethriftytoday/models/transaction.dart';
-import 'package:bethriftytoday/models/user.dart';
-import 'package:bethriftytoday/services/database/transaction_db.dart';
-import 'package:bethriftytoday/shared/transaction_list/transaction_list.dart';
+import 'package:bethriftytoday/generated/l10n.dart';
+import 'package:bethriftytoday/models/models.dart';
+import 'package:bethriftytoday/services/services.dart';
+import 'package:bethriftytoday/shared/shared.dart';
 import 'package:flutter/material.dart' hide Key;
 import 'package:provider/provider.dart';
 
@@ -14,47 +14,27 @@ class DailyTransactionList extends StatelessWidget {
       stream: TransactionDatabaseService(user).transactions,
       builder: (context, snapshot) {
         if (snapshot.hasData) {
-          var grouped = TransactionDatabaseService(user)
-              .groupTransactionsByDate(snapshot.data);
-
           if (snapshot.data.length == 0) {
-            return Center(
-              child: Container(
-                width: MediaQuery.of(context).size.width * 0.6,
-                margin: const EdgeInsets.only(bottom: 50),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    Image.asset('assets/images/money_man.png'),
-                    SizedBox(height: 20),
-                    Text(
-                      'This list is looking a little bit empty...',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                    SizedBox(height: 15),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 40),
-                      child: Text(
-                        'Tap on the + button below to add a new income/expense.',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w400,
-                        ),
-                      ),
-                    ),
-                  ],
+            return NoTransactionsFound();
+          }
+
+          if (snapshot.hasError) {
+            return Padding(
+              padding: const EdgeInsets.only(top: 40),
+              child: Center(
+                child: Text(
+                  'Something has gone horribly wrong, please try again after some time!',
                 ),
               ),
             );
           }
 
+          var grouped = TransactionDatabaseService(user)
+              .groupTransactionsByDate(snapshot.data);
+
           return ListView.builder(
             shrinkWrap: true,
+            physics: NeverScrollableScrollPhysics(),
             itemCount: grouped.keys.length,
             itemBuilder: (context, index) {
               return TransactionList(
@@ -65,17 +45,45 @@ class DailyTransactionList extends StatelessWidget {
           );
         }
 
-        if (snapshot.hasError) {
-          return Padding(
-            padding: const EdgeInsets.only(top: 40),
-            child: Center(
-              child: Text('There seems to be an error!'),
-            ),
-          );
-        }
-
         return Container();
       },
+    );
+  }
+}
+
+class NoTransactionsFound extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.all(30),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          SizedBox(height: 20),
+          Image.asset(
+            'assets/images/money_man.png',
+            width: MediaQuery.of(context).size.width * 0.5,
+          ),
+          SizedBox(height: 40),
+          Text(
+            S.of(context).homeDailyNoTransactionsTextTitle,
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+          SizedBox(height: 15),
+          Text(
+            S.of(context).homeDailyNoTransactionsTextSubtitle,
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.w400,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

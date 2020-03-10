@@ -1,8 +1,7 @@
-import 'package:bethriftytoday/config/colors.dart';
-import 'package:bethriftytoday/config/utils.dart';
-import 'package:bethriftytoday/models/transaction.dart';
-import 'package:bethriftytoday/models/user.dart';
-import 'package:bethriftytoday/shared/dialogs/update_budget.dart';
+import 'package:bethriftytoday/config/config.dart';
+import 'package:bethriftytoday/generated/l10n.dart';
+import 'package:bethriftytoday/models/models.dart';
+import 'package:bethriftytoday/shared/shared.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -21,8 +20,9 @@ class ThriftyOverview extends StatelessWidget {
     if (user != null && balance != null && expenses != null) {
       return InkWell(
         onTap: () {
-          showDialog(
+          showModalBottomSheet(
             context: context,
+            isScrollControlled: true,
             builder: (context) => UpdateBudgetDialog(
               initialValue: user.budget,
             ),
@@ -30,13 +30,10 @@ class ThriftyOverview extends StatelessWidget {
         },
         child: Container(
           margin: const EdgeInsets.symmetric(horizontal: 20),
-          padding: const EdgeInsets.symmetric(
-            horizontal: 25,
-            vertical: 30,
-          ),
+          padding: const EdgeInsets.all(25),
           width: double.infinity,
           decoration: BoxDecoration(
-            color: thriftyBlue,
+            color: Theme.of(context).accentColor,
             borderRadius: BorderRadius.circular(10),
           ),
           child: Row(
@@ -46,7 +43,7 @@ class ThriftyOverview extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text(
-                      'YOUR BALANCE',
+                      S.of(context).thriftyOverviewTextBalanceHeading,
                       style: TextStyle(
                         fontSize: 12,
                         color: Colors.white,
@@ -54,20 +51,24 @@ class ThriftyOverview extends StatelessWidget {
                       ),
                     ),
                     SizedBox(height: 4),
-                    (balance != null)
-                        ? Text(
-                            formatAmount(user, balance),
-                            style: TextStyle(
-                              fontSize: 30,
-                              color: Colors.white,
-                              fontWeight: FontWeight.w800,
-                            ),
-                          )
-                        : Container(),
+                    Text(
+                      formatAmount(user, balance),
+                      style: TextStyle(
+                        fontSize: 30,
+                        color: Colors.white,
+                        fontWeight: FontWeight.w800,
+                      ),
+                    ),
                     SizedBox(height: 8),
                     (user.budget != null)
                         ? Text(
-                            'You have spent ${user.currency.symbol} ${calculateAbsoluteSum(expenses).toStringAsFixed(0)} of your total budget of ${user.currency.symbol} ${user.budget.toStringAsFixed(0)} in the month of ${DateFormat('MMMM y').format(DateTime.now())}.',
+                            S.of(context).thriftyOverviewTextBudgetSet(
+                                  user.currency.symbol,
+                                  calculateAbsoluteSum(expenses)
+                                      .toStringAsFixed(2),
+                                  user.budget.toStringAsFixed(2),
+                                  DateFormat('MMMM y').format(DateTime.now()),
+                                ),
                             style: TextStyle(
                               fontSize: 12,
                               color: Colors.white,
@@ -75,7 +76,7 @@ class ThriftyOverview extends StatelessWidget {
                             ),
                           )
                         : Text(
-                            'Tap here to set a monthly budget and manage your expenses efficiently.',
+                            S.of(context).thriftyOverviewTextBudgetUnset,
                             style: TextStyle(
                               fontSize: 12,
                               color: Colors.white,
@@ -87,7 +88,7 @@ class ThriftyOverview extends StatelessWidget {
               ),
               SizedBox(width: 60),
               (user.budget != null)
-                  ? buildBudgetMeter(expenses, user)
+                  ? buildBudgetMeter(context, expenses, user)
                   : Icon(Icons.category, size: 60, color: Colors.white),
             ],
           ),
@@ -98,13 +99,17 @@ class ThriftyOverview extends StatelessWidget {
     return Container();
   }
 
-  CircleAvatar buildBudgetMeter(List<Transaction> expenses, User user) {
+  CircleAvatar buildBudgetMeter(
+    BuildContext context,
+    List<Transaction> expenses,
+    User user,
+  ) {
     return CircleAvatar(
       radius: 35,
       backgroundColor: Colors.white,
       child: CircleAvatar(
         radius: (35 - 6).toDouble(),
-        backgroundColor: thriftyBlue,
+        backgroundColor: Theme.of(context).accentColor,
         child: Text(
           ((calculateAbsoluteSum(expenses) / user.budget) * 100)
                   .toStringAsFixed(0) +

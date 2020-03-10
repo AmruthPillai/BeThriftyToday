@@ -1,5 +1,6 @@
-import 'package:bethriftytoday/models/transaction.dart';
-import 'package:bethriftytoday/shared/transaction_list/transaction_list_tile.dart';
+import 'package:bethriftytoday/generated/l10n.dart';
+import 'package:bethriftytoday/models/models.dart';
+import 'package:bethriftytoday/shared/shared.dart';
 import 'package:flutter/material.dart';
 
 class TransactionList extends StatefulWidget {
@@ -53,7 +54,8 @@ class _TransactionListState extends State<TransactionList> {
                 visible
                     ? Container()
                     : Text(
-                        '${widget.grouped[widget.date].length} transactions hidden',
+                        S.of(context).transactionListHiddenTransactionText(
+                            widget.grouped[widget.date].length),
                         style: TextStyle(fontSize: 12, color: Colors.grey),
                       ),
                 SizedBox(width: 5),

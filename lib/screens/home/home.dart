@@ -1,14 +1,8 @@
-import 'package:bethriftytoday/models/category.dart';
-import 'package:bethriftytoday/models/transaction.dart';
-import 'package:bethriftytoday/models/user.dart';
-import 'package:bethriftytoday/services/database/category_db.dart';
-import 'package:bethriftytoday/services/database/transaction_db.dart';
-import 'package:bethriftytoday/services/database/user_db.dart';
-import 'package:bethriftytoday/shared/transaction/floating_button.dart';
-import 'package:bethriftytoday/shared/thrifty/thrifty_appbar.dart';
-import 'package:bethriftytoday/shared/thrifty/thrifty_drawer.dart';
-import 'package:bethriftytoday/shared/thrifty/thrifty_overview.dart';
-import 'package:bethriftytoday/shared/transaction_list/daily.dart';
+import 'package:bethriftytoday/config/utils.dart';
+import 'package:bethriftytoday/models/models.dart';
+import 'package:bethriftytoday/services/services.dart';
+import 'package:bethriftytoday/shared/shared.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -20,12 +14,19 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
+
   @override
   Widget build(BuildContext context) {
     final _scaffoldKey = GlobalKey<ScaffoldState>();
     var user = Provider.of<User>(context);
+    updateStatusBarColor(context);
 
     if (user != null) {
+      _firebaseMessaging.getToken().then((token) {
+        UserDatabaseService(user).updateUserPushToken(token);
+      });
+
       return MultiProvider(
         providers: [
           StreamProvider<User>.value(
@@ -33,9 +34,6 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           StreamProvider<double>.value(
             value: TransactionDatabaseService(user).balance,
-          ),
-          StreamProvider<List<Category>>.value(
-            value: CategoryDatabaseService().categories,
           ),
           StreamProvider<List<Transaction>>.value(
             value: TransactionDatabaseService(user)
@@ -56,9 +54,13 @@ class _HomeScreenState extends State<HomeScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 ThriftyAppBar(),
-                ThriftyOverview(),
                 Expanded(
-                  child: DailyTransactionList(),
+                  child: ListView(
+                    children: <Widget>[
+                      ThriftyOverview(),
+                      DailyTransactionList(),
+                    ],
+                  ),
                 ),
               ],
             ),

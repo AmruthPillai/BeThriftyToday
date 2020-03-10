@@ -1,6 +1,4 @@
-import 'package:bethriftytoday/config/colors.dart';
-import 'package:bethriftytoday/shared/thrifty/thrifty_logo.dart';
-import 'package:bethriftytoday/shared/wave_clipper.dart';
+import 'package:bethriftytoday/shared/shared.dart';
 import 'package:flutter/material.dart';
 
 class OnboardingHeader extends StatelessWidget {
@@ -14,14 +12,13 @@ class OnboardingHeader extends StatelessWidget {
       child: Container(
         width: double.infinity,
         height: 200,
-        color: thriftyBlue,
+        color: Theme.of(context).accentColor,
         child: Column(
           children: <Widget>[
             Container(
               margin: const EdgeInsets.only(top: 40),
               child: ThriftyLogo(
                 size: 80,
-                isLight: true,
               ),
             ),
           ],

@@ -1,9 +1,8 @@
 import 'dart:io';
 
-import 'package:bethriftytoday/config/utils.dart';
-import 'package:bethriftytoday/screens/login/bottom_section.dart';
-import 'package:bethriftytoday/screens/login/top_section.dart';
-import 'package:bethriftytoday/shared/wave_clipper.dart';
+import 'package:bethriftytoday/config/config.dart';
+import 'package:bethriftytoday/screens/screens.dart';
+import 'package:bethriftytoday/shared/shared.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -11,7 +10,7 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    updateStatusBarColor();
+    updateStatusBarColor(context);
 
     return Scaffold(
       body: SafeArea(

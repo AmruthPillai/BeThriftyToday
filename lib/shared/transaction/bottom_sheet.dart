@@ -1,11 +1,8 @@
-import 'package:bethriftytoday/models/category.dart';
-import 'package:bethriftytoday/models/transaction.dart';
-import 'package:bethriftytoday/models/user.dart';
-import 'package:bethriftytoday/services/database/category_db.dart';
-import 'package:bethriftytoday/services/database/transaction_db.dart';
-import 'package:bethriftytoday/shared/transaction/category_selector.dart';
-import 'package:bethriftytoday/shared/transaction/txn_type_selector.dart';
-import 'package:bethriftytoday/shared/thrifty/thrifty_button.dart';
+import 'package:bethriftytoday/generated/l10n.dart';
+import 'package:bethriftytoday/models/models.dart';
+import 'package:bethriftytoday/services/category.dart';
+import 'package:bethriftytoday/services/services.dart';
+import 'package:bethriftytoday/shared/shared.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -33,7 +30,6 @@ class _TransactionBottomSheetState extends State<TransactionBottomSheet> {
   var _amountNode = FocusNode();
 
   bool isExpense = true;
-  final _formKey = GlobalKey<FormState>();
 
   TextEditingController _descriptionController = TextEditingController();
   TextEditingController _amountController = TextEditingController();
@@ -47,128 +43,115 @@ class _TransactionBottomSheetState extends State<TransactionBottomSheet> {
   void initState() {
     super.initState();
     var date = DateTime.now();
-    var time = TimeOfDay.now();
-
-    setDateTime(date, time);
+    setDate(date);
 
     if (widget.transaction != null) {
       id = widget.transaction.id;
       amount = widget.transaction.amount;
       _amountController.text = amount.abs().toStringAsFixed(0);
       timestamp = widget.transaction.timestamp;
-      setDateTime(timestamp, TimeOfDay.fromDateTime(timestamp));
+      setDate(timestamp);
       description = widget.transaction.description;
       _descriptionController.text = description;
       selectedCategory = widget.transaction.category;
+      isExpense = selectedCategory.type == 'expense';
     }
   }
 
-  setDateTime(DateTime date, TimeOfDay time) {
-    timestamp = DateTime(
-      date.year,
-      date.month,
-      date.day,
-      time.hour,
-      time.minute,
-    );
-
-    _dateController.text = DateFormat().add_yMMMMd().add_jm().format(timestamp);
+  setDate(DateTime date) {
+    timestamp = date;
+    _dateController.text = DateFormat().add_yMMMMd().format(date);
   }
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedContainer(
-      curve: Curves.easeInOutExpo,
-      duration: Duration(milliseconds: 200),
-      height: MediaQuery.of(context).size.height *
-          (this.isKeyboardOpen ? 0.8 : 0.6),
-      margin: const EdgeInsets.symmetric(
+    return Container(
+      height: MediaQuery.of(context).size.height * 0.85,
+      padding: const EdgeInsets.symmetric(
+        vertical: 20,
         horizontal: 20,
-        vertical: 30,
       ),
-      child: Scaffold(
-        resizeToAvoidBottomInset: true,
-        body: ListView(
-          children: <Widget>[
-            buildTypeSelector(),
-            SizedBox(height: 30),
-            Form(
-              key: _formKey,
-              child: Column(
-                children: <Widget>[
-                  buildCategorySelector(),
-                  SizedBox(height: 30),
-                  TextFormField(
-                    focusNode: _descriptionNode,
-                    controller: _descriptionController,
-                    onSaved: (v) => setState(() => description = v),
-                    onFieldSubmitted: (v) =>
-                        FocusScope.of(context).requestFocus(_amountNode),
-                    decoration: InputDecoration(
-                      labelText: 'Description (optional)',
-                    ),
-                  ),
-                  SizedBox(height: 30),
-                  TextFormField(
-                    focusNode: _amountNode,
-                    controller: _amountController,
-                    keyboardType: TextInputType.number,
-                    onSaved: (v) => setState(() => amount = double.parse(v)),
-                    validator: (value) {
-                      if (value.isEmpty) {
-                        return 'Please enter an amount.';
-                      }
-                      if (!isNumeric(value)) {
-                        return 'Please enter a valid number.';
-                      }
-                      return null;
-                    },
-                    decoration: InputDecoration(
-                      prefixIcon: Icon(
-                        isExpense ? Icons.remove : Icons.add,
-                      ),
-                      labelText: 'Amount',
-                    ),
-                  ),
-                  SizedBox(height: 30),
-                  TextFormField(
-                    onTap: () async {
-                      var date = await showDatePicker(
-                        context: context,
-                        initialDate: DateTime.now(),
-                        firstDate: DateTime(1990),
-                        lastDate: DateTime.now(),
-                      );
-
-                      var time = await showTimePicker(
-                        context: context,
-                        initialTime: TimeOfDay.now(),
-                      );
-
-                      if (date != null || time != null) {
-                        setState(() => setDateTime(date, time));
-                      }
-                    },
-                    controller: _dateController,
-                    readOnly: true,
-                    decoration: InputDecoration(
-                      labelText: 'Date',
-                    ),
-                  ),
-                  SizedBox(height: 30),
-                  ThriftyButton(
-                    title: (widget.transaction != null)
-                        ? 'Update'.toUpperCase()
-                        : 'Add'.toUpperCase(),
-                    onPressed: (this.selectedCategory != null)
-                        ? this.addTransaction
-                        : null,
-                  ),
-                ],
-              ),
+      child: ListView(
+        children: <Widget>[
+          Text(
+            (widget.transaction == null)
+                ? S.of(context).transactionBottomSheetTextHeadingAdd
+                : S.of(context).transactionBottomSheetTextHeadingUpdate,
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.w500,
             ),
-          ],
-        ),
+          ),
+          SizedBox(height: 20),
+          buildTypeSelector(),
+          SizedBox(height: 20),
+          Column(
+            children: <Widget>[
+              buildCategorySelector(),
+              SizedBox(height: 20),
+              TextField(
+                focusNode: _descriptionNode,
+                controller: _descriptionController,
+                textCapitalization: TextCapitalization.words,
+                onChanged: (v) => setState(() => description = v),
+                onEditingComplete: () =>
+                    FocusScope.of(context).requestFocus(_amountNode),
+                decoration: InputDecoration(
+                  labelText:
+                      S.of(context).transactionBottomSheetLabelTextDescription,
+                ),
+              ),
+              SizedBox(height: 20),
+              TextField(
+                focusNode: _amountNode,
+                controller: _amountController,
+                keyboardType: TextInputType.numberWithOptions(
+                  decimal: true,
+                  signed: false,
+                ),
+                onChanged: (v) => setState(() => amount = double.parse(v)),
+                decoration: InputDecoration(
+                  prefixIcon: Icon(
+                    isExpense ? Icons.remove : Icons.add,
+                    color: Theme.of(context).accentColor,
+                  ),
+                  labelText:
+                      S.of(context).transactionBottomSheetLabelTextAmount,
+                ),
+              ),
+              SizedBox(height: 20),
+              TextField(
+                onTap: () async {
+                  var date = await showDatePicker(
+                    context: context,
+                    initialDate: DateTime.now(),
+                    firstDate: DateTime(1990),
+                    lastDate: DateTime.now(),
+                  );
+
+                  if (date != null) {
+                    setState(() => setDate(date));
+                  }
+                },
+                controller: _dateController,
+                readOnly: true,
+                decoration: InputDecoration(
+                  labelText: S.of(context).transactionBottomSheetLabelTextDate,
+                ),
+              ),
+              SizedBox(height: 20),
+              ThriftyButton(
+                title: (widget.transaction == null)
+                    ? S.of(context).transactionBottomSheetButtonTextAdd
+                    : S.of(context).transactionBottomSheetButtonTextUpdate,
+                onPressed: (this.selectedCategory != null)
+                    ? this.addTransaction
+                    : null,
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }
@@ -176,7 +159,6 @@ class _TransactionBottomSheetState extends State<TransactionBottomSheet> {
   addTransaction() async {
     FocusScope.of(context).unfocus();
     var user = Provider.of<User>(context, listen: false);
-    _formKey.currentState.save();
 
     Transaction transaction = Transaction(
       id: id,
@@ -195,32 +177,62 @@ class _TransactionBottomSheetState extends State<TransactionBottomSheet> {
     Navigator.pop(context);
   }
 
-  StreamBuilder<List<Category>> buildCategorySelector() {
-    return StreamBuilder<List<Category>>(
-      stream: CategoryDatabaseService().categories,
-      builder: (context, snapshot) {
-        if (snapshot.hasData) {
-          var categories = snapshot.data
-              .where((x) => x.type == (isExpense ? 'expense' : 'income'))
-              .toList();
-          return Container(
-            width: double.infinity,
-            height: 80,
-            child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: categories.length,
-              itemBuilder: (context, index) {
-                var x = categories[index];
-                return CategorySelector(
-                  category: x,
-                  isSelected: x.name == selectedCategory?.name,
-                  onPressed: () => setState(() => selectedCategory = x),
-                );
-              },
+  Widget buildCategorySelector() {
+    return Consumer<CategoryProvider>(
+      builder: (context, categoryProvider, _) {
+        var categories = categoryProvider.categories
+            .where((x) => x.type == (isExpense ? 'expense' : 'income'))
+            .toList();
+
+        return Row(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            (selectedCategory != null)
+                ? Row(
+                    children: <Widget>[
+                      Container(
+                        width: 80,
+                        height: 80,
+                        child: CategorySelector(
+                          isSelected: false,
+                          category: selectedCategory,
+                        ),
+                        decoration: BoxDecoration(
+                          border: Border(
+                            right: BorderSide(
+                              width: 1,
+                              color: Colors.grey.withOpacity(0.5),
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(width: 10),
+                    ],
+                  )
+                : Container(),
+            Expanded(
+              child: Container(
+                width: double.infinity,
+                height: 80,
+                child: ListView.builder(
+                  itemExtent: 90,
+                  shrinkWrap: true,
+                  itemCount: categories.length,
+                  scrollDirection: Axis.horizontal,
+                  physics: BouncingScrollPhysics(),
+                  itemBuilder: (context, index) {
+                    var x = categories[index];
+                    return CategorySelector(
+                      category: x,
+                      isSelected: x.name == selectedCategory?.name,
+                      onPressed: () => setState(() => selectedCategory = x),
+                    );
+                  },
+                ),
+              ),
             ),
-          );
-        }
-        return CircularProgressIndicator();
+          ],
+        );
       },
     );
   }
@@ -228,16 +240,16 @@ class _TransactionBottomSheetState extends State<TransactionBottomSheet> {
   Container buildTypeSelector() {
     return Container(
       width: double.infinity,
-      height: 40,
+      height: 45,
       child: Row(
         children: <Widget>[
           TransactionTypeSelector(
-            title: 'Expense',
+            title: S.of(context).transactionBottomSheetButtonTextExpense,
             isSelected: isExpense,
             onPressed: () => setIsExpense(true),
           ),
           TransactionTypeSelector(
-            title: 'Income',
+            title: S.of(context).transactionBottomSheetButtonTextIncome,
             isSelected: !isExpense,
             onPressed: () => setIsExpense(false),
           ),

@@ -2,13 +2,15 @@
 
 # Be Thrifty Today
 
-The simple and secure money manager app you’ve been waiting for.
+A simple and secure money manager that keeps you financially vigilant.
 
-[![Codemagic build status](https://api.codemagic.io/apps/5e608a86018eb9163eb40b1a/5e608a86018eb9163eb40b19/status_badge.svg)](https://codemagic.io/apps/5e608a86018eb9163eb40b1a/5e608a86018eb9163eb40b19/latest_build)
+[![Codemagic build status](https://api.codemagic.io/apps/5e608a86018eb9163eb40b1a/5e609fdb018eb9042699afe3/status_badge.svg)](https://codemagic.io/apps/5e608a86018eb9163eb40b1a/5e609fdb018eb9042699afe3/latest_build)
+
+<a href="https://play.google.com/store/apps/details?id=today.bethrifty.app" target="_blank"><img src="https://bethrifty.today/assets/buttons/google-play-badge.png" width="200px" alt="Get the App on the Google Play Store" /></a>
 
 ## Website
 
-https://bethrifty.today
+<a href="https://bethrifty.today" target="_blank">https://bethrifty.today</a>
 
 ## Short Description
 
@@ -24,6 +26,36 @@ I do not plan to monetize this project at any time. It’s a free app without an
 
 Oh, and in line with saving the best for last... There’s also a dark mode! 🕶️
 
+## Screenshots
+
+<div style="display: flex">
+  <a target="_blank" href="https://bethrifty.today/assets/screenshots/1-splash-screen.png"><img
+      src="https://bethrifty.today/assets/screenshots/1-splash-screen.png" height="220px" alt="Splash Screen">
+  </a><a target="_blank" href="https://bethrifty.today/assets/screenshots/2-profile-setup.png"><img
+      src="https://bethrifty.today/assets/screenshots/2-profile-setup.png" height="220px" alt="Profile Setup">
+  </a><a target="_blank" href="https://bethrifty.today/assets/screenshots/3-currency-selection.png"><img
+      src="https://bethrifty.today/assets/screenshots/3-currency-selection.png" height="220px" alt="Currency Selection">
+  </a><a target="_blank" href="https://bethrifty.today/assets/screenshots/4-dashboard.png"><img
+      src="https://bethrifty.today/assets/screenshots/4-dashboard.png" height="220px" alt="Dashboard">
+  </a><a target="_blank" href="https://bethrifty.today/assets/screenshots/5-drawer.png"><img
+      src="https://bethrifty.today/assets/screenshots/5-drawer.png" height="220px" alt="Drawer">
+  </a><a target="_blank" href="https://bethrifty.today/assets/screenshots/6-settings.png"><img
+      src="https://bethrifty.today/assets/screenshots/6-settings.png" height="220px" alt="Settings">
+  </a><a target="_blank" href="https://bethrifty.today/assets/screenshots/7-expense.png"><img
+      src="https://bethrifty.today/assets/screenshots/7-expense.png" height="220px" alt="Add Expense">
+  </a><a target="_blank" href="https://bethrifty.today/assets/screenshots/8-income.png"><img
+      src="https://bethrifty.today/assets/screenshots/8-income.png" height="220px" alt="Add Income">
+  </a><a target="_blank" href="https://bethrifty.today/assets/screenshots/9-dashboard.png"><img
+      src="https://bethrifty.today/assets/screenshots/9-dashboard.png" height="220px" alt="Dashboard">
+  </a><a target="_blank" href="https://bethrifty.today/assets/screenshots/10-delete.png"><img
+      src="https://bethrifty.today/assets/screenshots/10-delete.png" height="220px" alt="Delete Expense">
+  </a><a target="_blank" href="https://bethrifty.today/assets/screenshots/11-dark-mode.png"><img
+      src="https://bethrifty.today/assets/screenshots/11-dark-mode.png" height="220px" alt="Dark Mode">
+  </a><a target="_blank" href="https://bethrifty.today/assets/screenshots/12-about.png"><img
+      src="https://bethrifty.today/assets/screenshots/12-about.png" height="220px" alt="About the App">
+  </a>
+</div>
+
 ## Features
 
 - Manage your income and expenses with ease, both on Mobile, Web & Desktop (coming soon).
@@ -32,14 +64,49 @@ Oh, and in line with saving the best for last... There’s also a dark mode! �
 - Attention to detail, user interface design and enhanced usability is at the topmost priority (so if there’s a typo, don’t hesitate to let me know).
 - No pesky push notifications, that bother you in the middle of the night.
 - It doesn’t require read/write access to your phone storage or your SMSes, it’s completely air-gapped and secure.
+- Ability to export income/expense transactions of a certain time period to CSV or JSON.
 - Your data is completely secure, there is no social aspect to this application. Your finances are yours alone, and you have complete control over them.
 - Set up biometric authentication in the Settings page so the app will allow access only to you and no one else using the phone. It uses your device’s biometrics, so you don’t need to set it up all over again. (available only on phones with fingerprint readers)
 - You can request to add new categories or new features by dropping me an email at bethriftytoday@gmail.com and I’ll add them as soon as I have the time to work on it.
-- This app is ad-free, and always will be.
+- **This app is ad-free, and always will be.**
 
-## Things to Do
+## Changelog
 
-- Ability to export income/expense transactions of a certain time period to CSV or XLSX.
+#### v1.1.0 (10)
+
+- You can now choose between 3 themes (Light, Dark and AMOLED)
+- You can pick any accent colour from the choices, making it completely personalisable
+- Users can sign in as a guest (still syncs your data to the cloud), but you won't have to divulge any personal information
+- You can now create your own income/expense categories
+- You can now enter your own currency symbols and use them within the app
+- All values now have decimal places up to 2 places
+
+#### v1.1.0 (11)
+
+- Allow users to add/delete any categories or even reset categories list to their original state
+- Base code modifications made to allow for further localization through translation of strings
+
+#### v1.1.0 (12)
+
+- Added Spanish (Espanõl) Language to the app (Credits: <a href="https://github.com/moralesnery">@moralesnery</a>)
+
+## Security
+
+As mentioned above, I've used a simple but uncrackable method to encrypt the sensitive information of a user's transactions so you can use the app in peace, knowing that no one else can ever read your data except you. In the spirit of complete transparency, here's a snapshot of the database
+
+<a href="https://user-images.githubusercontent.com/1134738/76155841-f291b980-6117-11ea-9f81-69d8abab13ed.png" target="_blank"><img src="https://user-images.githubusercontent.com/1134738/76155841-f291b980-6117-11ea-9f81-69d8abab13ed.png" height="400" alt="Snapshot of the Database" /></a>
+
+## Translation
+
+Localization was possible using the Flutter Intl VS Code Plugin and Google's ARB (Application Resource Bundle) format which is powerful enough to handle some of the best usecases for language translations.
+
+To translate the app into your own language, all you need to do are the following steps:
+1) Fork the repository to your own account
+2) Go to `lib/l10n` folder and clone the `intl_en.arb` into another file `intl_{code}.arb` where `code` is your ISO-639-1 (2 Alpha) Language Code.
+3) Once you are done with the translation of strings, open a pull request to merge with the `develop` branch of the original repository.
+4) Wait for me to approve the pull request so that I can generate the corresponding dart files and make changes in the settings screen. (Don't worry, I'm pretty quick when it comes to changes)
+
+That's about it. Please do contribute as much as possible to the open source project, it would mean a lot to me as it would reach a whole lot of people out there. Thank you so much!
 
 ## License
 
@@ -48,3 +115,7 @@ The source code and product are governed under the Apache License 2.0 which can 
 ## Contributing
 
 If you are a developer yourself, please create a Pull Request to fix/add what you feel like and I'll review it into the application :) Thank you so much!
+
+Please be aware that running the project requires certain files such as the Google Services JSON and the Encryption Functions Dart File which I have consciously kept out of source control. To those who are willing to contribute to the project, you can generate your own Firebase project and get the corresponding `google-services.json` and `Google-Service-Info.plist`.
+
+For the missing `encrypt.dart` file which is required to build the application, here is a gist with the file's contents, stripped off of the encryption key which is used in the production app: https://gist.github.com/AmruthPillai/3d99758a3836b909d331a90601023f53

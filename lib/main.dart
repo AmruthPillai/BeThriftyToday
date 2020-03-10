@@ -1,15 +1,15 @@
-import 'package:bethriftytoday/config/routes.dart';
-import 'package:bethriftytoday/config/theme.dart';
-import 'package:bethriftytoday/models/currency.dart';
-import 'package:bethriftytoday/models/user.dart';
-import 'package:bethriftytoday/screens/splash.dart';
-import 'package:bethriftytoday/services/auth.dart';
-import 'package:bethriftytoday/services/database/currency_db.dart';
-import 'package:bethriftytoday/services/settings.dart';
+import 'package:bethriftytoday/config/config.dart';
+import 'package:bethriftytoday/generated/l10n.dart';
+import 'package:bethriftytoday/models/models.dart';
+import 'package:bethriftytoday/screens/screens.dart';
+import 'package:bethriftytoday/services/category.dart';
+import 'package:bethriftytoday/services/currency.dart';
+import 'package:bethriftytoday/services/services.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_analytics/observer.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 
 void main() => runApp(MyApp());
@@ -23,6 +23,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     FirebaseAnalytics analytics = FirebaseAnalytics();
+    updateStatusBarColor(context);
     setupCloudMessaging();
 
     return MultiProvider(
@@ -30,11 +31,14 @@ class _MyAppState extends State<MyApp> {
         StreamProvider<User>.value(
           value: AuthService().user,
         ),
+        ChangeNotifierProvider<CategoryProvider>(
+          create: (context) => CategoryProvider(),
+        ),
+        ChangeNotifierProvider<CurrencyProvider>(
+          create: (context) => CurrencyProvider(),
+        ),
         ChangeNotifierProvider<SettingsProvider>(
           create: (context) => SettingsProvider(),
-        ),
-        StreamProvider<List<Currency>>.value(
-          value: CurrencyDatabaseService().currencies,
         ),
       ],
       child: GestureDetector(
@@ -42,19 +46,39 @@ class _MyAppState extends State<MyApp> {
         child: Consumer<SettingsProvider>(
           builder: (context, settings, _) => MaterialApp(
             debugShowCheckedModeBanner: false,
+            locale: settings.appLang,
+            supportedLocales: S.delegate.supportedLocales,
+            localizationsDelegates: [
+              S.delegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+            ],
             navigatorObservers: [
               FirebaseAnalyticsObserver(analytics: analytics),
             ],
             title: 'Be Thrifty Today',
-            theme: theme,
-            darkTheme: darkTheme,
+            theme: themeSelector(settings.themePref).copyWith(
+              accentColor: settings.accentColor,
+            ),
             initialRoute: SplashScreen.routeName,
-            themeMode: settings.isDarkMode ? ThemeMode.dark : ThemeMode.light,
             routes: routes,
           ),
         ),
       ),
     );
+  }
+
+  ThemeData themeSelector(ThemeOptions option) {
+    switch (option) {
+      case ThemeOptions.light:
+        return theme;
+      case ThemeOptions.dark:
+        return darkTheme;
+      case ThemeOptions.amoled:
+        return amoledTheme;
+      default:
+        return theme;
+    }
   }
 
   setupCloudMessaging() async {

@@ -1,8 +1,6 @@
-import 'package:bethriftytoday/config/utils.dart';
-import 'package:bethriftytoday/screens/home/home.dart';
-import 'package:bethriftytoday/screens/onboarding/profile_setup.dart';
-import 'package:bethriftytoday/services/auth.dart';
-import 'package:bethriftytoday/services/database/user_db.dart';
+import 'package:bethriftytoday/generated/l10n.dart';
+import 'package:bethriftytoday/screens/screens.dart';
+import 'package:bethriftytoday/services/services.dart';
 import 'package:flutter/material.dart';
 
 class BottomSection extends StatefulWidget {
@@ -19,54 +17,51 @@ class _BottomSectionState extends State<BottomSection> {
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        Spacer(),
+        Spacer(flex: 2),
         Container(
           width: MediaQuery.of(context).size.width * 0.8,
           child: Text(
-            'A simple money management app for those who want to be in control of their financial life.',
+            S.of(context).loginTextTagline,
             textAlign: TextAlign.center,
             style: TextStyle(
+              height: 1.6,
               fontSize: 16,
+              fontWeight: FontWeight.w500,
             ),
           ),
         ),
-        SizedBox(height: 20),
-        Text(
-          'For those who want to be in control.',
-          textAlign: TextAlign.center,
-          style: TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.w800,
+        Spacer(flex: 2),
+        Container(
+          width: MediaQuery.of(context).size.width * 0.8,
+          child: FlatButton.icon(
+            onPressed: () => signIn(false),
+            color: Theme.of(context).primaryColor,
+            textColor: Colors.blue[800],
+            padding: const EdgeInsets.symmetric(vertical: 15),
+            icon: Image.asset(
+              'assets/images/google_icon.png',
+              width: 28,
+              height: 28,
+            ),
+            label: Text(
+              S.of(context).loginButtonTextGoogle,
+              style: TextStyle(fontSize: 16),
+            ),
           ),
         ),
-        Spacer(),
+        SizedBox(height: 15),
         Container(
           width: MediaQuery.of(context).size.width * 0.8,
           child: FlatButton(
-            onPressed: () => signIn(false),
-            color: isDarkMode(context) ? Colors.black54 : Colors.white,
-            padding: const EdgeInsets.symmetric(vertical: 14),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Image.asset(
-                  'assets/images/google_icon.png',
-                  width: 28,
-                  height: 28,
-                ),
-                SizedBox(width: 15),
-                Text(
-                  'Login with Google',
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: Theme.of(context).primaryColor,
-                  ),
-                ),
-              ],
+            onPressed: () => signIn(true),
+            padding: const EdgeInsets.symmetric(vertical: 15),
+            child: Text(
+              S.of(context).loginButtonTextGuest,
+              style: TextStyle(fontSize: 16),
             ),
           ),
         ),
-        Spacer(),
+        Spacer(flex: 2),
       ],
     );
   }

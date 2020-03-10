@@ -33,6 +33,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 apply plugin: 'com.google.gms.google-services'
+apply plugin: 'com.google.firebase.crashlytics'
 
 android {
     compileSdkVersion 29
@@ -68,6 +69,10 @@ android {
         release {
             signingConfig signingConfigs.release
         }
+
+        debug {
+            signingConfig signingConfigs.debug
+        }
     }
 }
 
@@ -81,6 +86,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth:19.2.0'
     implementation 'com.google.firebase:firebase-firestore:21.4.1'
     implementation 'com.google.firebase:firebase-messaging:20.1.1'
+    implementation 'com.google.firebase:firebase-crashlytics:17.0.0-beta01'
     implementation 'com.android.support:multidex:1.0.3'
     testImplementation 'junit:junit:4.13'
     androidTestImplementation 'androidx.test:runner:1.2.0'

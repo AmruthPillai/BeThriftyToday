@@ -1,5 +1,5 @@
-import 'package:bethriftytoday/models/user.dart';
-import 'package:bethriftytoday/services/database/user_db.dart';
+import 'package:bethriftytoday/models/models.dart';
+import 'package:bethriftytoday/services/services.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
@@ -74,9 +74,12 @@ class AuthService {
   }
 
   Future deleteUser() async {
-    AuthCredential credential = await getGoogleAuthCredential();
-    AuthResult authResult = await _auth.signInWithCredential(credential);
-    FirebaseUser firebaseUser = authResult.user;
+    FirebaseUser firebaseUser = await _auth.currentUser();
+    if (firebaseUser.providerId != 'firebase') {
+      AuthCredential credential = await getGoogleAuthCredential();
+      AuthResult authResult = await _auth.signInWithCredential(credential);
+      firebaseUser = authResult.user;
+    }
     await firebaseUser.delete();
     signOut();
   }

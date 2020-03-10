@@ -1,3 +1,4 @@
+import 'package:bethriftytoday/generated/l10n.dart';
 import 'package:bethriftytoday/models/models.dart';
 import 'package:bethriftytoday/services/category.dart';
 import 'package:bethriftytoday/services/services.dart';
@@ -29,7 +30,6 @@ class _TransactionBottomSheetState extends State<TransactionBottomSheet> {
   var _amountNode = FocusNode();
 
   bool isExpense = true;
-  final _formKey = GlobalKey<FormState>();
 
   TextEditingController _descriptionController = TextEditingController();
   TextEditingController _amountController = TextEditingController();
@@ -74,7 +74,9 @@ class _TransactionBottomSheetState extends State<TransactionBottomSheet> {
       child: ListView(
         children: <Widget>[
           Text(
-            'Add New Transaction',
+            (widget.transaction == null)
+                ? S.of(context).transactionBottomSheetTextHeadingAdd
+                : S.of(context).transactionBottomSheetTextHeadingUpdate,
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 16,
@@ -84,77 +86,70 @@ class _TransactionBottomSheetState extends State<TransactionBottomSheet> {
           SizedBox(height: 20),
           buildTypeSelector(),
           SizedBox(height: 20),
-          Form(
-            key: _formKey,
-            child: Column(
-              children: <Widget>[
-                buildCategorySelector(),
-                SizedBox(height: 20),
-                TextField(
-                  focusNode: _descriptionNode,
-                  controller: _descriptionController,
-                  textCapitalization: TextCapitalization.words,
-                  onChanged: (v) => setState(() => description = v),
-                  onEditingComplete: () =>
-                      FocusScope.of(context).requestFocus(_amountNode),
-                  decoration: InputDecoration(
-                    labelText: 'Description (optional)',
-                  ),
+          Column(
+            children: <Widget>[
+              buildCategorySelector(),
+              SizedBox(height: 20),
+              TextField(
+                focusNode: _descriptionNode,
+                controller: _descriptionController,
+                textCapitalization: TextCapitalization.words,
+                onChanged: (v) => setState(() => description = v),
+                onEditingComplete: () =>
+                    FocusScope.of(context).requestFocus(_amountNode),
+                decoration: InputDecoration(
+                  labelText:
+                      S.of(context).transactionBottomSheetLabelTextDescription,
                 ),
-                SizedBox(height: 20),
-                TextFormField(
-                  focusNode: _amountNode,
-                  controller: _amountController,
-                  keyboardType: TextInputType.number,
-                  onChanged: (v) => setState(() => amount = double.parse(v)),
-                  validator: (value) {
-                    if (value.isEmpty) {
-                      return 'Please enter an amount.';
-                    }
-                    if (!isNumeric(value)) {
-                      return 'Please enter a valid number.';
-                    }
-                    return null;
-                  },
-                  decoration: InputDecoration(
-                    prefixIcon: Icon(
-                      isExpense ? Icons.remove : Icons.add,
-                      color: Theme.of(context).accentColor,
-                    ),
-                    labelText: 'Amount',
-                  ),
+              ),
+              SizedBox(height: 20),
+              TextField(
+                focusNode: _amountNode,
+                controller: _amountController,
+                keyboardType: TextInputType.numberWithOptions(
+                  decimal: true,
+                  signed: false,
                 ),
-                SizedBox(height: 20),
-                TextFormField(
-                  onTap: () async {
-                    var date = await showDatePicker(
-                      context: context,
-                      initialDate: DateTime.now(),
-                      firstDate: DateTime(1990),
-                      lastDate: DateTime.now(),
-                    );
+                onChanged: (v) => setState(() => amount = double.parse(v)),
+                decoration: InputDecoration(
+                  prefixIcon: Icon(
+                    isExpense ? Icons.remove : Icons.add,
+                    color: Theme.of(context).accentColor,
+                  ),
+                  labelText:
+                      S.of(context).transactionBottomSheetLabelTextAmount,
+                ),
+              ),
+              SizedBox(height: 20),
+              TextField(
+                onTap: () async {
+                  var date = await showDatePicker(
+                    context: context,
+                    initialDate: DateTime.now(),
+                    firstDate: DateTime(1990),
+                    lastDate: DateTime.now(),
+                  );
 
-                    if (date != null) {
-                      setState(() => setDate(date));
-                    }
-                  },
-                  controller: _dateController,
-                  readOnly: true,
-                  decoration: InputDecoration(
-                    labelText: 'Date',
-                  ),
+                  if (date != null) {
+                    setState(() => setDate(date));
+                  }
+                },
+                controller: _dateController,
+                readOnly: true,
+                decoration: InputDecoration(
+                  labelText: S.of(context).transactionBottomSheetLabelTextDate,
                 ),
-                SizedBox(height: 20),
-                ThriftyButton(
-                  title: (widget.transaction != null)
-                      ? 'Update'.toUpperCase()
-                      : 'Add'.toUpperCase(),
-                  onPressed: (this.selectedCategory != null)
-                      ? this.addTransaction
-                      : null,
-                ),
-              ],
-            ),
+              ),
+              SizedBox(height: 20),
+              ThriftyButton(
+                title: (widget.transaction == null)
+                    ? S.of(context).transactionBottomSheetButtonTextAdd
+                    : S.of(context).transactionBottomSheetButtonTextUpdate,
+                onPressed: (this.selectedCategory != null)
+                    ? this.addTransaction
+                    : null,
+              ),
+            ],
           ),
         ],
       ),
@@ -164,7 +159,6 @@ class _TransactionBottomSheetState extends State<TransactionBottomSheet> {
   addTransaction() async {
     FocusScope.of(context).unfocus();
     var user = Provider.of<User>(context, listen: false);
-    _formKey.currentState.save();
 
     Transaction transaction = Transaction(
       id: id,
@@ -250,12 +244,12 @@ class _TransactionBottomSheetState extends State<TransactionBottomSheet> {
       child: Row(
         children: <Widget>[
           TransactionTypeSelector(
-            title: 'Expense',
+            title: S.of(context).transactionBottomSheetButtonTextExpense,
             isSelected: isExpense,
             onPressed: () => setIsExpense(true),
           ),
           TransactionTypeSelector(
-            title: 'Income',
+            title: S.of(context).transactionBottomSheetButtonTextIncome,
             isSelected: !isExpense,
             onPressed: () => setIsExpense(false),
           ),

@@ -1,4 +1,5 @@
 import 'package:bethriftytoday/config/config.dart';
+import 'package:bethriftytoday/generated/l10n.dart';
 import 'package:bethriftytoday/models/models.dart';
 import 'package:bethriftytoday/screens/screens.dart';
 import 'package:bethriftytoday/services/category.dart';
@@ -8,6 +9,7 @@ import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_analytics/observer.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 
 void main() => runApp(MyApp());
@@ -47,6 +49,13 @@ class _MyAppState extends State<MyApp> {
         child: Consumer<SettingsProvider>(
           builder: (context, settings, _) => MaterialApp(
             debugShowCheckedModeBanner: false,
+            locale: Locale('kn'),
+            supportedLocales: S.delegate.supportedLocales,
+            localizationsDelegates: [
+              S.delegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+            ],
             navigatorObservers: [
               FirebaseAnalyticsObserver(analytics: analytics),
             ],

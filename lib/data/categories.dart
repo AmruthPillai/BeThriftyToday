@@ -22,7 +22,7 @@ final List<Category> baseIncomeCategories = [
   ),
   Category(
     id: UniqueKey().toString(),
-    name: 'Friends',
+    name: 'Friends & Family',
     icon: 'income/friends.png',
     type: 'income',
   ),

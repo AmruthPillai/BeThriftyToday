@@ -1,0 +1,11 @@
+{
+  "@@locale": "kn",
+  "currencySetupTextHeadline": "ನಿಮ್ಮ ಕರೆನ್ಸಿ ಏನು?",
+  "loginButtonTextGoogle": "ಗೂಗಲ್ ನೊಂದಿಗೆ ಲಾಗಿನ್ ಮಾಡಿ",
+  "loginButtonTextGuest": "ಅತಿಥಿಯಾಗಿ ಲಾಗಿನ್ ಮಾಡಿ",
+  "loginTextTagline": "ಬಿ ತ್ರಿಫ್ತಿ ಟುಡೇ ಇದು ಸರಳ ಮತ್ತು ನಿಮ್ಮ ಆದಾಯ ಮತ್ತು ವೆಚ್ಚಗಳು ಟ್ರ್ಯಾಕ್ ಸಹಾಯ ಮಾಡುತ್ತದೆ ಸುರಕ್ಷಿತ ಹಣ ನಿರ್ವಹಣೆ ಅಪ್ಲಿಕೇಶನ್.",
+  "profileSetupButtonTextNext": "ಮುಂದುವರಿಸಿ",
+  "profileSetupLabelTextEmailAddress": "ಇಮೇಲ್ ವಿಳಾಸ",
+  "profileSetupLabelTextFullName": "ಪೂರ್ಣ ಹೆಸರು",
+  "profileSetupTextHeadline": "ನೀವು ಯಾರು?"
+}

@@ -1,4 +1,5 @@
 import 'package:bethriftytoday/config/config.dart';
+import 'package:bethriftytoday/generated/l10n.dart';
 import 'package:bethriftytoday/models/models.dart';
 import 'package:flutter/material.dart';
 
@@ -43,7 +44,8 @@ class CategorySelector extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    category.name,
+                    S.of(context).categoryName(
+                        category.name.replaceAll(new RegExp(r'[& ]'), '')),
                     textAlign: TextAlign.center,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(

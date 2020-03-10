@@ -1,4 +1,5 @@
 import 'package:bethriftytoday/config/config.dart';
+import 'package:bethriftytoday/generated/l10n.dart';
 import 'package:bethriftytoday/models/models.dart';
 import 'package:bethriftytoday/shared/shared.dart';
 import 'package:flutter/material.dart';
@@ -42,7 +43,7 @@ class ThriftyOverview extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text(
-                      'YOUR BALANCE',
+                      S.of(context).thriftyOverviewTextBalanceHeading,
                       style: TextStyle(
                         fontSize: 12,
                         color: Colors.white,
@@ -50,20 +51,24 @@ class ThriftyOverview extends StatelessWidget {
                       ),
                     ),
                     SizedBox(height: 4),
-                    (balance != null)
-                        ? Text(
-                            formatAmount(user, balance),
-                            style: TextStyle(
-                              fontSize: 30,
-                              color: Colors.white,
-                              fontWeight: FontWeight.w800,
-                            ),
-                          )
-                        : Container(),
+                    Text(
+                      formatAmount(user, balance),
+                      style: TextStyle(
+                        fontSize: 30,
+                        color: Colors.white,
+                        fontWeight: FontWeight.w800,
+                      ),
+                    ),
                     SizedBox(height: 8),
                     (user.budget != null)
                         ? Text(
-                            'You have spent ${user.currency.symbol} ${calculateAbsoluteSum(expenses).toStringAsFixed(2)} of your total budget of ${user.currency.symbol} ${user.budget.toStringAsFixed(2)} in the month of ${DateFormat('MMMM y').format(DateTime.now())}.',
+                            S.of(context).thriftyOverviewTextBudgetSet(
+                                  user.currency.symbol,
+                                  calculateAbsoluteSum(expenses)
+                                      .toStringAsFixed(2),
+                                  user.budget.toStringAsFixed(2),
+                                  DateFormat('MMMM y').format(DateTime.now()),
+                                ),
                             style: TextStyle(
                               fontSize: 12,
                               color: Colors.white,
@@ -71,7 +76,7 @@ class ThriftyOverview extends StatelessWidget {
                             ),
                           )
                         : Text(
-                            'Tap here to set a monthly budget and manage your expenses efficiently.',
+                            S.of(context).thriftyOverviewTextBudgetUnset,
                             style: TextStyle(
                               fontSize: 12,
                               color: Colors.white,

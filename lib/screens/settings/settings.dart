@@ -1,4 +1,6 @@
 import 'package:bethriftytoday/config/utils.dart';
+import 'package:bethriftytoday/data/languages.dart';
+import 'package:bethriftytoday/generated/l10n.dart';
 import 'package:bethriftytoday/models/models.dart';
 import 'package:bethriftytoday/screens/screens.dart';
 import 'package:bethriftytoday/services/services.dart';
@@ -37,17 +39,18 @@ class _SettingsScreenState extends State<SettingsScreen> {
               children: <Widget>[
                 ThriftyAppBar(canGoBack: true),
                 SizedBox(height: 20),
-                buildHeader('Preferences'),
+                buildHeader(S.of(context).settingsScreenHeaderTitlePreferences),
                 buildAccentColorSelector(settings),
+                buildAppLanguageSelector(settings),
                 buildThemeSelector(settings),
                 buildBiometricsSwitch(settings),
                 Divider(),
-                buildHeader('Account'),
+                buildHeader(S.of(context).settingsScreenHeaderTitleAccount),
                 buildNameSetting(user),
                 buildEmailSetting(user),
                 buildCurrencySetting(user),
                 Divider(),
-                buildHeader('Danger Zone'),
+                buildHeader(S.of(context).settingsScreenHeaderTitleDangerZone),
                 buildDeleteAccount()
               ],
             ),
@@ -64,7 +67,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         color: Theme.of(context).accentColor,
       ),
       title: Text(
-        'Name',
+        S.of(context).settingsScreenSettingTitleName,
         style: TextStyle(
           fontWeight: FontWeight.w500,
         ),
@@ -96,7 +99,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         color: Theme.of(context).accentColor,
       ),
       title: Text(
-        'Email',
+        S.of(context).settingsScreenSettingTitleEmailAddress,
         style: TextStyle(
           fontWeight: FontWeight.w500,
         ),
@@ -118,7 +121,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         color: Theme.of(context).accentColor,
       ),
       title: Text(
-        'Currency',
+        S.of(context).settingsScreenSettingTitleCurrency,
         style: TextStyle(
           fontWeight: FontWeight.w500,
         ),
@@ -165,7 +168,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         color: Colors.red[800],
       ),
       title: Text(
-        'Delete Account',
+        S.of(context).settingsScreenSettingTitleDeleteAccount,
         style: TextStyle(
           color: Colors.red[800],
           fontWeight: FontWeight.w500,
@@ -175,18 +178,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
         showDialog(
           context: context,
           builder: (context) => AlertDialog(
-            title: Text(
-              'Do you really want to delete your account?',
-            ),
-            content: Text(
-              'You will lose all the data (including profile information and you transaction history) when you delete your account. This is an irreversible process, are you sure you want to go through with it?',
-            ),
+            title: Text(S.of(context).deleteAccountDialogTitle),
+            content: Text(S.of(context).deleteAccountDialogContent),
             actions: <Widget>[
               FlatButton(
                 onPressed: () {
                   Navigator.pop(context);
                 },
-                child: Text('No, I don\'t want to leave'),
+                child: Text(S.of(context).deleteAccountDialogButtonTextCancel),
               ),
               FlatButton(
                 onPressed: () async {
@@ -203,7 +202,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   }
                 },
                 child: Text(
-                  'Yes, delete my data',
+                  S.of(context).deleteAccountDialogButtonTextDelete,
                   style: TextStyle(
                     color: Colors.red[800],
                     fontWeight: FontWeight.w500,
@@ -232,13 +231,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
               color: Theme.of(context).accentColor,
             ),
             title: Text(
-              'Biometric Fortification',
+              S.of(context).settingsScreenSettingTitleBiometric,
               style: TextStyle(
                 fontWeight: FontWeight.w500,
               ),
             ),
-            subtitle:
-                Text('Asks for your fingerprint everytime you open the app.'),
+            subtitle: Text(
+              S.of(context).settingsScreenSettingTitleBiometricDescription,
+            ),
             trailing: Switch(
               value: settings.biometricsEnabled,
               activeColor: Theme.of(context).accentColor,
@@ -266,7 +266,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         color: Theme.of(context).accentColor,
       ),
       title: Text(
-        'Theme',
+        S.of(context).settingsScreenSettingTitleTheme,
         style: TextStyle(
           fontWeight: FontWeight.w500,
         ),
@@ -277,17 +277,42 @@ class _SettingsScreenState extends State<SettingsScreen> {
         items: [
           DropdownMenuItem(
             value: ThemeOptions.light,
-            child: Text('Light'),
+            child: Text(S.of(context).settingsScreenSettingTitleThemeLight),
           ),
           DropdownMenuItem(
             value: ThemeOptions.dark,
-            child: Text('Dark'),
+            child: Text(S.of(context).settingsScreenSettingTitleThemeDark),
           ),
           DropdownMenuItem(
             value: ThemeOptions.amoled,
-            child: Text('AMOLED'),
+            child: Text(S.of(context).settingsScreenSettingTitleThemeAMOLED),
           ),
         ],
+      ),
+    );
+  }
+
+  ListTile buildAppLanguageSelector(SettingsProvider settings) {
+    return ListTile(
+      leading: Icon(
+        Icons.language,
+        color: Theme.of(context).accentColor,
+      ),
+      title: Text(
+        S.of(context).settingsScreenSettingTitleLanguage,
+        style: TextStyle(
+          fontWeight: FontWeight.w500,
+        ),
+      ),
+      trailing: DropdownButton<Locale>(
+        onChanged: settings.setAppLanguage,
+        value: settings.appLang,
+        items: languages
+            .map((x) => DropdownMenuItem(
+                  value: Locale(x.code),
+                  child: Text(x.title),
+                ))
+            .toList(),
       ),
     );
   }
@@ -310,7 +335,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         color: Theme.of(context).accentColor,
       ),
       title: Text(
-        'Accent Color',
+        S.of(context).settingsScreenSettingTitleAccentColor,
         style: TextStyle(
           fontWeight: FontWeight.w500,
         ),

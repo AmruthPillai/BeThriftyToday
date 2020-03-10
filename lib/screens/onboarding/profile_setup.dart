@@ -1,4 +1,5 @@
 import 'package:after_layout/after_layout.dart';
+import 'package:bethriftytoday/generated/l10n.dart';
 import 'package:bethriftytoday/models/models.dart';
 import 'package:bethriftytoday/screens/screens.dart';
 import 'package:bethriftytoday/services/services.dart';
@@ -48,7 +49,7 @@ class _ProfileSetupScreenState extends State<ProfileSetupScreen>
           ),
           SizedBox(height: 10),
           Text(
-            'Who are you?',
+            S.of(context).profileSetupTextHeadline,
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 16,
@@ -61,7 +62,7 @@ class _ProfileSetupScreenState extends State<ProfileSetupScreen>
             child: TextField(
               controller: _nameController,
               decoration: InputDecoration(
-                labelText: 'Full Name',
+                labelText: S.of(context).profileSetupLabelTextFullName,
               ),
             ),
           ),
@@ -72,7 +73,7 @@ class _ProfileSetupScreenState extends State<ProfileSetupScreen>
               enabled: isGuest,
               controller: _emailController,
               decoration: InputDecoration(
-                labelText: 'Email Address',
+                labelText: S.of(context).profileSetupLabelTextEmailAddress,
               ),
             ),
           ),
@@ -80,7 +81,7 @@ class _ProfileSetupScreenState extends State<ProfileSetupScreen>
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: ThriftyButton(
-              title: 'NEXT',
+              title: S.of(context).profileSetupButtonTextNext,
               onPressed: () async {
                 if (_nameController.text.isEmpty ||
                     _emailController.text.isEmpty) return;

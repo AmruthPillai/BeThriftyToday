@@ -1,4 +1,5 @@
 import 'package:bethriftytoday/config/config.dart';
+import 'package:bethriftytoday/generated/l10n.dart';
 import 'package:bethriftytoday/models/models.dart';
 import 'package:bethriftytoday/screens/categories/categories.dart';
 import 'package:bethriftytoday/screens/currencies/currencies.dart';
@@ -30,7 +31,7 @@ class ThriftyDrawer extends StatelessWidget {
                     Navigator.pushNamed(context, CategoriesScreen.routeName);
                   },
                   leading: Icon(Icons.category),
-                  title: Text('Categories'),
+                  title: Text(S.of(context).thriftyDrawerTextCategories),
                 ),
                 ListTile(
                   onTap: () {
@@ -38,7 +39,7 @@ class ThriftyDrawer extends StatelessWidget {
                     Navigator.pushNamed(context, CurrenciesScreen.routeName);
                   },
                   leading: Icon(Icons.attach_money),
-                  title: Text('Currencies'),
+                  title: Text(S.of(context).thriftyDrawerTextCurrencies),
                 ),
                 Divider(),
                 ListTile(
@@ -51,7 +52,7 @@ class ThriftyDrawer extends StatelessWidget {
                     );
                   },
                   leading: Icon(Icons.import_export),
-                  title: Text('Export to CSV/JSON'),
+                  title: Text(S.of(context).thriftyDrawerTextExport),
                 ),
                 ListTile(
                   onTap: () {
@@ -59,7 +60,7 @@ class ThriftyDrawer extends StatelessWidget {
                     Navigator.pushNamed(context, SettingsScreen.routeName);
                   },
                   leading: Icon(Icons.settings),
-                  title: Text('Settings'),
+                  title: Text(S.of(context).thriftyDrawerTextSettings),
                 ),
                 Divider(),
                 ListTile(
@@ -71,31 +72,29 @@ class ThriftyDrawer extends StatelessWidget {
                         size: 80,
                         color: Theme.of(context).accentColor,
                       ),
-                      applicationName: 'Be Thrifty Today',
+                      applicationName: S.of(context).appName,
                       applicationLegalese:
-                          'This application is open source and free-to-use, governed under the Apache License 2.0. If you are a developer, please feel free to contribute to the application on GitHub.',
+                          S.of(context).thriftyDrawerTextAboutAppLegalese,
                       applicationVersion: await getVersionCode(),
                       children: [
                         SizedBox(height: 30),
-                        Text(
-                          'If you love the app and use it regularly, please donate as little as you can, enough to keep the app alive and running on it\'s own. Donation details can be found on the GitHub homepage or the website. Thank you so much!',
-                        ),
+                        Text(S.of(context).thriftyDrawerTextAboutFooter),
                       ],
                     );
                   },
                   leading: Icon(Icons.local_library),
-                  title: Text('About the App'),
+                  title: Text(S.of(context).thriftyDrawerTextAbout),
                 ),
                 ListTile(
                   onTap: () {
                     Navigator.pop(context);
                     Share.share(
-                      'Check out this app that helps you manage your income and expenses, safe and secure: https://pillai.xyz/thrifty',
-                      subject: 'Be Thrifty Today!',
+                      S.of(context).thriftyDrawerMessageShare,
+                      subject: S.of(context).appName,
                     );
                   },
                   leading: Icon(Icons.favorite),
-                  title: Text('Share the Love'),
+                  title: Text(S.of(context).thriftyDrawerTextShare),
                 ),
                 ListTile(
                   onTap: () async {
@@ -105,13 +104,13 @@ class ThriftyDrawer extends StatelessWidget {
                     if (await canLaunch(playStoreUrl)) launch(playStoreUrl);
                   },
                   leading: Icon(Icons.rate_review),
-                  title: Text('Rate the App'),
+                  title: Text(S.of(context).thriftyDrawerTextRate),
                 ),
                 Divider(),
                 ListTile(
                   onTap: () => logout(context),
                   leading: Icon(Icons.exit_to_app),
-                  title: Text('Logout'),
+                  title: Text(S.of(context).thriftyDrawerTextLogout),
                 ),
               ],
             ),

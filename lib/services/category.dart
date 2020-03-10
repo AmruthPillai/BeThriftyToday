@@ -86,4 +86,26 @@ class CategoryProvider extends ChangeNotifier {
 
     await this.fetch();
   }
+
+  Future reset() async {
+    final db = await database;
+
+    await db.delete('categories');
+    baseIncomeCategories.forEach((x) async {
+      await db.insert(
+        'categories',
+        x.toJson(),
+        conflictAlgorithm: ConflictAlgorithm.replace,
+      );
+    });
+    baseExpenseCategories.forEach((x) async {
+      await db.insert(
+        'categories',
+        x.toJson(),
+        conflictAlgorithm: ConflictAlgorithm.replace,
+      );
+    });
+
+    await this.fetch();
+  }
 }

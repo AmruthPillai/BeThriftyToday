@@ -31,16 +31,18 @@ class _SplashScreenState extends State<SplashScreen>
     var settings = Provider.of<SettingsProvider>(context);
     SharedPreferences prefs = await SharedPreferences.getInstance();
     try {
+      settings.setAppLanguage(Locale(prefs.getString('appLang')));
       settings.setAccentColor(Color(prefs.getInt('accentColor')));
-      settings.setTheme(ThemeOptions.values[prefs.getInt('themePref')]);
       settings.setBiometricsEnabled(prefs.getBool('biometricsEnabled'));
+      settings.setTheme(ThemeOptions.values[prefs.getInt('themePref')]);
     } catch (_) {
       settings.setAccentColor(thriftyBlue);
+      settings.setAppLanguage(Locale('en'));
+      settings.setBiometricsEnabled(false);
       settings.setTheme(
           MediaQuery.of(context).platformBrightness == Brightness.dark
               ? ThemeOptions.dark
               : ThemeOptions.light);
-      settings.setBiometricsEnabled(false);
     }
   }
 

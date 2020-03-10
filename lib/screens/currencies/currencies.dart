@@ -1,3 +1,4 @@
+import 'package:bethriftytoday/generated/l10n.dart';
 import 'package:bethriftytoday/models/models.dart';
 import 'package:bethriftytoday/screens/screens.dart';
 import 'package:bethriftytoday/services/currency.dart';
@@ -20,8 +21,9 @@ class _CurrenciesScreenState extends State<CurrenciesScreen> {
 
     return Scaffold(
       appBar: AppBar(
+        elevation: 0,
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-        title: Text('Currencies'),
+        title: Text(S.of(context).currenciesScreenAppBarTitle),
       ),
       body: Container(
         margin: const EdgeInsets.all(20),
@@ -48,13 +50,14 @@ class _CurrenciesScreenState extends State<CurrenciesScreen> {
   }
 
   FloatingActionButton buildAddCurrencyButton(
-      CurrencyProvider currencyProvider) {
+    CurrencyProvider currencyProvider,
+  ) {
     return FloatingActionButton(
-      onPressed: () {
-        setState(() {
-          editMode = true;
-        });
-      },
+      elevation: 0,
+      hoverElevation: 0,
+      focusElevation: 0,
+      highlightElevation: 0,
+      onPressed: () => setState(() => editMode = true),
       child: Theme(
         data: ThemeData(),
         child: editMode
@@ -73,9 +76,7 @@ class _CurrenciesScreenState extends State<CurrenciesScreen> {
                     symbol: v,
                   ));
 
-                  setState(() {
-                    editMode = false;
-                  });
+                  setState(() => editMode = false);
                 },
                 decoration: InputDecoration(
                   border: InputBorder.none,

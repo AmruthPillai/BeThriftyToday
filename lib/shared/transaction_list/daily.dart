@@ -1,3 +1,4 @@
+import 'package:bethriftytoday/generated/l10n.dart';
 import 'package:bethriftytoday/models/models.dart';
 import 'package:bethriftytoday/services/services.dart';
 import 'package:bethriftytoday/shared/shared.dart';
@@ -21,7 +22,9 @@ class DailyTransactionList extends StatelessWidget {
             return Padding(
               padding: const EdgeInsets.only(top: 40),
               child: Center(
-                child: Text('There seems to be an error!'),
+                child: Text(
+                  'Something has gone horribly wrong, please try again after some time!',
+                ),
               ),
             );
           }
@@ -63,7 +66,7 @@ class NoTransactionsFound extends StatelessWidget {
           ),
           SizedBox(height: 40),
           Text(
-            'This list is looking a little bit empty...',
+            S.of(context).homeDailyNoTransactionsTextTitle,
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 18,
@@ -72,7 +75,7 @@ class NoTransactionsFound extends StatelessWidget {
           ),
           SizedBox(height: 15),
           Text(
-            'Tap on the + button below to add a new income/expense.',
+            S.of(context).homeDailyNoTransactionsTextSubtitle,
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 14,

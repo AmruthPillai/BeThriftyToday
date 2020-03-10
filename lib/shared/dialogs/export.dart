@@ -1,3 +1,4 @@
+import 'package:bethriftytoday/generated/l10n.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:bethriftytoday/models/models.dart';
 import 'package:bethriftytoday/shared/shared.dart';
@@ -23,18 +24,6 @@ class _ExportDialogState extends State<ExportDialog> {
   TextEditingController _startDateCtrl = TextEditingController();
   TextEditingController _endDateCtrl = TextEditingController();
 
-  setDate(TextEditingController ctrl, DateTime date) {
-    setState(() => ctrl.text = new DateFormat.yMMMMd().format(date));
-  }
-
-  bool isDatePeriodValid() {
-    if (startDate == null || endDate == null) return false;
-    var difference = endDate.difference(startDate);
-    if (difference.isNegative) return false;
-    if (difference.inDays == 0 && (startDate.day == endDate.day)) return false;
-    return true;
-  }
-
   @override
   Widget build(BuildContext context) {
     var user = Provider.of<User>(context);
@@ -48,7 +37,7 @@ class _ExportDialogState extends State<ExportDialog> {
         shrinkWrap: true,
         children: <Widget>[
           Text(
-            'Export as CSV/JSON',
+            S.of(context).exportBottomSheetHeadingText,
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 16,
@@ -72,7 +61,7 @@ class _ExportDialogState extends State<ExportDialog> {
               }
             },
             decoration: InputDecoration(
-              labelText: 'Start Date',
+              labelText: S.of(context).exportBottomSheetLabelTextStartDate,
             ),
           ),
           SizedBox(height: 20),
@@ -92,14 +81,14 @@ class _ExportDialogState extends State<ExportDialog> {
               }
             },
             decoration: InputDecoration(
-              labelText: 'End Date',
+              labelText: S.of(context).exportBottomSheetLabelTextEndDate,
             ),
           ),
           SizedBox(height: 5),
           isDatePeriodValid()
               ? Container()
               : Text(
-                  'Start Date must be earlier than End Date',
+                  S.of(context).exportBottomSheetTextDateValidationError,
                   style: TextStyle(
                     fontSize: 12,
                     color: Colors.grey,
@@ -121,17 +110,17 @@ class _ExportDialogState extends State<ExportDialog> {
             items: [
               DropdownMenuItem(
                 value: 'csv',
-                child: Text('Comma-Separated Values (CSV)'),
+                child: Text(S.of(context).exportBottomSheetDropdownTextCSV),
               ),
               DropdownMenuItem(
                 value: 'json',
-                child: Text('JavaScript Object Notation (JSON)'),
+                child: Text(S.of(context).exportBottomSheetDropdownTextJSON),
               ),
             ],
           ),
           SizedBox(height: 20),
           ThriftyButton(
-            title: 'EXPORT',
+            title: S.of(context).exportBottomSheetButtonTextExport,
             onPressed: (isDatePeriodValid() && downloadLink == null && !loading)
                 ? () => beginExport(user)
                 : null,
@@ -152,7 +141,7 @@ class _ExportDialogState extends State<ExportDialog> {
                   textColor: Theme.of(context).accentColor,
                   icon: Icon(Icons.cloud_download),
                   label: Text(
-                    'Download',
+                    S.of(context).exportBottomSheetButtonTextDownload,
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w500,
@@ -165,7 +154,19 @@ class _ExportDialogState extends State<ExportDialog> {
     );
   }
 
-  beginExport(User user) async {
+  setDate(TextEditingController ctrl, DateTime date) {
+    setState(() => ctrl.text = new DateFormat.yMMMMd().format(date));
+  }
+
+  bool isDatePeriodValid() {
+    if (startDate == null || endDate == null) return false;
+    var difference = endDate.difference(startDate);
+    if (difference.isNegative) return false;
+    if (difference.inDays == 0 && (startDate.day == endDate.day)) return false;
+    return true;
+  }
+
+  Future beginExport(User user) async {
     setState(() => loading = true);
     var url =
         'https://us-central1-be-thrifty-today.cloudfunctions.net/export/$format?uid=${user.uid}&startDate=${startDate.toIso8601String()}&endDate=${endDate.toIso8601String()}';

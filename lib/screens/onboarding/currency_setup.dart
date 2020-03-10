@@ -1,3 +1,4 @@
+import 'package:bethriftytoday/generated/l10n.dart';
 import 'package:bethriftytoday/models/models.dart';
 import 'package:bethriftytoday/screens/screens.dart';
 import 'package:bethriftytoday/services/currency.dart';
@@ -31,7 +32,7 @@ class _CurrencySetupScreenState extends State<CurrencySetupScreen> {
               ),
               SizedBox(height: 15),
               Text(
-                'What\'s your currency?',
+                S.of(context).currencySetupTextHeadline,
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,

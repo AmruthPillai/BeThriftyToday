@@ -1,3 +1,4 @@
+import 'package:bethriftytoday/generated/l10n.dart';
 import 'package:bethriftytoday/models/models.dart';
 import 'package:bethriftytoday/services/services.dart';
 import 'package:flutter/material.dart';
@@ -40,15 +41,20 @@ class _UpdateBudgetDialogState extends State<UpdateBudgetDialog> {
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             Text(
-              'Please enter a monthly budget that you feel is conservative according to your spending habits.',
+              S.of(context).updateBudgetBottomSheetHeadingText,
               textAlign: TextAlign.center,
+              style: TextStyle(
+                height: 1.5,
+                fontSize: 16,
+                fontWeight: FontWeight.w500,
+              ),
             ),
             SizedBox(height: 20),
             TextField(
               controller: _budgetController,
               keyboardType: TextInputType.number,
               decoration: InputDecoration(
-                labelText: 'Budget',
+                labelText: S.of(context).updateBudgetBottomSheetLabelTextBudget,
               ),
             ),
             SizedBox(height: 10),
@@ -62,7 +68,9 @@ class _UpdateBudgetDialogState extends State<UpdateBudgetDialog> {
                   },
                   textColor: Colors.red,
                   icon: Icon(Icons.clear),
-                  label: Text('CLEAR'),
+                  label: Text(
+                    S.of(context).updateBudgetBottomSheetButtonTextClear,
+                  ),
                 ),
                 FlatButton.icon(
                   textColor: Theme.of(context).accentColor,
@@ -74,7 +82,9 @@ class _UpdateBudgetDialogState extends State<UpdateBudgetDialog> {
                     Navigator.pop(context);
                   },
                   icon: Icon(Icons.check),
-                  label: Text('SET BUDGET'),
+                  label: Text(
+                    S.of(context).updateBudgetBottomSheetButtonTextSetBudget,
+                  ),
                 ),
               ],
             ),

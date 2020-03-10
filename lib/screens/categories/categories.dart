@@ -1,3 +1,5 @@
+import 'package:bethriftytoday/config/utils.dart';
+import 'package:bethriftytoday/generated/l10n.dart';
 import 'package:bethriftytoday/models/models.dart';
 import 'package:bethriftytoday/services/category.dart';
 import 'package:bethriftytoday/shared/dialogs/add_category.dart';
@@ -24,16 +26,22 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
         key: _scaffoldKey,
         appBar: AppBar(
           elevation: 0,
-          title: Text('Categories'),
+          title: Text(S.of(context).categoriesScreenAppBarTitle),
           backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+          actions: <Widget>[
+            IconButton(
+              icon: Icon(Icons.refresh),
+              onPressed: () => resetCategories(categoryProvider),
+            )
+          ],
           bottom: TabBar(
             indicatorColor: Theme.of(context).accentColor,
             tabs: <Widget>[
               Tab(
-                child: Text('Income'),
+                child: Text(S.of(context).categoriesScreenTabBarTextIncome),
               ),
               Tab(
-                child: Text('Expense'),
+                child: Text(S.of(context).categoriesScreenTabBarTextExpense),
               ),
             ],
           ),
@@ -82,6 +90,28 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
     );
   }
 
+  resetCategories(CategoryProvider categoryProvider) {
+    _scaffoldKey.currentState.showSnackBar(SnackBar(
+      content: Text(
+        S.of(context).categoriesScreenSnackbarTextResetCategoriesConfirmation,
+      ),
+      action: SnackBarAction(
+          label: 'Yes',
+          onPressed: () async {
+            await categoryProvider.reset();
+
+            _scaffoldKey.currentState.showSnackBar(SnackBar(
+              duration: Duration(seconds: 2),
+              content: Text(
+                S
+                    .of(context)
+                    .categoriesScreenSnackbarTextResetCategoriesSuccess,
+              ),
+            ));
+          }),
+    ));
+  }
+
   Widget buildAddButton(Function onTap) {
     return InkWell(
       onTap: onTap,
@@ -103,7 +133,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
             ),
             SizedBox(height: 10),
             Text(
-              'Add New',
+              S.of(context).categoriesScreenButtonTextAddNew,
               overflow: TextOverflow.ellipsis,
             ),
           ],
@@ -118,25 +148,16 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
   ) {
     return categories
         .map((x) => InkWell(
-              onLongPress: (x.id.contains('custom'))
-                  ? () async {
-                      await categoryProvider.delete(x);
+              onLongPress: () async {
+                await categoryProvider.delete(x);
 
-                      _scaffoldKey.currentState.showSnackBar(SnackBar(
-                        content: Text(
-                          'Your custom category has been deleted',
-                          textAlign: TextAlign.center,
-                        ),
-                      ));
-                    }
-                  : () {
-                      _scaffoldKey.currentState.showSnackBar(SnackBar(
-                        content: Text(
-                          'You can\'t delete an original category',
-                          textAlign: TextAlign.center,
-                        ),
-                      ));
-                    },
+                _scaffoldKey.currentState.showSnackBar(SnackBar(
+                  content: Text(
+                    S.of(context).categoriesScreenSnackbarTextDeleteMessage,
+                    textAlign: TextAlign.center,
+                  ),
+                ));
+              },
               child: Container(
                 key: Key(x.id),
                 padding: const EdgeInsets.all(16),
@@ -158,7 +179,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                     ),
                     SizedBox(height: 12),
                     Text(
-                      x.name,
+                      S.of(context).categoryName(transformCategoryToKey(x)),
                       overflow: TextOverflow.ellipsis,
                     ),
                   ],

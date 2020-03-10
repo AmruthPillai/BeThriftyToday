@@ -1,3 +1,4 @@
+import 'package:bethriftytoday/generated/l10n.dart';
 import 'package:bethriftytoday/screens/screens.dart';
 import 'package:bethriftytoday/services/services.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +21,7 @@ class _BottomSectionState extends State<BottomSection> {
         Container(
           width: MediaQuery.of(context).size.width * 0.8,
           child: Text(
-            'Be Thrifty Today is a simple and secure money management app that helps you track your incomes and expenses.',
+            S.of(context).loginTextTagline,
             textAlign: TextAlign.center,
             style: TextStyle(
               height: 1.6,
@@ -43,7 +44,7 @@ class _BottomSectionState extends State<BottomSection> {
               height: 28,
             ),
             label: Text(
-              'Login with Google',
+              S.of(context).loginButtonTextGoogle,
               style: TextStyle(fontSize: 16),
             ),
           ),
@@ -55,7 +56,7 @@ class _BottomSectionState extends State<BottomSection> {
             onPressed: () => signIn(true),
             padding: const EdgeInsets.symmetric(vertical: 15),
             child: Text(
-              'Login as Guest',
+              S.of(context).loginButtonTextGuest,
               style: TextStyle(fontSize: 16),
             ),
           ),

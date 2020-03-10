@@ -44,8 +44,7 @@ class CategorySelector extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    S.of(context).categoryName(
-                        category.name.replaceAll(new RegExp(r'[& ]'), '')),
+                    category.name,
                     textAlign: TextAlign.center,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(

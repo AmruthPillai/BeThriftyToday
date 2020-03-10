@@ -100,8 +100,7 @@ class TransactionListTile extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Text(
-          S.of(context).categoryName(
-              transaction.category.name.replaceAll(new RegExp(r'[& ]'), '')),
+          transaction.category.name,
           style: transactionTitleStyle,
         ),
         SizedBox(height: 2),

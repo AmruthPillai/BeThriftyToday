@@ -69,7 +69,7 @@
   "transactionBottomSheetButtonTextUpdate": "METTRE À JOUR",
   "transactionBottomSheetLabelTextAmount": "Montant",
   "transactionBottomSheetLabelTextDate": "Date",
-  "transactionBottomSheetLabelTextDescription": "Description (facultatif)",
+  "transactionBottomSheetLabelTextDescription": "Description (facultative)",
   "transactionBottomSheetTextHeadingAdd": "Ajouter une nouvelle transaction",
   "transactionBottomSheetTextHeadingUpdate": "Mettre à jour la transaction",
   "transactionListHiddenTransactionText": "{howMany, plural, one {1 transaction cachée} other {{howMany} transactions cachées}}",

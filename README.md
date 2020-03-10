@@ -86,7 +86,7 @@ Oh, and in line with saving the best for last... There’s also a dark mode! �
 - Allow users to add/delete any categories or even reset categories list to their original state
 - Base code modifications made to allow for further localization through translation of strings
 
-#### v1.1.0 (12)
+#### v1.1.0 (13)
 
 - Added Spanish (Espanõl) Language to the app (Credits: <a href="https://github.com/moralesnery">@moralesnery</a>)
 

@@ -85,6 +85,18 @@ As mentioned above, I've used a simple but uncrackable method to encrypt the sen
 
 <a href="https://user-images.githubusercontent.com/1134738/76155841-f291b980-6117-11ea-9f81-69d8abab13ed.png" target="_blank"><img src="https://user-images.githubusercontent.com/1134738/76155841-f291b980-6117-11ea-9f81-69d8abab13ed.png" height="400" alt="Snapshot of the Database" /></a>
 
+## Translation
+
+Localization was possible using the Flutter Intl VS Code Plugin and Google's ARB (Application Resource Bundle) format which is powerful enough to handle some of the best usecases for language translations.
+
+To translate the app into your own language, all you need to do are the following steps:
+1) Fork the repository to your own account
+2) Go to `lib/l10n` folder and clone the `intl_en.arb` into another file `intl_{code}.arb` where `code` is your ISO-639-1 (2 Alpha) Language Code.
+3) Once you are done with the translation of strings, open a pull request to merge with the `develop` branch of the original repository.
+4) Wait for me to approve the pull request so that I can generate the corresponding dart files and make changes in the settings screen. (Don't worry, I'm pretty quick when it comes to changes)
+
+That's about it. Please do contribute as much as possible to the open source project, it would mean a lot to me as it would reach a whole lot of people out there. Thank you so much!
+
 ## License
 
 The source code and product are governed under the Apache License 2.0 which can read here: [LICENSE](https://github.com/AmruthPillai/BeThriftyToday/blob/master/LICENSE). It allows for open source contribution and resharing of work :)

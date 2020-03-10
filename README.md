@@ -68,9 +68,11 @@ Oh, and in line with saving the best for last... There’s also a dark mode! �
 - Your data is completely secure, there is no social aspect to this application. Your finances are yours alone, and you have complete control over them.
 - Set up biometric authentication in the Settings page so the app will allow access only to you and no one else using the phone. It uses your device’s biometrics, so you don’t need to set it up all over again. (available only on phones with fingerprint readers)
 - You can request to add new categories or new features by dropping me an email at bethriftytoday@gmail.com and I’ll add them as soon as I have the time to work on it.
-- This app is ad-free, and always will be.
+- **This app is ad-free, and always will be.**
 
-### Features that were released in v1.1.0
+## Changelog
+
+#### v1.1.0 (10)
 
 - You can now choose between 3 themes (Light, Dark and AMOLED)
 - You can pick any accent colour from the choices, making it completely personalisable
@@ -78,6 +80,15 @@ Oh, and in line with saving the best for last... There’s also a dark mode! �
 - You can now create your own income/expense categories
 - You can now enter your own currency symbols and use them within the app
 - All values now have decimal places up to 2 places
+
+#### v1.1.0 (11)
+
+- Allow users to add/delete any categories or even reset categories list to their original state
+- Base code modifications made to allow for further localization through translation of strings
+
+#### v1.1.0 (12)
+
+- Added Spanish (Espanõl) Language to the app (Credits: <a href="https://github.com/moralesnery">@moralesnery</a>)
 
 ## Security
 

@@ -92,10 +92,14 @@ Oh, and in line with saving the best for last... There’s also a dark mode! �
 
 #### v1.1.0 (15)
 
-- Added French Language Support, thanks to @Levkoje 
+- Added French (Français) Language Support, (Credits: <a href="https://github.com/Levkoje">@Levkoje</a>)
 - Fixed issue where preferences and settings were not being saved
 - Fixed translating Category Name in the Transaction List Tile
 - Allow option to reset currencies, just like resetting categories
+
+#### v1.1.0 (16)
+
+- Added Kannada (ಕನ್ನಡ) Language Support
 
 ## Security
 
@@ -108,10 +112,11 @@ As mentioned above, I've used a simple but uncrackable method to encrypt the sen
 Localization was possible using the Flutter Intl VS Code Plugin and Google's ARB (Application Resource Bundle) format which is powerful enough to handle some of the best usecases for language translations.
 
 To translate the app into your own language, all you need to do are the following steps:
-1) Fork the repository to your own account
-2) Go to `lib/l10n` folder and clone the `intl_en.arb` into another file `intl_{code}.arb` where `code` is your ISO-639-1 (2 Alpha) Language Code.
-3) Once you are done with the translation of strings, open a pull request to merge with the `develop` branch of the original repository.
-4) Wait for me to approve the pull request so that I can generate the corresponding dart files and make changes in the settings screen. (Don't worry, I'm pretty quick when it comes to changes)
+
+1. Fork the repository to your own account
+2. Go to `lib/l10n` folder and clone the `intl_en.arb` into another file `intl_{code}.arb` where `code` is your ISO-639-1 (2 Alpha) Language Code.
+3. Once you are done with the translation of strings, open a pull request to merge with the `develop` branch of the original repository.
+4. Wait for me to approve the pull request so that I can generate the corresponding dart files and make changes in the settings screen. (Don't worry, I'm pretty quick when it comes to changes)
 
 That's about it. Please do contribute as much as possible to the open source project, it would mean a lot to me as it would reach a whole lot of people out there. Thank you so much!
 

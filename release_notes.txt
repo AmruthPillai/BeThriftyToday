@@ -1,4 +1,1 @@
-- Added French Language Support, thanks to @Levkoje 
-- Fixed issue where preferences and settings were not being saved
-- Fixed translating Category Name in the Transaction List Tile
-- Allow option to reset currencies, just like resetting categories
+- Added Kannada (ಕನ್ನಡ) Language Support

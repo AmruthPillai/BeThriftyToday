@@ -71,6 +71,9 @@ class _AddCategoryDialogState extends State<AddCategoryDialog> {
   @override
   Widget build(BuildContext context) {
     var categoryProvider = Provider.of<CategoryProvider>(context);
+    var type = widget.type == 'income'
+        ? S.of(context).categoriesScreenTabBarTextIncome
+        : S.of(context).categoriesScreenTabBarTextExpense;
 
     return Container(
       margin: EdgeInsets.only(
@@ -81,8 +84,7 @@ class _AddCategoryDialogState extends State<AddCategoryDialog> {
         shrinkWrap: true,
         children: <Widget>[
           Text(
-            S.of(context).addCategoryBottomSheetHeadingText(
-                '${widget.type[0].toUpperCase()}${widget.type.substring(1)}'),
+            S.of(context).addCategoryBottomSheetHeadingText(type),
             textAlign: TextAlign.center,
             style: TextStyle(
               fontWeight: FontWeight.w500,

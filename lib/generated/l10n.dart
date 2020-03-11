@@ -220,7 +220,7 @@ class S {
 
   String get deleteAccountDialogContent {
     return Intl.message(
-      'You will lose all the data (including profile information and you transaction history) when you delete your account. This is an irreversible process, are you sure you want to go through with it?',
+      'You will lose all the data (including profile information and your transaction history) when you delete your account. This is an irreversible process, are you sure you want to go through with it?',
       name: 'deleteAccountDialogContent',
       desc: '',
       args: [],
@@ -328,7 +328,7 @@ class S {
 
   String get loginTextTagline {
     return Intl.message(
-      'Be Thrifty Today is a simple and secure money management app that helps you track your incomes and expenses.',
+      'Be Thrifty Today is a simple and secure money management app that helps you track your income and expenses.',
       name: 'loginTextTagline',
       desc: '',
       args: [],
@@ -409,7 +409,7 @@ class S {
 
   String get settingsScreenSettingTitleBiometric {
     return Intl.message(
-      'Biometric Fortification',
+      'Biometric Security',
       name: 'settingsScreenSettingTitleBiometric',
       desc: '',
       args: [],
@@ -418,7 +418,7 @@ class S {
 
   String get settingsScreenSettingTitleBiometricDescription {
     return Intl.message(
-      'Asks for your fingerprint everytime you open the app.',
+      'Asks for your fingerprint every time you open the app.',
       name: 'settingsScreenSettingTitleBiometricDescription',
       desc: '',
       args: [],
@@ -463,7 +463,7 @@ class S {
 
   String get settingsScreenSettingTitleName {
     return Intl.message(
-      'Name',
+      'Full Name',
       name: 'settingsScreenSettingTitleName',
       desc: '',
       args: [],
@@ -526,7 +526,7 @@ class S {
 
   String get thriftyDrawerTextAboutAppLegalese {
     return Intl.message(
-      'This application is open source and free-to-use, governed under the Apache License 2.0. If you are a developer, please feel free to contribute to the application on GitHub.',
+      'This application is open-source and free-to-use, governed under the Apache License 2.0. If you are a developer, please feel free to contribute to the application on GitHub.',
       name: 'thriftyDrawerTextAboutAppLegalese',
       desc: '',
       args: [],
@@ -535,7 +535,7 @@ class S {
 
   String get thriftyDrawerTextAboutFooter {
     return Intl.message(
-      'If you love the app and use it regularly, please donate as little as you can, enough to keep the app alive and running on it\'s own. Donation details can be found on the GitHub homepage or the website. Thank you so much!',
+      'If you love the app and use it regularly, please donate as little as you can, enough to keep the app alive and running on its own. Donation details can be found on the GitHub homepage or the website. Thank you so much!',
       name: 'thriftyDrawerTextAboutFooter',
       desc: '',
       args: [],
@@ -766,7 +766,7 @@ class AppLocalizationDelegate extends LocalizationsDelegate<S> {
 
   List<Locale> get supportedLocales {
     return const <Locale>[
-      Locale('es', ''), Locale('en', ''), Locale('fr', ''),
+      Locale('es', ''), Locale('kn', ''), Locale('en', ''), Locale('fr', ''),
     ];
   }
 

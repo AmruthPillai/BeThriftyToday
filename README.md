@@ -90,6 +90,13 @@ Oh, and in line with saving the best for last... There’s also a dark mode! �
 
 - Added Spanish (Espanõl) Language to the app (Credits: <a href="https://github.com/moralesnery">@moralesnery</a>)
 
+#### v1.1.0 (15)
+
+- Added French Language Support, thanks to @Levkoje 
+- Fixed issue where preferences and settings were not being saved
+- Fixed translating Category Name in the Transaction List Tile
+- Allow option to reset currencies, just like resetting categories
+
 ## Security
 
 As mentioned above, I've used a simple but uncrackable method to encrypt the sensitive information of a user's transactions so you can use the app in peace, knowing that no one else can ever read your data except you. In the spirit of complete transparency, here's a snapshot of the database

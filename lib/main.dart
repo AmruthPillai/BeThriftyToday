@@ -57,7 +57,7 @@ class _MyAppState extends State<MyApp> {
               FirebaseAnalyticsObserver(analytics: analytics),
             ],
             title: 'Be Thrifty Today',
-            theme: themeSelector(settings.themePref).copyWith(
+            theme: themeSelector(settings.theme).copyWith(
               accentColor: settings.accentColor,
             ),
             initialRoute: SplashScreen.routeName,

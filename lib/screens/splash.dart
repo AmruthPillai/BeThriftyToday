@@ -28,22 +28,18 @@ class _SplashScreenState extends State<SplashScreen>
   }
 
   checkUserPreferences() async {
-    var settings = Provider.of<SettingsProvider>(context);
+    var settings = Provider.of<SettingsProvider>(context, listen: false);
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    try {
-      settings.setAppLanguage(Locale(prefs.getString('appLang')));
-      settings.setAccentColor(Color(prefs.getInt('accentColor')));
-      settings.setBiometricsEnabled(prefs.getBool('biometricsEnabled'));
-      settings.setTheme(ThemeOptions.values[prefs.getInt('themePref')]);
-    } catch (_) {
-      settings.setAccentColor(thriftyBlue);
-      settings.setAppLanguage(Locale('en'));
-      settings.setBiometricsEnabled(false);
-      settings.setTheme(
-          MediaQuery.of(context).platformBrightness == Brightness.dark
-              ? ThemeOptions.dark
-              : ThemeOptions.light);
-    }
+
+    int theme = prefs.getInt('theme') ?? 0;
+    String appLang = prefs.getString('appLang') ?? 'en';
+    int color = prefs.getInt('accentColor') ?? thriftyBlue.value;
+    bool biometricsEnabled = prefs.getBool('biometricsEnabled') ?? false;
+
+    settings.setAccentColor(Color(color));
+    settings.setAppLanguage(Locale(appLang));
+    settings.setTheme(ThemeOptions.values[theme]);
+    settings.setBiometricsEnabled(biometricsEnabled);
   }
 
   _checkIfUserIsLoggedIn() async {

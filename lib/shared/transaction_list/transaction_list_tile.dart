@@ -1,4 +1,5 @@
 import 'package:bethriftytoday/config/config.dart';
+import 'package:bethriftytoday/generated/l10n.dart';
 import 'package:bethriftytoday/models/models.dart';
 import 'package:bethriftytoday/services/services.dart';
 import 'package:bethriftytoday/shared/shared.dart';
@@ -99,7 +100,9 @@ class TransactionListTile extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Text(
-          transaction.category.name,
+          S
+              .of(context)
+              .categoryName(transformCategoryToKey(transaction.category)),
           style: transactionTitleStyle,
         ),
         SizedBox(height: 2),

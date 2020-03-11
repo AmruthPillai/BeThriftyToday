@@ -273,7 +273,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       ),
       trailing: DropdownButton<ThemeOptions>(
         onChanged: settings.setTheme,
-        value: settings.themePref,
+        value: settings.theme,
         items: [
           DropdownMenuItem(
             value: ThemeOptions.light,

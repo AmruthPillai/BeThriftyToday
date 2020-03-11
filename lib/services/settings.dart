@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:bethriftytoday/config/colors.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 enum ThemeOptions { light, dark, amoled }
@@ -7,19 +6,12 @@ enum ThemeOptions { light, dark, amoled }
 class SettingsProvider extends ChangeNotifier {
   Locale appLang;
   Color accentColor;
-  ThemeOptions themePref;
+  ThemeOptions theme;
   bool biometricsEnabled;
-
-  SettingsProvider() {
-    appLang = Locale('en');
-    accentColor = thriftyBlue;
-    biometricsEnabled = false;
-    themePref = ThemeOptions.light;
-  }
 
   setAppLanguage(Locale locale) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setString('accentColor', locale.languageCode);
+    await prefs.setString('appLang', locale.languageCode);
     appLang = locale;
     notifyListeners();
   }
@@ -33,8 +25,8 @@ class SettingsProvider extends ChangeNotifier {
 
   setTheme(ThemeOptions themeOption) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setInt('themePref', themeOption.index);
-    themePref = themeOption;
+    await prefs.setInt('theme', themeOption.index);
+    theme = themeOption;
     notifyListeners();
   }
 

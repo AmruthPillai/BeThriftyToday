@@ -35,8 +35,7 @@ class _BottomSectionState extends State<BottomSection> {
           width: MediaQuery.of(context).size.width * 0.8,
           child: FlatButton.icon(
             onPressed: () => signIn(false),
-            color: Theme.of(context).primaryColor,
-            textColor: Colors.blue[800],
+            textColor: Theme.of(context).accentColor,
             padding: const EdgeInsets.symmetric(vertical: 15),
             icon: Image.asset(
               'assets/images/google_icon.png',

@@ -18,6 +18,10 @@ final List<Language> languages = [
     title: 'French (Français)',
   ),
   Language(
+    code: 'kn',
+    title: 'Kannada (ಕನ್ನಡ)',
+  ),
+  Language(
     code: 'es',
     title: 'Spanish (Español)',
   ),

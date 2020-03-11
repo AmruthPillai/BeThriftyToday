@@ -96,7 +96,8 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
         S.of(context).categoriesScreenSnackbarTextResetCategoriesConfirmation,
       ),
       action: SnackBarAction(
-          label: 'Yes',
+          label:
+              S.of(context).categoriesScreenSnackbarTextResetCategoriesAction,
           onPressed: () async {
             await categoryProvider.reset();
 

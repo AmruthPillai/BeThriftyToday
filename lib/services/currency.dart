@@ -79,4 +79,19 @@ class CurrencyProvider extends ChangeNotifier {
 
     await this.fetch();
   }
+
+  Future reset() async {
+    final db = await database;
+
+    await db.delete('currencies');
+    baseCurrencies.forEach((x) async {
+      await db.insert(
+        'currencies',
+        x.toJson(),
+        conflictAlgorithm: ConflictAlgorithm.replace,
+      );
+    });
+
+    await this.fetch();
+  }
 }

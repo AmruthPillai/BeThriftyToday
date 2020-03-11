@@ -14,36 +14,46 @@ class CurrenciesScreen extends StatefulWidget {
 
 class _CurrenciesScreenState extends State<CurrenciesScreen> {
   bool editMode = false;
+  GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
     var currencyProvider = Provider.of<CurrencyProvider>(context);
 
     return Scaffold(
+      key: _scaffoldKey,
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         title: Text(S.of(context).currenciesScreenAppBarTitle),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.refresh),
+            onPressed: () => resetCurrencies(currencyProvider),
+          )
+        ],
       ),
-      body: Container(
-        margin: const EdgeInsets.all(20),
-        child: GridView.count(
-          crossAxisCount: 4,
-          mainAxisSpacing: 25,
-          crossAxisSpacing: 25,
-          children: <Widget>[
-            ...currencyProvider.currencies
-                .map((x) => CurrencyCircle(
-                      currency: x,
-                      onPressed: () {
-                        if (x.id.contains('custom')) {
-                          currencyProvider.delete(x);
-                        }
-                      },
-                    ))
-                .toList(),
-            buildAddCurrencyButton(currencyProvider),
-          ],
+      body: Builder(
+        builder: (context) => Container(
+          margin: const EdgeInsets.all(20),
+          child: GridView.count(
+            crossAxisCount: 4,
+            mainAxisSpacing: 25,
+            crossAxisSpacing: 25,
+            children: <Widget>[
+              ...currencyProvider.currencies
+                  .map((x) => CurrencyCircle(
+                        currency: x,
+                        onPressed: () {
+                          if (x.id.contains('custom')) {
+                            currencyProvider.delete(x);
+                          }
+                        },
+                      ))
+                  .toList(),
+              buildAddCurrencyButton(currencyProvider),
+            ],
+          ),
         ),
       ),
     );
@@ -54,9 +64,7 @@ class _CurrenciesScreenState extends State<CurrenciesScreen> {
   ) {
     return FloatingActionButton(
       elevation: 0,
-      hoverElevation: 0,
-      focusElevation: 0,
-      highlightElevation: 0,
+      heroTag: 'add_currency',
       onPressed: () => setState(() => editMode = true),
       child: Theme(
         data: ThemeData(),
@@ -89,5 +97,28 @@ class _CurrenciesScreenState extends State<CurrenciesScreen> {
               ),
       ),
     );
+  }
+
+  resetCurrencies(CurrencyProvider currencyProvider) {
+    _scaffoldKey.currentState.showSnackBar(SnackBar(
+      content: Text(
+        S.of(context).currenciesScreenSnackbarTextResetCurrenciesConfirmation,
+      ),
+      action: SnackBarAction(
+          label:
+              S.of(context).currenciesScreenSnackbarTextResetCurrenciesAction,
+          onPressed: () async {
+            await currencyProvider.reset();
+
+            _scaffoldKey.currentState.showSnackBar(SnackBar(
+              duration: Duration(seconds: 2),
+              content: Text(
+                S
+                    .of(context)
+                    .currenciesScreenSnackbarTextResetCurrenciesSuccess,
+              ),
+            ));
+          }),
+    ));
   }
 }

@@ -101,6 +101,15 @@ class S {
     );
   }
 
+  String get categoriesScreenSnackbarTextResetCategoriesAction {
+    return Intl.message(
+      'Yes',
+      name: 'categoriesScreenSnackbarTextResetCategoriesAction',
+      desc: '',
+      args: [],
+    );
+  }
+
   String get categoriesScreenSnackbarTextResetCategoriesConfirmation {
     return Intl.message(
       'Are you sure you want to reset all categories to the original?',
@@ -150,6 +159,33 @@ class S {
     return Intl.message(
       'Currencies',
       name: 'currenciesScreenAppBarTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get currenciesScreenSnackbarTextResetCurrenciesAction {
+    return Intl.message(
+      'Yes',
+      name: 'currenciesScreenSnackbarTextResetCurrenciesAction',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get currenciesScreenSnackbarTextResetCurrenciesConfirmation {
+    return Intl.message(
+      'Are you sure you want to reset all currencies to the original?',
+      name: 'currenciesScreenSnackbarTextResetCurrenciesConfirmation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get currenciesScreenSnackbarTextResetCurrenciesSuccess {
+    return Intl.message(
+      'All currencies have been reset successfully',
+      name: 'currenciesScreenSnackbarTextResetCurrenciesSuccess',
       desc: '',
       args: [],
     );
@@ -730,7 +766,7 @@ class AppLocalizationDelegate extends LocalizationsDelegate<S> {
 
   List<Locale> get supportedLocales {
     return const <Locale>[
-      Locale('es', ''), Locale('en', ''),
+      Locale('es', ''), Locale('en', ''), Locale('fr', ''),
     ];
   }
 

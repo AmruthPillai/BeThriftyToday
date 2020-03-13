@@ -111,9 +111,8 @@ class ThriftyOverview extends StatelessWidget {
         radius: (35 - 6).toDouble(),
         backgroundColor: Theme.of(context).accentColor,
         child: Text(
-          ((calculateAbsoluteSum(expenses) / user.budget) * 100)
-                  .toStringAsFixed(0) +
-              '%',
+          calculatePercentage(expenses, user),
+          overflow: TextOverflow.ellipsis,
           style: TextStyle(
             fontSize: 15,
             color: Colors.white,
@@ -122,5 +121,11 @@ class ThriftyOverview extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  String calculatePercentage(List<Transaction> expenses, User user) {
+    return ((calculateAbsoluteSum(expenses) / user.budget) * 100)
+            .toStringAsFixed(0) +
+        '%';
   }
 }

@@ -85,7 +85,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "thriftyDrawerMessageShare" : MessageLookupByLibrary.simpleMessage("Check out this app that helps you manage your income and expenses, safe and secure: https://pillai.xyz/thrifty"),
     "thriftyDrawerTextAbout" : MessageLookupByLibrary.simpleMessage("About the App"),
     "thriftyDrawerTextAboutAppLegalese" : MessageLookupByLibrary.simpleMessage("This application is open-source and free-to-use, governed under the Apache License 2.0. If you are a developer, please feel free to contribute to the application on GitHub."),
-    "thriftyDrawerTextAboutFooter" : MessageLookupByLibrary.simpleMessage("If you love the app and use it regularly, please donate as little as you can, enough to keep the app alive and running on its own. Donation details can be found on the GitHub homepage or the website. Thank you so much!"),
+    "thriftyDrawerTextAboutFooter" : MessageLookupByLibrary.simpleMessage("If you love the app and use it regularly, please donate as little as you can, enough to keep the app alive and running on its own. You can also contribute by translating the app into your own language. Thank you so much!"),
     "thriftyDrawerTextCategories" : MessageLookupByLibrary.simpleMessage("Categories"),
     "thriftyDrawerTextCurrencies" : MessageLookupByLibrary.simpleMessage("Currencies"),
     "thriftyDrawerTextExport" : MessageLookupByLibrary.simpleMessage("Export to JSON/CSV"),

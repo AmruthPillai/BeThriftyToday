@@ -535,7 +535,7 @@ class S {
 
   String get thriftyDrawerTextAboutFooter {
     return Intl.message(
-      'If you love the app and use it regularly, please donate as little as you can, enough to keep the app alive and running on its own. Donation details can be found on the GitHub homepage or the website. Thank you so much!',
+      'If you love the app and use it regularly, please donate as little as you can, enough to keep the app alive and running on its own. You can also contribute by translating the app into your own language. Thank you so much!',
       name: 'thriftyDrawerTextAboutFooter',
       desc: '',
       args: [],

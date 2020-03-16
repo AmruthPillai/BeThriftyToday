@@ -85,7 +85,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "thriftyDrawerMessageShare" : MessageLookupByLibrary.simpleMessage("ನಿಮ್ಮ ಆದಾಯ ಮತ್ತು ಖರ್ಚಗಳನ್ನು ಸರಳ ಮತ್ತು ಸುರಕ್ಷಿತವಾಗಿ ನಿರ್ವಹಿಸಲು ಸಹಾಯ ಮಾಡುವ ಈ ಅಪ್ಲಿಕೇಶನ್ ಅನ್ನು ಪರಿಶೀಲಿಸಿ: https://pillai.xyz/thrifty"),
     "thriftyDrawerTextAbout" : MessageLookupByLibrary.simpleMessage("ಅಪ್ಲಿಕೇಶನ್ ಬಗ್ಗೆ"),
     "thriftyDrawerTextAboutAppLegalese" : MessageLookupByLibrary.simpleMessage("ಈ ಅಪ್ಲಿಕೇಶನ್ ತೆರೆದ ಮೂಲ ಮತ್ತು ಬಳಸಲು ಮುಕ್ತವಾಗಿದೆ, ಇದನ್ನು ಅಪಾಚೆ ಪರವಾನಗಿ 2.0 ಅಡಿಯಲ್ಲಿ ನಿಯಂತ್ರಿಸಲಾಗುತ್ತದೆ. ನೀವು ಡೆವಲಪರ್ ಆಗಿದ್ದರೆ, ದಯವಿಟ್ಟು GitHub ನಲ್ಲಿ ಅಪ್ಲಿಕೇಶನ್‌ಗೆ ಕೊಡುಗೆ ನೀಡಲು ಹಿಂಜರಿಯಬೇಡಿ."),
-    "thriftyDrawerTextAboutFooter" : MessageLookupByLibrary.simpleMessage("ನೀವು ಅಪ್ಲಿಕೇಶನ್ ಅನ್ನು ಪ್ರೀತಿಸುತ್ತಿದ್ದರೆ ಮತ್ತು ಅದನ್ನು ನಿಯಮಿತವಾಗಿ ಬಳಸುತ್ತಿದ್ದರೆ, ದಯವಿಟ್ಟು ನಿಮ್ಮಿಂದ ಸಾಧ್ಯವಾದಷ್ಟು ಕಡಿಮೆ ದಾನ ಮಾಡಿ, ಅಪ್ಲಿಕೇಶನ್ ಅನ್ನು ಜೀವಂತವಾಗಿಡಲು ಮತ್ತು ಸ್ವಂತವಾಗಿ ಕಾರ್ಯನಿರ್ವಹಿಸಲು ಸಾಕು. ದೇಣಿಗೆ ವಿವರಗಳನ್ನು ಗಿಟ್‌ಹಬ್ ಮುಖಪುಟ ಅಥವಾ ವೆಬ್‌ಸೈಟ್‌ನಲ್ಲಿ ಕಾಣಬಹುದು. ತುಂಬಾ ಧನ್ಯವಾದಗಳು!"),
+    "thriftyDrawerTextAboutFooter" : MessageLookupByLibrary.simpleMessage("ನೀವು ಅಪ್ಲಿಕೇಶನ್ ಅನ್ನು ಪ್ರೀತಿಸುತ್ತಿದ್ದರೆ ಮತ್ತು ಅದನ್ನು ನಿಯಮಿತವಾಗಿ ಬಳಸುತ್ತಿದ್ದರೆ, ದಯವಿಟ್ಟು ನಿಮ್ಮಿಂದ ಸಾಧ್ಯವಾದಷ್ಟು ಕಡಿಮೆ ದಾನ ಮಾಡಿ, ಅಪ್ಲಿಕೇಶನ್ ಅನ್ನು ಜೀವಂತವಾಗಿಡಲು ಮತ್ತು ಸ್ವಂತವಾಗಿ ಕಾರ್ಯನಿರ್ವಹಿಸಲು ಸಾಕು. ನಿಮ್ಮ ಸ್ವಂತ ಭಾಷೆಗೆ ಅಪ್ಲಿಕೇಶನ್ ಅನ್ನು ಭಾಷಾಂತರಿಸುವ ಮೂಲಕ ನೀವು ಸಹ ಕೊಡುಗೆ ನೀಡಬಹುದು. ತುಂಬಾ ಧನ್ಯವಾದಗಳು!"),
     "thriftyDrawerTextCategories" : MessageLookupByLibrary.simpleMessage("ವರ್ಗಗಳು"),
     "thriftyDrawerTextCurrencies" : MessageLookupByLibrary.simpleMessage("ಕರೆನ್ಸಿಗಳು"),
     "thriftyDrawerTextExport" : MessageLookupByLibrary.simpleMessage("CSV/JSON ಆಗಿ ಎಕ್ಸ್ಪೋರ್ಟ್ ಮಾಡಿ"),

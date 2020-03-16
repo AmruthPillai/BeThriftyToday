@@ -15,6 +15,7 @@ Map<String, Widget Function(BuildContext)> routes = {
 
   // In-App
   HomeScreen.routeName: (context) => HomeScreen(),
+  ReportsScreen.routeName: (context) => ReportsScreen(),
   CategoriesScreen.routeName: (context) => CategoriesScreen(),
   CurrenciesScreen.routeName: (context) => CurrenciesScreen(),
   SettingsScreen.routeName: (context) => SettingsScreen(),

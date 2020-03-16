@@ -28,6 +28,14 @@ class ThriftyDrawer extends StatelessWidget {
                 ListTile(
                   onTap: () {
                     Navigator.pop(context);
+                    Navigator.pushNamed(context, ReportsScreen.routeName);
+                  },
+                  leading: Icon(Icons.multiline_chart),
+                  title: Text('Reports'),
+                ),
+                ListTile(
+                  onTap: () {
+                    Navigator.pop(context);
                     Navigator.pushNamed(context, CategoriesScreen.routeName);
                   },
                   leading: Icon(Icons.category),

@@ -1,6 +1,5 @@
 name: bethriftytoday
-description:
-  A simple money management app for those who want to be in control of their
+description: A simple money management app for those who want to be in control of their
   financial life.
 
 version: 1.0.0+1
@@ -14,6 +13,7 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   after_layout: ^1.0.7+2
+  charts_flutter: ^0.9.0
   cloud_firestore: ^0.13.4
   collection: ^1.14.11
   encrypt: ^4.0.0

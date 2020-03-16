@@ -4,7 +4,7 @@
 
 A simple and secure money manager that keeps you financially vigilant.
 
-[![Codemagic build status](https://api.codemagic.io/apps/5e608a86018eb9163eb40b1a/5e609fdb018eb9042699afe3/status_badge.svg)](https://codemagic.io/apps/5e608a86018eb9163eb40b1a/5e609fdb018eb9042699afe3/latest_build)
+[![Codemagic build status](https://api.codemagic.io/apps/5e608a86018eb9163eb40b1a/5e609fdb018eb9042699afe3/status_badge.svg)](https://codemagic.io/apps/5e608a86018eb9163eb40b1a/5e609fdb018eb9042699afe3/latest_build) [![Crowdin](https://badges.crowdin.net/be-thrifty-today/localized.svg)](https://translate.bethrifty.today/project/be-thrifty-today)
 
 <a href="https://play.google.com/store/apps/details?id=today.bethrifty.app" target="_blank"><img src="https://bethrifty.today/assets/buttons/google-play-badge.png" width="200px" alt="Get the App on the Google Play Store" /></a>
 
@@ -109,16 +109,12 @@ As mentioned above, I've used a simple but uncrackable method to encrypt the sen
 
 ## Translation
 
-Localization was possible using the Flutter Intl VS Code Plugin and Google's ARB (Application Resource Bundle) format which is powerful enough to handle some of the best usecases for language translations.
+You can translate the application to your desired language through the Localization Platform, Crowdin. This tool helps me manage translations on a larger scale and also helps with easier collaboration with other contributors.
 
-To translate the app into your own language, all you need to do are the following steps:
+### To help translate the app, just visit https://translate.bethrifty.today/
+If the platform requires you to be invited to the project, please visit this link: http://translate.bethrifty.today/project/be-thrifty-today/invite
 
-1. Fork the repository to your own account
-2. Go to `lib/l10n` folder and clone the `intl_en.arb` into another file `intl_{code}.arb` where `code` is your ISO-639-1 (2 Alpha) Language Code.
-3. Once you are done with the translation of strings, open a pull request to merge with the `develop` branch of the original repository.
-4. Wait for me to approve the pull request so that I can generate the corresponding dart files and make changes in the settings screen. (Don't worry, I'm pretty quick when it comes to changes)
-
-That's about it. Please do contribute as much as possible to the open source project, it would mean a lot to me as it would reach a whole lot of people out there. Thank you so much!
+Thank you so much for your contribution!
 
 ## License
 

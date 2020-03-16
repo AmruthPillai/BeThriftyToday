@@ -26,6 +26,9 @@ key.properties
 # Encryption
 encrypt.dart
 
+# Translation
+crowdin.yaml
+
 # Flutter/Dart/Pub related
 **/doc/api/
 .dart_tool/

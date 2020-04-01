@@ -24,5 +24,9 @@ final List<Language> languages = [
   Language(
     code: 'es',
     title: 'Spanish (Español)',
+  ),,
+  Language(
+    code: 'pt-br',
+    title: 'Português (Brasil)',
   ),
 ];

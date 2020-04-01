@@ -27,4 +27,9 @@ final List<Currency> baseCurrencies = [
     name: 'Yen',
     symbol: '¥',
   ),
+  Currency(
+    id: UniqueKey().toString(),
+    name: 'Real',
+    symbol: 'R\$',
+  ),
 ];
